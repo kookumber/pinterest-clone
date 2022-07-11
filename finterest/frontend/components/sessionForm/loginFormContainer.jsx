@@ -3,10 +3,11 @@ import React from "react";
 import { login } from "../../actions/sessionActions";
 import { openModal, closeModal } from "../../actions/modalActions";
 import SessionForm from "./sessionForm";
+import { removeErrors } from "../../actions/sessionActions";
 
-const mapStateToProps = ({ errors }) => {
+const mapStateToProps = (state) => {
     return {
-        errors: errors.session,
+        errors: state.errors.session.errors,
         formType: 'login',
     }
 }
@@ -19,7 +20,8 @@ const mapDispatchToProps = dispatch => {
                 Signup
             </button>
         ),
-        closeModal: () => dispatch(closeModal())
+        closeModal: () => dispatch(closeModal()),
+        removeErrors: () => dispatch(removeErrors())
     }
 }
 

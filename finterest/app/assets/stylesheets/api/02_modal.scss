@@ -101,7 +101,7 @@
     padding: 0px 18px 0px 18px;
     font-size: 15px;
     font-weight: bold;
-    margin-top: 8px;
+    margin-top: 12px;
     vertical-align: middle;
     background-color: rgb(230, 0, 35);
     color: rgb(255, 255, 255);
@@ -110,4 +110,29 @@
 
 .session-submit-button:hover {
     background-color: #ad081b;
+}
+
+.demo-login-button {
+    cursor: pointer;
+    text-align: center;
+    border: 0px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 20px;
+    -webkit-font-smoothing: antialiased;
+    padding: 0px 18px 0px 18px;
+    font-size: 15px;
+    font-weight: bold;
+    width: 268px;
+    margin-top: 18px;
+    vertical-align: middle;
+    background-color: rgb(0, 138, 230);
+    color: rgb(255, 255, 255);
+    width: 100%;
+}
+
+.error-items {
+    width: 100%;
+    display: inline-block;
+    font-size: 15px;
 }

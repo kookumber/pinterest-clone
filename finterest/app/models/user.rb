@@ -6,7 +6,13 @@ class User < ApplicationRecord
 
     validates :username, presence: true, uniqueness: true
     validates :password_digest, :session_token, presence: true
-    validates :password, length: { minimum: 6 }, allow_nil: true    
+    validates :password, length: { minimum: 6 }, allow_nil: true
+    
+    has_many :pins,
+        primary_key: :id,
+        foreign_key: :user_id,
+        class_name: :Pin
+        
 
         # Class method for finding a user ONLY if we have the correct username and password
     def self.find_by_credentials(username, password)

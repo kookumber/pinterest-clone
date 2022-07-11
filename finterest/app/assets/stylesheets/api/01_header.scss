@@ -58,6 +58,7 @@
 
 .signup-button {
     width: 80px;
+    background-color: #efefef
 }
 
 .signup-button:hover {
@@ -74,15 +75,65 @@
     box-sizing: border-box;
 }
 
+.search-bar-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search-icon {
+    height: 30px;
+    width: 30px;
+    padding-left: 17px;
+    font-weight: bold;
+    color: #767676;
+}
+
 .search-bar {
     height: 100%;
     width: 100%;
+    background: transparent;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    padding-left: 17px;
+    padding-left: 4px;
 }
 
 .search-bar-container:hover, .search-bar:hover {
     background-color: #e2e2e2
+}
+
+.user-links {
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+}
+
+.notifications, .messages, .logout-button {
+    color: #767676;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    padding-left: 2px;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.user-icons {
+    width: 30px;
+    height: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: transparent;
+}
+
+.notifications:hover, .messages:hover, .logout-button:hover  {
+    background-color: #efefef;
+}
+
+button {
+    border-style: none;
+    background-color: transparent;
 }

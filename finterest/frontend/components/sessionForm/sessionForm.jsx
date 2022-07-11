@@ -10,6 +10,12 @@ class SessionForm extends React.Component {
             password: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        // this.renderErrors = this.renderErrors.bind(this);
+        this.handleDemoLogin = this.handleDemoLogin.bind(this);
+    }
+
+    componentWillUnmount() {
+        this.props.removeErrors()
     }
 
     update(field) {
@@ -26,11 +32,36 @@ class SessionForm extends React.Component {
             password: this.state.password
         }}
         this.props.processForm(user).then(this.props.closeModal)
-        this.setState({
-            email: "",
-            password: "",
-            name: ""
-        })
+        // this.setState({
+        //     email: "",
+        //     password: "",
+        //     name: ""
+        // })
+    }
+
+    // handleDemoLogin(e) {
+    //     e.preventDefault()
+    //     const demoUser = {user: {
+    //         username: 'demo-user1',
+    //         email: 'demo@user1.com',
+    //         password: 'demo-user1'
+    //     }}
+    //     // this.setState({ username: 'demo-user1' })
+    //     // this.setState({ email: 'demo@user1.com' })
+    //     // this.setState({ password: 'demo-user1' })
+    //     this.props.processForm(demoUser).then(this.props.closeModal)
+    // }
+
+    renderErrors() {
+        return(
+            <ul>
+                {this.props.errors.map((error, idx) => (
+                    <li key={`error-${idx}`} className='error-items'>
+                        {error}
+                    </li>
+                ))}
+            </ul>
+        )
     }
 
     signupForm () {
@@ -38,6 +69,7 @@ class SessionForm extends React.Component {
             <div className="login-form-container">
                 <form onSubmit={this.handleSubmit} className='login-form-box'>
                     <div className="close-x" onClick={this.props.closeModal}>X</div>
+                    <a>{this.props.errors}</a>
                     <div>
                         Icon
                     </div>
@@ -88,6 +120,7 @@ class SessionForm extends React.Component {
             <div className="login-form-container">
                 <form onSubmit={this.handleSubmit} className='login-form-box'>
                     <div className="close-x" onClick={this.props.closeModal}>X</div>
+                    {this.renderErrors()}
                     <div>
                         Icon
                     </div>
@@ -112,11 +145,15 @@ class SessionForm extends React.Component {
                             onChange={this.update('password')}
                             className="login-input"
                             placeholder="Password" />
-                        <div>
+                        <div className="session-button">
                             <input type="submit"
                                 value={this.props.formType === 'signup' ? 'Continue' : 'Log in'}
                                 className="session-submit-button" />
                         </div>
+
+                        {/* <div>
+                            <button className="demo-login-button" onClick={e => this.handleDemoLogin(e)}>Log in as Demo User</button>
+                        </div> */}
                         
                     </div>
                 </form>

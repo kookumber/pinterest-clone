@@ -1,5 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 const NavLinks = ({ currentUser, logout, openModal }) => {
     const sessionLinks = () => (
@@ -40,20 +44,29 @@ const NavLinks = ({ currentUser, logout, openModal }) => {
                 </div>
 
                 <div className="search-bar-container">
+                    <svg className="search-icon"><SearchRoundedIcon /></svg>
                     <input className="search-bar" type="text" placeholder="Search"/>
                 </div>
 
                 <div className="user-links">
                     <div className="notifications">
-
+                        <svg className="user-icons">
+                            <NotificationsIcon />
+                        </svg>
                     </div>
                     <div className="messages">
-
+                        <svg className="user-icons">
+                            <MessageRoundedIcon />
+                        </svg>
                     </div>
                     <div className="profile">
 
                     </div>
-                    <button className="logout-button" onClick={logout}>Log out</button>
+                    <button className="logout-button" onClick={logout}>
+                        <svg className="user-icons">
+                            <LogoutRoundedIcon />
+                        </svg>
+                    </button>
                 </div>
 
             </nav>

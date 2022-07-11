@@ -9,7 +9,7 @@ class Api::SessionsController < ApplicationController
     # Flash errors, if any.
     # Render :new if invalid credentials (give the user another chance to login)
     if @user.nil?
-      flash.now[:errors] = ['Invalid email or password.']
+      render json: ['Invalid email or password.'], status: 401
     else
     # Log them in and redirect them if we find them
       login!(@user)
