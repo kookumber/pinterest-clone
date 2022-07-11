@@ -1,22 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {postUser, postSession, deleteSession} from './util/session_api_util'
 import configureStore from './store/store'
-import {signup, login, logout} from './actions/session_actions'
+import Root from './components/root'
+import {login, signup, logout} from './actions/sessionActions'
 
 document.addEventListener("DOMContentLoaded", () => {
-    const root = document.getElementById("root");
-    const store = configureStore();
+    let store;
+    
+    if (window.currentUser) {
+        const preloadedState = {
+            entities: {
+                users: { [window.currentUser.id]: window.currentUser }
+            },
+            session: { id: window.currentUser.id }
+        };
+        store = configureStore(preloadedState);
+        delete window.currentUser;
+    } else {
+        store = configureStore()
+    }
 
+    const root = document.getElementById("root");
+    
     window.store = store
     window.getState = store.getState;
-    window.signup = signup
-    window.login = login
-    window.logout = logout
     window.dispatch = store.dispatch;
-    window.postUser = postUser
-    window.postSession = postSession
-    window.deleteSession = deleteSession
+    window.login = login
+    window.signup = signup
+    window.logout = logout
 
-    ReactDOM.render(<h1>Welcome to Finterest</h1>, root);
+    ReactDOM.render(<Root store={store} />, root);
 });
+

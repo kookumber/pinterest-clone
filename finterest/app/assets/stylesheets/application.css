@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+    height: 100%;
+ }
+
+:hover {
+   --g-colorGray150Hovered: #d0d0d0;
+}

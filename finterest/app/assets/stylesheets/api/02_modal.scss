@@ -1,0 +1,113 @@
+.modal-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    min-height: 0px;
+    height: 100%;
+    margin: 0px auto;
+}
+
+.modal-child {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px 10px 24px 10px;
+    border-radius: 32px;
+    height: 642px;
+    width: 484px;
+    text-align: center;
+    margin: auto;
+}
+.login-form-container {
+    background: white;
+    width: 268px;
+    width: 400px;
+    padding: 20px 10px 24px 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.close-x {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    margin-top: auto;
+    margin-bottom: auto;
+    line-height: 40px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
+    font-size: 100%;
+}
+
+.close-x:hover {
+    background-color: rgba(0, 0, 0,0.06);
+}
+
+.login-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 24px;
+    width: 268px;
+}
+
+.input-label {
+    display: block;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    font-size: 15px;
+    padding-left: 12px;
+}
+
+.login-input {
+    position: relative;
+    box-sizing: border-box;
+    min-height: 48px;
+    border-radius: 16px;
+    border-color: #cdcdcd;
+    padding: 8px;
+    padding-left: 13px;
+    margin: 5px;
+    border-style: solid;
+    font-size: 16px;
+}
+
+.session-submit-button {
+    cursor: pointer;
+    text-align: center;
+    border: 0px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 20px;
+    -webkit-font-smoothing: antialiased;
+    padding: 0px 18px 0px 18px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 8px;
+    vertical-align: middle;
+    background-color: rgb(230, 0, 35);
+    color: rgb(255, 255, 255);
+    width: 100%;
+}
+
+.session-submit-button:hover {
+    background-color: #ad081b;
+}
