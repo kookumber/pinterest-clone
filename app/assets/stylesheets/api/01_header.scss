@@ -5,6 +5,8 @@
     width: 100%;
 }
 
+
+
 .logged-out-nav, .logged-in-nav {
     width: 100%;
     display: flex;
@@ -16,6 +18,7 @@
 }
 
 .app-logo-container {
+    margin-left: 14px;
     align-items: center;
     vertical-align: middle;
     margin-top: auto;
@@ -24,14 +27,41 @@
 
 
 .app-logo-title {
-    font-weight: bold;
-    font-size: 20px;
+    font-weight: 500;
+    font-size: 19px;
 }
 
 .header-links {
     vertical-align: middle;
     margin-top: auto;
     margin-bottom: auto;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.personal-links {
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+    align-items: center;
+    margin-right: 30px;
+    justify-content: space-between;
+    width: 220px;
+}
+
+.personal-links a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+
+.personal-links a:hover {
+    text-decoration: underline;
+}
+
+.login-signup-buttons-container {
+    min-width: 160px;
 }
 
 .login-button, .signup-button {
@@ -44,6 +74,7 @@
     padding: 8px, 12px, 8px, 12px;
     font-size: 100%;
     cursor: pointer;
+    position: relative;
 }
 
 .login-button {

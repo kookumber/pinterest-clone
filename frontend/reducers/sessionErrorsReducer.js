@@ -9,7 +9,6 @@ const sessionErrorsReducer = (state = {errors: []}, action) => {
             newState.errors = []
             return newState
         case RECEIVE_ERRORS:
-            
             newState.errors = action.errors
             return newState
         case CLEAR_SESSION_ERRORS:

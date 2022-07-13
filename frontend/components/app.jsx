@@ -1,10 +1,10 @@
 import React from "react";
 import NavLinksContainer from "./nav/navLinksContainer";
 import { Route, Switch } from "react-router-dom";
+
 import Modal from "./modal/modal";
-import LoginFormContainer from "./sessionForm/loginFormContainer";
-import SignupFormContainer from "./sessionForm/signupFormContainer";
 import { AuthRoute, ProtectedRoute } from "../util/routeUtil";
+import PinIndexContainer from "./pin/pinIndexContainer";
 
 const App = () => (
     <div>
@@ -13,10 +13,7 @@ const App = () => (
             <NavLinksContainer />
         </header>
 
-        {/* <Switch>
-            <AuthRoute exact path="/login" component={LoginFormContainer} />
-            <AuthRoute exact path="/signup" component={SignupFormContainer} />
-        </Switch> */}
+        <PinIndexContainer />        
         
     </div>
 )

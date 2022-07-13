@@ -1,0 +1,33 @@
+// Place all the styles related to the api/pins controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// To get a grid with flex, try 3 divs where flex dir is row and within each div, elements where div
+// is flex dir column
+.home-feed {
+    padding-bottom: 24px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    min-height: 1200px;
+}
+
+.pins-grid-container {
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    height: 100%;
+    max-width: 1000px;
+    box-sizing: border-box;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, 250px);
+    grid-auto-rows: 10px;
+    grid-auto-flow: column;
+}
+
+.pin-wrapper {
+    min-width: 252px;
+    max-width: 252px;
+    height: 374px;
+    border: 1px solid black;
+}

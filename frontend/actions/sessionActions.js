@@ -19,21 +19,19 @@ export const receiveErrors = errors => ({
     errors,
 })
 
-export const removeErrors = () => ({
+export const removeErrors = (errors) => ({
     type: CLEAR_SESSION_ERRORS
 })
 
 export const signup = formUser => dispatch => postUser(formUser)
-            .then(user => dispatch(receiveCurrentUser(user)),
-            err => (dispatch(receiveErrors(err.responseJSON))
+            .then(user => dispatch(receiveCurrentUser(user))
+            ,err => (dispatch(receiveErrors(err.responseJSON))
             )
             )
 
 export const login = formUser => dispatch => postSession(formUser)
-            .then(user => dispatch(receiveCurrentUser(user)),
-            err =>(dispatch(receiveErrors(err.responseJSON))
-            
-            )
+            .then(user => dispatch(receiveCurrentUser(user))
+            , err => dispatch(receiveErrors(err.responseJSON))
             )
 
 export const logout = () => dispatch => deleteSession()

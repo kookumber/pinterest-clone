@@ -14,9 +14,13 @@ const NavLinks = ({ currentUser, logout, openModal }) => {
                 </div>
 
                 <div className="header-links">
-                    <div></div>
+                    <div className="personal-links">
+                        <a href="https://www.linkedin.com/in/quang-tran-2926a78b/" target="_blank">Linkedin</a>
+                        <a href="https://github.com/kookumber" target="_blank">Github</a>
+                        <a href="#">Portfolio</a>
+                    </div>
                     {/* Need Routes in order for Link to work */}
-                    <div className="login-signup-buttons">
+                    <div className="login-signup-buttons-container">
                         <button onClick={() => openModal('login')} className="login-button">Log in</button>
                         <button onClick={() => openModal('signup')} className="signup-button">Sign up</button>
                     </div>

@@ -1,5 +1,6 @@
-a {
-    text-decoration: none;
+body {
+    height: 100%;
+    min-height: 100%;
 }
 
 a, div, h1, h2, h3, h4, input, p, li, ul {
@@ -22,3 +23,24 @@ ul {
 input:focus {
     outline-width: 0;
 }
+
+
+// Below is mixin example to reuse css for elements that
+// should have similar styles
+// @mixin button($num, $color) {
+    // font-weight: 800;
+    // padding: $num;
+    // &:hover { color: $color}
+// }
+
+// .sign-in-button {
+//     @include button(25px, "red")
+// }
+
+// USE THIS
+// @mixin center($direction) {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     flex-direction: $direction;
+// }

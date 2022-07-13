@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import configureStore from './store/store'
 import Root from './components/root'
 import {login, signup, logout} from './actions/sessionActions'
+import {fetchPin, createPin, fetchPins} from './util/pinApiUtil'
 
 document.addEventListener("DOMContentLoaded", () => {
     let store;
@@ -28,8 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.login = login
     window.signup = signup
     window.logout = logout
+    window.fetchPin = fetchPin
+    window.createPin = createPin
+    window.fetchPins = fetchPins
 
-    // ReactDOM.render(<Root store={store} />, root);
-    ReactDOM.render(<h1>Its working</h1>, root);
+    ReactDOM.render(<Root store={store} />, root);
+    // ReactDOM.render(<h1>Its working</h1>, root);
 });
 
