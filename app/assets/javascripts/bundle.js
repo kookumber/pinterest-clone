@@ -8060,11 +8060,14 @@ var PinForm = /*#__PURE__*/function (_React$Component) {
         className: "pin-form-main-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-form-image-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "pin-form-image-container",
+        onDrop: console.log("hello")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         type: "file",
         className: "image-upload-box",
         onChange: this.handleFile
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-form-text-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "text-area-container"
