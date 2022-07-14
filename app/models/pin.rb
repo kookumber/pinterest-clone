@@ -7,6 +7,7 @@ class Pin < ApplicationRecord
         foreign_key: :user_id,
         class_name: :User
 
+
     has_one_attached :image
     
     # def ensure_photo  

@@ -18,7 +18,8 @@
  /* Make sure to do @import './api/00_reset.css', etc... or */
  /* Heroku won't work */
  
-
-:hover {
-   --g-colorGray150Hovered: #d0d0d0;
-}
+@import './api/00_reset.css';
+@import './api/01_header.scss';
+@import './api/02_sessionModal.scss';
+@import './api/03_pins.scss';
+@import './api/04_pinForm.scss'

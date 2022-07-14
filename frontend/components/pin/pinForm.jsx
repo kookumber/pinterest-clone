@@ -1,5 +1,7 @@
 import React from "react";
 import { withRouter } from 'react-router'
+import ListRoundedIcon from '@mui/icons-material/ListRounded';
+
 
 class PinForm extends React.Component {
     constructor(props){
@@ -49,12 +51,27 @@ class PinForm extends React.Component {
     }
 
     render() {
+
+        const previewImg = this.state.imageUrl ? <div className="image-preview"><img src={this.state.imageUrl} /></div> : null;
+        const uploadBox = (
+            <div className="pin-image-dropbox">
+                <input type="file"
+                    className="image-upload-box"
+                    onChange={this.handleFile} />
+                <h3>{previewImg}</h3>
+            </div>
+        )
+
         return (
         <div className="new-pin-container">
             {/* Start Pin Header */}
             <form onSubmit={this.handleSubmit} className="new-pin-form">
                 <div className="pin-form-header">
-                    <div className="pin-form-options">Dropdown</div>
+                    <div className="pin-form-options">
+                        <svg className="user-icons">
+                        <ListRoundedIcon />
+                        </svg>
+                    </div>
                     <div className="pin-form-submission">
                         <div className="pin-board-selector">Board Name</div>
                         <div className="pin-save-button">
@@ -67,11 +84,7 @@ class PinForm extends React.Component {
             {/* Start Pin Form Main Body */}
                 <div className="pin-form-main-body">
                     <div className="pin-form-image-container">
-                        <div className="pin-form-image-container" onDrop={console.log("hello")}>
-                            <input type="file" 
-                                className="image-upload-box"
-                                onChange={this.handleFile}/>
-                        </div>
+                        {this.state.imageUrl ? previewImg : uploadBox}
                     </div>
                     <div className="pin-form-text-container">
                         <div className="text-area-container">
@@ -80,6 +93,7 @@ class PinForm extends React.Component {
                                 placeholder="Add your title"
                                 onChange={this.update('title')} />
                         </div>
+                        
                         <div className="current-user-container">
                             User Details
                         </div>
@@ -97,4 +111,4 @@ class PinForm extends React.Component {
     }
 }
 
-export default PinForm
+export default withRouter(PinForm)

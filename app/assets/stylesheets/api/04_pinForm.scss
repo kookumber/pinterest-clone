@@ -38,6 +38,11 @@
     
 }
 
+.fa-ellipsis {
+    background-color: black;
+    color: black;
+}
+
 .pin-form-submission {
     width: 240px;
     @include center('row', 'space-between');
@@ -71,20 +76,32 @@
 }
 
 .pin-form-image-container {
-    width: 340px;
+    width: 300px;
     padding: 0px 20px 0px 20px;
-    @include center('row', center)
+    @include center('row', center);
+    border-radius: 6px;
+    background-color: #efefef;
+
+        .pin-image-dropbox {
+            border: 2px rgb(218, 218, 218) dashed;
+            border-radius: 6px;
+            width: 100%;
+            height: 90%;
+            @include center('row', 'center');
+
+                .image-upload-box {
+                    background-color: #efefef;
+                    height: 454px;
+                    width: 320px;
+                    cursor: pointer;
+                    margin-left: auto;
+                    margin-right: auto;
+                    @include center('row', 'center')
+                }
+        }
 }
 
-.image-upload-box {
-    background-color: #efefef;
-    height: 454px;
-    width: 340px;
-    cursor: pointer;
-    line-height: normal;
-    vertical-align: middle;
-    align-items: baseline;
-}
+
 
 .pin-form-text-container {
     width: 380px;

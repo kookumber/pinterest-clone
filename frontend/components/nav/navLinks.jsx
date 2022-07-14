@@ -4,6 +4,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
 const NavLinks = ({ currentUser, logout, openModal }) => {
     const sessionLinks = () => (
@@ -64,7 +65,9 @@ const NavLinks = ({ currentUser, logout, openModal }) => {
                         </svg>
                     </div>
                     <div className="profile">
-
+                        <svg className="user-icons">
+                            <PersonRoundedIcon />
+                        </svg>
                     </div>
                     <button className="logout-button" onClick={logout}>
                         <svg className="user-icons">
