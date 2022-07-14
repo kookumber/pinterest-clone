@@ -30,4 +30,7 @@ pin2 = Pin.create!(user_id: demo_user1.id, title: 'Fun Waves', description: 'Cle
 pin2.image.attach(io: open('https://finterest-project-dev.s3.us-west-1.amazonaws.com/jwwnn2ZNnyiw2Hdn5gB9jc6C'), filename: 'cool.jpg')
 
 pin3 = Pin.create!(user_id: demo_user2.id, title: 'Grass Turf, Favorite Court', description: 'Lusher, greener, faster than Wimbledon')
+pin3.image.attach(io: open('https://finterest-project-dev.s3.us-west-1.amazonaws.com/jwwnn2ZNnyiw2Hdn5gB9jc6C'), filename:'surf-crazy.jpg')
+
 pin4 = Pin.create!(user_id: demo_user2.id, title: 'Rocky Holds', description: 'Pleasant climbing destination')
+pin4.image.attach(io: open('https://finterest-project-dev.s3.us-west-1.amazonaws.com/jwwnn2ZNnyiw2Hdn5gB9jc6C'), filename:'surf-crazy.jpg')
