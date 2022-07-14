@@ -1,6 +1,9 @@
 @pins.each do |pin|
-    json.set! pin.id do 
-        json.extract! pin, :id, :title, :description, :user_id
+    if pin.id === 1
+        json.set! pin.id do 
+            json.extract! pin, :id, :title, :description, :user_id
+            json.imageUrl url_for(pin.image)
+        end
     end
 end
 

@@ -32,18 +32,18 @@ const NavLinks = ({ currentUser, logout, openModal }) => {
     const loaded = () => (
         <div className="header">
             <nav className="logged-in-nav">
-                <div className="inspiration-links">
+                <div className="inspiration-links-container">
                     <div className='app-logo'>
                         <a href="#">F</a>
                     </div>
-                    <div className="home-link">
-
+                    <div className="inspiration-link">
+                        <Link to="/"><div>Home</div></Link>
                     </div>
-                    <div className="today-link">
-
+                    <div className="inspiration-link">
+                        <span>Today</span>
                     </div>
-                    <div className="create-pin-link">
-
+                    <div className="inspiration-link">
+                        <Link to="/pins/create">Create</Link>
                     </div>
                 </div>
 

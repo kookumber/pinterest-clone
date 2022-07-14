@@ -15,10 +15,14 @@ export const fetchPin = pinId => {
 
 
 export const createPin = pin => {
+    console.log("pin ajax", pin)
     return $.ajax({
-            url: '/api/pins',
+            url: '/api/pins/',
             method: 'POST',
-            data: {pin}
+            data: pin,
+            //The 2 lines below let the ajax method know not to fiddle with formData object for rails backend. Leave as is so rails does the work
+            contentType: false, 
+            processData: false
         })
 }
 

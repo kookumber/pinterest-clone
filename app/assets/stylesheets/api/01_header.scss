@@ -1,11 +1,16 @@
+@mixin center($direction, $just-type) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: center;
+    justify-content: $just-type;
+}
+
 .header {
     height: 80px;
     display: flex;
     align-items: center;
     width: 100%;
 }
-
-
 
 .logged-out-nav, .logged-in-nav {
     width: 100%;
@@ -25,6 +30,26 @@
     margin-bottom: auto;
 }
 
+.inspiration-links-container {
+    width: 200px;
+    @include center('row', 'space-between');
+    margin-right: 15px;
+}
+
+.inspiration-link {
+    height: 48px;
+    min-width: 60px;
+    @include center('row', 'space-between');
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+    
+}
+
+.app-logo {
+    width: 60px;
+}
 
 .app-logo-title {
     font-weight: 500;

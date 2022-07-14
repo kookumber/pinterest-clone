@@ -1,13 +1,14 @@
-import { RECEIVE_PINS } from "../actions/pinActions";
+import { RECEIVE_PINS, RECEIVE_PIN } from "../actions/pinActions";
 
 const pinsReducer = (state = {}, action) => {
     Object.freeze(state)
-    // let newState = Object.assign({}, oldState)
+    let newState = Object.assign({}, state)
     switch (action.type) {
         case RECEIVE_PINS:
             return action.pins
-        // case RECEIVE_PIN:
-
+        case RECEIVE_PIN:
+            newState[action.pin.id] = action.pin
+            return newState
         default:
             return state;
     }

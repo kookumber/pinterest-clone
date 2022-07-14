@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import Modal from "./modal/modal";
 import { AuthRoute, ProtectedRoute } from "../util/routeUtil";
 import PinIndexContainer from "./pin/pinIndexContainer";
+import PinFormContainer from "./pin/pinFormContainer";
 
 const App = () => (
     <div>
@@ -13,7 +14,10 @@ const App = () => (
             <NavLinksContainer />
         </header>
 
-        <PinIndexContainer />        
+        <Route exact path="/" component={PinIndexContainer}/>
+        
+        <ProtectedRoute path="/pins/create" component={PinFormContainer} />
+        
         
     </div>
 )
