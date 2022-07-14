@@ -8,7 +8,7 @@ import PinIndexContainer from "./pin/pinIndexContainer";
 import PinFormContainer from "./pin/pinFormContainer";
 
 const App = () => (
-    <div>
+    <div className="main-wrapper">
         <Modal />
         <header>
             <NavLinksContainer />

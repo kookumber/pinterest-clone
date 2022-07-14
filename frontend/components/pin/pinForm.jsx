@@ -66,7 +66,7 @@ class PinForm extends React.Component {
             
             {/* Start Pin Form Main Body */}
                 <div className="pin-form-main-body">
-                    <div className="pin-form-image-container">img here
+                    <div className="pin-form-image-container">
                         <input type="file" 
                             className="image-upload-box"
                             onChange={this.handleFile}/>

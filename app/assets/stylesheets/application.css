@@ -17,9 +17,7 @@
 
  /* Make sure to do @import './api/00_reset.css', etc... or */
  /* Heroku won't work */
- body {
-    height: 100%;
- }
+ 
 
 :hover {
    --g-colorGray150Hovered: #d0d0d0;

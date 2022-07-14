@@ -1,0 +1,109 @@
+// Place all the styles related to the Pins controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "./01_header.scss";
+
+.new-pin-container {
+    height: 100%;
+    width: 100%;
+    background-color: #efefef;
+    border: none;
+    position: relative;
+    @include center('row', 'center')
+}
+
+.new-pin-form {
+    background-color: white;
+    height: 650px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 16px;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    display: inline-block;
+}
+
+.pin-form-header {
+    // @include center('row', 'space-between');
+    display: flex;
+    justify-content:space-between;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+    width: 800px;
+    
+}
+
+.pin-form-submission {
+    width: 240px;
+    @include center('row', 'space-between');
+}
+
+.pin-board-selector {
+    width: 175px;
+    border-radius: 8px 0px 0px 8px;
+    background-color: #efefef;
+    height: 40px;
+    cursor: pointer;
+}
+
+.pin-save-button {
+    background-color: rgb(230, 0, 35);
+    width: 65px;
+    height: 40px;
+    cursor: pointer;
+    @include center('row', 'center');
+    & button {
+        color: white;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
+    }
+    border-radius: 0px 8px 8px 0px;
+}
+
+.pin-form-main-body {
+    @include center('column', 'center');
+}
+
+.pin-form-image-container {
+    width: 340px;
+    padding: 0px 20px 0px 20px;
+    @include center('row', center)
+}
+
+.image-upload-box {
+    background-color: #efefef;
+    height: 454px;
+    width: 340px;
+    cursor: pointer;
+    line-height: normal;
+    vertical-align: middle;
+    align-items: baseline;
+}
+
+.pin-form-text-container {
+    width: 380px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 446px;
+}
+
+.pin-input:first-of-type {
+    height: 46px;
+    font-size: 36px;
+    font-weight: 700;
+    width: 100%;
+    cursor: text;
+    border: none;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+
+    &:focus {
+        border-bottom: 2px solid blue;
+    }
+}
+
