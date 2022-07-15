@@ -1,21 +1,25 @@
 import React from "react";
-import { withRouter } from "react-router-dom"
 
 class UserShow extends React.Component {
     constructor(props) {
         super(props)
     }
 
+    
     render() {
+        const { user } = this.props
         return (
             <div className="main-profile-container">
                 <div className="profile-wrapper">
                     <div className="user-details">
-                        <div id="user-profile-pic">
-                            
+                        <div className="user-data" id="user-profile-pic">
+                            <h1>{user.username[0].toUpperCase()}</h1>
                         </div>
-                        <div id="user-page-username">
-
+                        <div className="user-data" id="user-page-username">
+                            <h1>{user.username}</h1>
+                        </div>
+                        <div className="user-data" id="user-social">
+                            Followers
                         </div>
                     </div>
                 </div>
@@ -37,4 +41,4 @@ class UserShow extends React.Component {
     }
 }
 
-export default withRouter(UserShow)
+export default UserShow

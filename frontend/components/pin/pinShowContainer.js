@@ -1,15 +1,18 @@
 import { connect } from "react-redux";
 import { fetchPin } from "../../actions/pinActions";
+import { fetchUser } from "../../actions/userActions";
 import PinShow from "./pinShow";
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
     return {
-
+        pin: state.entities.pins[ownProps.match.params.pinId],
+        users: state.entities.users
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        showPin: (pinId) => dispatch(fetchPin(pinId))
+        fetchPin: (pinId) => dispatch(fetchPin(pinId)),
+        fetchUser: (userId) => dispatch(fetchUser(userId))
     }
 }

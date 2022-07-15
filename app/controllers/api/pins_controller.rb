@@ -20,6 +20,26 @@ class Api::PinsController < ApplicationController
         end
     end
 
+    def update
+         @pin = Pin.find_by(id: params[:id])
+
+         if @pin.update(pin_params)
+            render :show
+         else
+            render json: @pin.errors.full_messages, status: 401
+         end
+    end
+
+    def destroy
+        @pin = Pin.find_by(id: params[:id])
+
+        if @pin && @pin.destroy
+            render json: ["pin was deleted"]
+        else
+            render json: @pin.errors.full_messages, status: 401
+        end
+    end
+
     private
 
     def pin_params

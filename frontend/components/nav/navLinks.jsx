@@ -6,6 +6,9 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+
 const NavLinks = ({ currentUser, logout, openModal }) => {
     const sessionLinks = () => (
         <div className="header">        
@@ -66,7 +69,7 @@ const NavLinks = ({ currentUser, logout, openModal }) => {
                     </div>
                     <div className="profile">
                         <svg className="user-icons">
-                            <PersonRoundedIcon />
+                            <Link to={`/users/${currentUser.id}`}><PersonRoundedIcon /></Link>
                         </svg>
                     </div>
                     <button className="logout-button" onClick={logout}>

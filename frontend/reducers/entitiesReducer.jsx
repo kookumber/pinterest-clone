@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import usersReducer from "./usersReducer";
+import usersReducer from "./userReducer";
 import pinsReducer from "./pinsReducer";
 
 const entitiesReducer = combineReducers({

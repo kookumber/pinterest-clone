@@ -197,6 +197,10 @@
     margin-top: auto;
     margin-bottom: auto;
     background-color: transparent;
+    
+    & svg {
+        color: #767676;
+    }
 }
 
 button {

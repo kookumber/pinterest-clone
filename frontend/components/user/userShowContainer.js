@@ -3,14 +3,16 @@ import { connect } from "react-redux";
 import { fetchUser } from "../../util/userApiUtil";
 
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps)=> {
     return {
-        currentUser: state.entities.users[0]
+        user: state.entities.users[ownProps.match.params.userId]
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        
+        fetchUser: (userId) => dispatch(fetchUser(userId))
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserShow)

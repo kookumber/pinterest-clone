@@ -18,8 +18,9 @@
  /* Make sure to do @import './api/00_reset.css', etc... or */
  /* Heroku won't work */
  
-@import './api/00_reset.css';
+@import './api/00_reset.scss';
 @import './api/01_header.scss';
 @import './api/02_sessionModal.scss';
 @import './api/03_pins.scss';
-@import './api/04_pinForm.scss'
+@import './api/04_pinForm.scss';
+@import './api/05_usersPage.scss';

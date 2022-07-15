@@ -50,6 +50,7 @@ class PinForm extends React.Component {
         this.props.createPin(formData)
     }
 
+
     render() {
 
         const previewImg = this.state.imageUrl ? <div className="image-preview"><img src={this.state.imageUrl} /></div> : null;
@@ -58,7 +59,7 @@ class PinForm extends React.Component {
                 <input type="file"
                     className="image-upload-box"
                     onChange={this.handleFile} />
-                <h3>{previewImg}</h3>
+                {previewImg}
             </div>
         )
 
