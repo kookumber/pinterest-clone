@@ -13,7 +13,6 @@ export const fetchPin = pinId => {
         })
 }
 
-
 export const createPin = pin => {
     console.log("pin ajax", pin)
     return $.ajax({

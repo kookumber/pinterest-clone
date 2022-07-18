@@ -54,6 +54,27 @@ class PinForm extends React.Component {
     render() {
 
         const previewImg = this.state.imageUrl ? <div className="image-preview"><img src={this.state.imageUrl} /></div> : null;
+
+        // const boardSelecter = (
+        //     <div className="board-selector">
+        //         <div className="search-bar-container">
+        //             <svg className="search-icon"><SearchRoundedIcon /></svg>
+        //             <input className="search-bar" type="text" placeholder="Search" />
+        //         </div>
+        //         <div className="user-boards">
+        //             <div>All boards</div>
+        //         </div>
+        //         <div className="create-board-container">
+        //             <div className="add-button">
+                        
+        //             </div>
+        //             <div id="create-text">
+        //                 Create board
+        //             </div>
+        //         </div>
+        //     </div>
+        // )
+
         const uploadBox = (
             <div className="pin-image-dropbox">
                 <input type="file"

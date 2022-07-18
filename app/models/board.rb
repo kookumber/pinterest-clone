@@ -1,6 +1,13 @@
 class Board < ApplicationRecord
     validates :name, :user_id, :public, presence: true
-    validates :public, inclusion: { in: [true, false]}
+    validates :public, inclusion: { in: [true, false] }
+    validates :public, exclusion: { in: [nil] }
+
+    before_validation :defaults, :on => :create
+
+    def defaults
+        self.public ||= false
+    end
 
     belongs_to :user,
         primary_key: :id,

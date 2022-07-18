@@ -1,6 +1,8 @@
 import UserShow from "./userShow"
 import { connect } from "react-redux";
 import { fetchUser } from "../../util/userApiUtil";
+import { openModal, closeModal } from "../../actions/modalActions";
+import React from "react";
 
 
 const mapStateToProps = (state, ownProps)=> {
@@ -11,7 +13,13 @@ const mapStateToProps = (state, ownProps)=> {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUser: (userId) => dispatch(fetchUser(userId))
+        fetchUser: (userId) => dispatch(fetchUser(userId)),
+        openBoardModal: (
+            <button onClick={() => dispatch(openModal('createBoard'))}>
+                Create Board
+            </button>
+        ),
+        closeBoardModal: () => dispatch(closeModal())
     }
 }
 

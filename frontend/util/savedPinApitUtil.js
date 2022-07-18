@@ -1,4 +1,4 @@
-export const fetchSavedPin = () => {
+export const fetchSavedPins = () => {
     return $.ajax({
         url: '/api/saved_pins',
         method: 'GET'

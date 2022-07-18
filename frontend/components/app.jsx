@@ -7,6 +7,8 @@ import { AuthRoute, ProtectedRoute } from "../util/routeUtil";
 import PinIndexContainer from "./pin/pinIndexContainer";
 import PinFormContainer from "./pin/pinFormContainer";
 import UserShowContainer from "./user/userShowContainer";
+import PinShowContainer from "./pin/pinShowContainer";
+
 
 const App = () => (
     <div className="main-wrapper">
@@ -16,9 +18,11 @@ const App = () => (
         </header>
 
         <Route exact path="/" component={PinIndexContainer}/>
-        
-        <ProtectedRoute exact path="/users/:userId" component={UserShowContainer}/>
-        <ProtectedRoute path="/pins/create" component={PinFormContainer} />
+        <Switch>
+            <ProtectedRoute path="/pins/create" component={PinFormContainer} />
+            <ProtectedRoute exact path="/pins/:pinId" component={PinShowContainer}/>
+            <ProtectedRoute exact path="/users/:userId" component={UserShowContainer}/>
+        </Switch>
         
         
     </div>

@@ -3,6 +3,7 @@ import { closeModal } from "../../actions/modalActions";
 import { connect } from "react-redux";
 import LoginFormContainer from "../sessionForm/loginFormContainer";
 import SignupFormContainer from "../sessionForm/signupFormContainer";
+import BoardFormContainer from "../board/boardFormContainer";
 
 const Modal = ({ modal, closeModal }) => {
     // This means if modal slice of state is null, we'll return null, essentially making
@@ -19,6 +20,9 @@ const Modal = ({ modal, closeModal }) => {
             break;
         case 'signup':
             component = <SignupFormContainer />
+            break;
+        case 'createBoard':
+            component = <BoardFormContainer />
             break;
         default:
             return null

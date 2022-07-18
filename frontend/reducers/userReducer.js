@@ -1,5 +1,5 @@
 import { RECEIVE_CURRENT_USER } from "../actions/sessionActions";
-import { RECEIVE_USER } from "../actions/userActions";
+import { RECEIVE_USER, RECEIVE_USERS } from "../actions/userActions";
 
 const userReducer = (state={}, action) => {
     Object.freeze(state)
@@ -13,6 +13,8 @@ const userReducer = (state={}, action) => {
         case RECEIVE_USER:
             newState[action.user.id] = action.user
             return newState;
+        case RECEIVE_USERS:
+            return action.users
         default:
             return state;
     }

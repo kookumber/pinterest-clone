@@ -36,6 +36,10 @@ class UserShow extends React.Component {
 
                     </div>
                 </div>
+
+                <div>
+                    {this.props.openBoardModal}
+                </div>
             </div>
         )
     }

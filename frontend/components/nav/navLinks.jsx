@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 const NavLinks = ({ currentUser, logout, openModal }) => {

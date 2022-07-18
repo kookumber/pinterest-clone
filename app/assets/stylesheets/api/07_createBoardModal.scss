@@ -1,0 +1,106 @@
+@import "./01_header.scss";
+
+.modal-child:last-of-type {
+    width: 540px;
+    height: 360px;
+}
+
+.create-board-modal {
+    width: 100%;
+
+}
+.modal-header {
+    
+    width: 100%;
+    height: 96px;
+    @include center(row, center);
+    margin-top: -15px;
+
+    & h1 {
+        width: 100%;
+        font-size: 28px;
+    }
+}
+
+.create-board-options {
+    width: 100%;
+    @include center(column, center);
+
+    & div > p {
+        width: 476px;
+        height: 15px;
+        text-align: start;
+        padding-bottom: 10px;
+        font-size: 14px;
+    }
+
+    & .board-name-input {
+        width: 476px;
+        height: 48px;
+        border-color: #e2e2e2;
+        box-sizing: border-box;
+        border-style: solid;
+        border-radius: 16px;
+        padding-left: 18px;
+        font-size: 16px;
+    }
+
+    & .board-public-option {
+        @include center(row, flex-start);
+        width: 476px;
+        height: 44px;
+        padding-top: 35px;
+        padding-bottom: 15px;
+
+        & div:last-of-type {
+            padding-left: 10px;
+            
+            & p {
+                font-size: 16px;
+                padding-bottom: 2px;
+            };
+
+            & p:first-child {
+            font-weight: bold;
+            };
+
+            & p:last-child {
+                color: rgb(123, 123, 123);
+            }
+        }
+    }
+}
+
+.board-public-input {
+    height: 24px;
+    width: 24px;
+    border: 3px solid #e2e2e2;
+    border-radius: 8px;
+    cursor: pointer;
+
+    & :focus {
+        background-color: black;
+    }
+}
+
+.create-board-button-wrap {
+    height: 110px;
+    @include center(row, center);
+
+    & div:first-child{
+        width: 476px;
+        
+        @include center(row, flex-end)
+    }
+
+}
+
+.create-board-button {
+    width: 80px;
+    height: 48px;
+    background-color: #efefef;
+    border-radius: 28px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #605f5f;
+}
