@@ -12,6 +12,8 @@ class PinShow extends React.Component {
                 this.props.fetchUser(this.props.pin.user_id)})
     }
 
+    
+
     render(){
         const { pin, users, session } = this.props;
 

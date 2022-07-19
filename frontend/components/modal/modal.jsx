@@ -33,7 +33,7 @@ const Modal = ({ modal, closeModal }) => {
         // This is super important because if we don't stop propogation, any time we click inside the .modal-child
         // the modal would close due to the way events bubble up through all containing elements
         <div className="modal-background" onClick={closeModal}>
-            <div className="modal-child" onClick={e => e.stopPropagation()}>
+            <div className="modal-child board-modal" onClick={e => e.stopPropagation()}>
                 { component }
             </div>
         </div>

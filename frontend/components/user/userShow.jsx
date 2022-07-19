@@ -1,13 +1,24 @@
 import React from "react";
+import BoardIndexContainer from "../board/boardIndexContainer";
+
+
 
 class UserShow extends React.Component {
     constructor(props) {
         super(props)
     }
 
+    componentDidMount(){
+        this.props.fetchBoards()
+            .then(() => this.props.fetchSavedPins())
+                .then(() => this.props.fetchPins())
+    }
     
     render() {
-        const { user } = this.props
+        const { user, pins, boards } = this.props
+
+        if(!pins || !user) return null
+
         return (
             <div className="main-profile-container">
                 <div className="profile-wrapper">
@@ -40,6 +51,11 @@ class UserShow extends React.Component {
                 <div>
                     {this.props.openBoardModal}
                 </div>
+                <section className="saved-content">
+                    
+                    <BoardIndexContainer />
+                    {/* <BoardIndex /> */}
+                </section>
             </div>
         )
     }

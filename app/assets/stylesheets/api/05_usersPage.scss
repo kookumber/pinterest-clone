@@ -34,3 +34,44 @@
     background-color: #efefef;
     border-radius: 50%;
 }
+
+.user-data {
+    @include center(row, center)
+}
+
+.saved-content {
+    width: 100%;
+    height: auto;
+}
+
+.boards-index-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.board-wrapper {
+    width: 236px;
+    height: 157px;
+}
+
+.board-image-box {
+        width: 100%;
+        height: 100%;
+        @include center(row, center);
+
+        & .board-image-big img {
+            width: 157px;
+            height: 157px;
+        }
+
+        & .board-image-smalls {
+            width: 78px;
+            height: 157px;
+
+            & #board-image-2 img, #board-image-3 img{
+                width: 77px;
+                height: 77px
+            }
+        }
+    }

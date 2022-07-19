@@ -8,9 +8,9 @@ const savedPinReducer = (state = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_SAVED_PINS:
-            return action.saved_pins;
+            return action.savedPins;
         case REMOVE_SAVED_PIN:
-            delete newState[action.saved_pin.id];
+            delete newState[action.savedPin.id];
             return newState;
         default:
             return state;

@@ -1,6 +1,6 @@
 import { RECEIVE_BOARD, RECEIVE_BOARDS, REMOVE_BOARD } from "../actions/boardActions";
 
-const boardsReducer = (state = {}, action) => {
+const boardReducer = (state = {}, action) => {
     Object.freeze(state);
 
     let newState = Object.assign({}, state)
@@ -19,4 +19,4 @@ const boardsReducer = (state = {}, action) => {
     }
 }
 
-export default boardsReducer;
+export default boardReducer;

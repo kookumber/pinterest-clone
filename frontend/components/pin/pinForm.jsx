@@ -91,7 +91,7 @@ class PinForm extends React.Component {
                 <div className="pin-form-header">
                     <div className="pin-form-options">
                         <svg className="user-icons">
-                        <ListRoundedIcon />
+                            <i className="fa fa-ellipsis-h" />
                         </svg>
                     </div>
                     <div className="pin-form-submission">

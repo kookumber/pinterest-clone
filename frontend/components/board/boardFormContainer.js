@@ -2,6 +2,8 @@ import { connect } from "react-redux";
 
 import BoardForm from "./boardForm";
 import { createBoard } from "../../actions/boardActions";
+import { closeModal } from "../../actions/modalActions";
+
 
 const mapStateToProps = (state) => {
     return {
@@ -11,7 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createBoard: (board) => dispatch(createBoard(board))
+        createBoard: (board) => dispatch(createBoard(board)),
+        closeBoardModal: () => dispatch(closeModal())
     }
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 class BoardForm extends React.Component {
     constructor(props) {
@@ -7,7 +7,7 @@ class BoardForm extends React.Component {
             name: '',
             details: '',
             user_id: props.user.id,
-            public: false
+            public: true
         }
         this.handleCreate = this.handleCreate.bind(this)
     }
@@ -23,9 +23,11 @@ class BoardForm extends React.Component {
         const newBoard = {board: {
             name: this.state.name,
             details: '',
-            user_id: this.state.user_id
+            user_id: this.state.user_id,
+            public: this.state.public
         }}
         this.props.createBoard(newBoard)
+            .then(this.props.closeBoardModal())
     }
 
     render() {
@@ -49,6 +51,7 @@ class BoardForm extends React.Component {
                         <div>
                             <input className="board-public-input" 
                                 type="checkbox"
+                                defaultChecked="true"
                                 value={this.state.public}
                                 onChange={() => this.setState({['public']: !this.state.public})}
                                 />

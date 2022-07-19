@@ -8,6 +8,7 @@ import PinIndexContainer from "./pin/pinIndexContainer";
 import PinFormContainer from "./pin/pinFormContainer";
 import UserShowContainer from "./user/userShowContainer";
 import PinShowContainer from "./pin/pinShowContainer";
+import BoardShowContainer from "./board/boardShowContainer";
 
 
 const App = () => (
@@ -20,8 +21,9 @@ const App = () => (
         <Route exact path="/" component={PinIndexContainer}/>
         <Switch>
             <ProtectedRoute path="/pins/create" component={PinFormContainer} />
-            <ProtectedRoute exact path="/pins/:pinId" component={PinShowContainer}/>
-            <ProtectedRoute exact path="/users/:userId" component={UserShowContainer}/>
+            <ProtectedRoute exact path="/pins/:pinId" component={PinShowContainer} />
+            <ProtectedRoute exact path="/users/:userId" component={UserShowContainer} />
+            <ProtectedRoute exact path="/boards/:boardId" component={BoardShowContainer} />
         </Switch>
         
         

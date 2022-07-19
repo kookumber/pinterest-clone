@@ -5,13 +5,14 @@ import PinForm from "./pinForm";
 
 const mapStateToProps = (state) => {
     return { 
-        user: state.entities.users[state.session.id]
+        user: state.entities.users[state.session.id],
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createPin: (pin) => dispatch(createPin(pin))
+        createPin: (pin) => dispatch(createPin(pin)),
+
     }
 }
 

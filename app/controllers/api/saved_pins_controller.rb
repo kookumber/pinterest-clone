@@ -17,7 +17,7 @@ class Api::SavedPinsController < ApplicationController
 
     # Not actually deleting any pins/boards but just delete a pins association to a board
     def destroy
-        @saved_pin = SavedPin.find_by[id: params[:id]]
+        @saved_pin = SavedPin.find_by(id: params[:id])
 
         if @saved_pin && @saved_pin.destroy
             render :index

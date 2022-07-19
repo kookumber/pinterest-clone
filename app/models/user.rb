@@ -17,7 +17,16 @@ class User < ApplicationRecord
         primary_key: :id,
         foreign_key: :user_id,
         class_name: :Board
-        
+    
+    has_many :followers, #These are the users that follow this specific user
+        primary_key: :id,
+        foreign_key: :user_id,
+        class_name: :Follow
+    
+    has_many :followings, #These are the users that this specific user is following
+        primary_key: :id,
+        foreign_key: :following_id,
+        class_name: :Follow
 
         # Class method for finding a user ONLY if we have the correct email and password
     def self.find_by_credentials(email, password)

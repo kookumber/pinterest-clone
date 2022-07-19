@@ -4,35 +4,37 @@
 
 // To get a grid with flex, try 3 divs where flex dir is row and within each div, elements where div
 // is flex dir column
+@import "./01_header.scss";
+
 .home-feed {
+    height: 100%;
+    margin-top: 85px;
     padding-bottom: 24px;
     height: auto;
-    display: flex;
-    justify-content: center;
-    min-height: 1200px;
+    @include center(row, center)
 }
 
 .pins-grid-container {
-    margin-left: auto;
-    margin-right: auto;
-    display: grid;
     height: 100%;
-    max-width: 1000px;
+    width: 100%;
     box-sizing: border-box;
-    justify-content: center;
-    grid-template-columns: repeat(auto-fit, 250px);
-    grid-auto-rows: 10px;
-    grid-auto-flow: column;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    overflow: hidden;
 }
 
 .pin-wrapper {
+    margin-bottom: 20px;
     min-width: 252px;
     max-width: 252px;
-    height: 374px;
-    border: 1px solid black;
+    max-height: 418px;
+    border: none;
 }
 
 .pin-image > img {
-    height: 100%;
+    max-height: 376px;
+    height: 95%;
     width: 100%;
+    border-radius: 16px;
 }

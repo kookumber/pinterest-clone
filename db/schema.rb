@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_18_024717) do
+ActiveRecord::Schema.define(version: 2022_07_18_172608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,10 +40,19 @@ ActiveRecord::Schema.define(version: 2022_07_18_024717) do
     t.string "name", null: false
     t.text "details"
     t.integer "user_id", null: false
-    t.boolean "public", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "public", default: false
     t.index ["user_id"], name: "index_boards_on_user_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "following_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["following_id"], name: "index_follows_on_following_id"
+    t.index ["user_id"], name: "index_follows_on_user_id"
   end
 
   create_table "pins", force: :cascade do |t|
