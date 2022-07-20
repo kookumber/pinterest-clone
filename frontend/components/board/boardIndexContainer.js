@@ -1,8 +1,9 @@
 import { connect } from "react-redux";
 import BoardIndex from "./boardIndex";
-import { fetchBoards } from "../../actions/boardActions";
+import { fetchBoards, fetchUsersBoards } from "../../actions/boardActions";
 import { fetchSavedPins } from "../../actions/savedPinActions";
 import { fetchPins } from "../../actions/pinActions";
+
 
 const mapStateToProps = (state) => {
     
@@ -18,7 +19,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchPins: () => dispatch(fetchPins()),
         fetchBoards: () => dispatch(fetchBoards()),
-        fetchSavedPins: () => dispatch(fetchSavedPins())
+        fetchSavedPins: () => dispatch(fetchSavedPins()),
+        fetchUsersBoards: (userId) => dispatch(fetchUsersBoards(userId))
     }
 }
 

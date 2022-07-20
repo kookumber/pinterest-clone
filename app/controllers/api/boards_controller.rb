@@ -1,7 +1,17 @@
 class Api::BoardsController < ApplicationController
     
     def index
-        @boards = Board.all
+        # @boards = Board.all
+
+        # @boards.each do |board|
+        #     board.saved_pins_on_board = board.featured_pins
+        # end
+
+        if params[:user_id]
+            @boards = Board.where(user_id: params[:user_id])
+        else
+            @boards = Board.all
+        end
     end
 
     def create

@@ -1,6 +1,5 @@
 class Api::PinsController < ApplicationController
     def index
-        # @pins = Pin.all
         @pins = Pin.all
         render :index
     end

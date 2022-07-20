@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from 'react-router'
 import ListRoundedIcon from '@mui/icons-material/ListRounded';
+import UploadRoundedIcon from '@mui/icons-material/UploadRounded';
 
 
 class PinForm extends React.Component {
@@ -54,7 +55,7 @@ class PinForm extends React.Component {
     render() {
 
         const previewImg = this.state.imageUrl ? <div className="image-preview"><img src={this.state.imageUrl} /></div> : null;
-
+        const pinsUser = this.props.user
         // const boardSelecter = (
         //     <div className="board-selector">
         //         <div className="search-bar-container">
@@ -75,13 +76,22 @@ class PinForm extends React.Component {
         //     </div>
         // )
 
-        const uploadBox = (
-            <div className="pin-image-dropbox">
-                <input type="file"
-                    className="image-upload-box"
-                    onChange={this.handleFile} />
-                {previewImg}
+        const uploadBox = (  
+            <div className="dotted-border">
+                <div className="upload-image-container">
+                    {/* <div className="upload-icon-wrap">
+                        <UploadRoundedIcon className="upload-icon" />
+                    </div> */}
+                    {/* <div className="upload-text" id="drag-text">Drag and drop or click to upload</div>
+                    <div className="upload-text" id="rec-text">Recommendation: Use high-quality .jpg files less than 20MB</div> */}
+                    <input type="file"
+                        className="image-upload-box"
+                        onChange={this.handleFile} />
+                    {previewImg}
+
+                </div>
             </div>
+            
         )
 
         return (
@@ -110,17 +120,23 @@ class PinForm extends React.Component {
                     </div>
                     <div className="pin-form-text-container">
                         <div className="text-area-container">
-                            <input className="pin-input" 
+                            <input className="pin-title-input" 
                                 value={this.state.title}
                                 placeholder="Add your title"
                                 onChange={this.update('title')} />
                         </div>
                         
-                        <div className="current-user-container">
-                            User Details
+                        <div className="pin-user">
+                                <div className="pin-user-icon">
+                                    {pinsUser ? pinsUser.username[0].toUpperCase() : null}
+                                </div>
+                                <div className="pin-user-info">
+                                    <div>{pinsUser ? pinsUser.username : null}</div>
+                                    <div># of followers</div>
+                                </div>
                         </div>
                         <div className="text-area-container">
-                            <input className="pin-input"
+                            <input className="pin-desc-input"
                                 value={this.state.description}
                                 placeholder="Tell everyone what your Pin is about"
                                 onChange={this.update('description')} />

@@ -1,0 +1,101 @@
+.home-text-wrap {
+    top: 165px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    height: 300px;
+}
+
+.home-text {
+    font-size: 60px;
+    font-weight: 600;
+    margin-top: 15px;
+    width: 600px;
+}
+
+.idea-text-container {
+    position: relative;
+
+    .text-change {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateX(-50%);
+
+        #surf-spot {
+            color: #006d77;
+        }
+    
+        #green-thumb {
+            color: #43aa8b;
+        }
+    
+        #board-fin {
+            color: #9a031e;
+        }
+    
+        #food-idea {
+            color: #fb8500;
+        }
+        
+        .home-text {
+            
+            transition-duration: 1s;
+        }
+    }
+}
+
+.animation {
+    transform: translateY(40px);
+    opacity: 40;
+    pointer-events: none;
+}
+
+
+// -------------- GRID SETUP -------------- //
+
+$delay: 0.2s;
+
+.splash-pics-container {
+    z-index: -99;
+    width: 100%;
+    // position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 24%;
+}
+
+.splash-grid {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 245px);
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.splash-col {
+    width: 100%;
+    display: flex;
+}
+
+.splash-pic {
+    width: 236px;
+    height: 350px;
+    border: 1px solid black;
+}
+
+.splash-pic img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}

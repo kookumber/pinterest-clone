@@ -28,6 +28,10 @@ class User < ApplicationRecord
         foreign_key: :following_id,
         class_name: :Follow
 
+    has_many :board_pins,
+        through: :boards,
+        source: :pins
+
         # Class method for finding a user ONLY if we have the correct email and password
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)

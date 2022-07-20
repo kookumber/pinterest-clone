@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import UserShow from "./userShow"
 
-import { fetchUser, fetchUsers } from "../../actions/userActions";
+import { fetchUser } from "../../actions/userActions";
 import { openModal, closeModal } from "../../actions/modalActions";
 import { fetchPins } from "../../actions/pinActions";
 import { fetchBoards } from "../../actions/boardActions";

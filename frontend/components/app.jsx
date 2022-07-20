@@ -9,6 +9,7 @@ import PinFormContainer from "./pin/pinFormContainer";
 import UserShowContainer from "./user/userShowContainer";
 import PinShowContainer from "./pin/pinShowContainer";
 import BoardShowContainer from "./board/boardShowContainer";
+import HomePageContainer from "./homePage/homePageContainer";
 
 
 const App = () => (
@@ -18,7 +19,7 @@ const App = () => (
             <NavLinksContainer />
         </header>
 
-        <Route exact path="/" component={PinIndexContainer}/>
+        <Route exact path="/" component={HomePageContainer}/>
         <Switch>
             <ProtectedRoute path="/pins/create" component={PinFormContainer} />
             <ProtectedRoute exact path="/pins/:pinId" component={PinShowContainer} />

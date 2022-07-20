@@ -5,6 +5,13 @@ export const fetchBoards = () => {
     })
 }
 
+export const fetchUsersBoards = (userId) => {
+    return $.ajax({
+        url: `/api/users/${userId}/boards`,
+        method: 'GET',
+    })
+}
+
 export const fetchBoard = (boardId) => {
     return $.ajax({
         url: `/api/boards/${boardId}`,

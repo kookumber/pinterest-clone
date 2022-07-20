@@ -46,6 +46,7 @@
 .pin-form-submission {
     width: 240px;
     @include center('row', 'space-between');
+
 }
 
 .pin-board-selector {
@@ -77,40 +78,83 @@
 
 .pin-form-image-container {
     width: 300px;
+    height: 454px;
     padding: 0px 20px 0px 20px;
     @include center('row', center);
-    border-radius: 6px;
+    border-radius: 8px;
     background-color: #efefef;
-
-        .pin-image-dropbox {
-            border: 2px rgb(218, 218, 218) dashed;
-            border-radius: 6px;
-            width: 100%;
-            height: 90%;
-            @include center('row', 'center');
-
-                .image-upload-box {
-                    background-color: #efefef;
-                    height: 454px;
-                    width: 320px;
-                    cursor: pointer;
-                    margin-left: auto;
-                    margin-right: auto;
-                    @include center('row', 'center')
-                }
-        }
+    float: left;
+    
 }
 
+.dotted-border {
+    border-radius: 8px;
+    width: 95%;
+    height: 95%;
+    padding: 15px;
+    
 
+    & .upload-icon-wrap {
+        width: 315px;
+        position: absolute;
+        z-index: 0;
+        top: 47%;
+        @include center(row, center);
+        
+        & .upload-icon {
+                font-size: 30px;
+                margin-right: auto;
+                margin-left: auto;
+                color: #efefef;
+                background-color: #737373;
+                border-radius: 50%;
+            }
+    }
+
+    & #drag-text {
+        position: absolute;
+        top: 53%;
+        font-size: 18px;
+        width: 250px;
+        text-align: center;
+    }
+
+    & #rec-text {
+        position: absolute;
+        text-align: center;
+        width: 270px;
+        top: 66%;
+        font-size: 16px;
+        color: #737373;
+    }
+
+}
+
+.image-upload-box {
+    // background-color: transparent;
+    margin-top: 5px;
+    width: 100%;
+    height: 420px;
+    cursor: pointer;
+    // z-index: 10;
+    border: 2px rgb(218, 218, 218) dashed;
+    border-radius: 8px;
+}
+
+// input::-webkit-file-upload-button {
+//     background-color: transparent;
+//     color: transparent;
+//     border: none;
+// }
 
 .pin-form-text-container {
     width: 380px;
-    padding-left: 20px;
+    padding-left: 40px;
     padding-right: 20px;
     height: 446px;
 }
 
-.pin-input:first-of-type {
+.pin-title-input {
     height: 46px;
     font-size: 36px;
     font-weight: 700;
@@ -125,7 +169,37 @@
     }
 }
 
+.pin-desc-input {
+    height: 46px;
+    font-size: 17px;
+    width: 100%;
+    cursor: text;
+    border: none;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+
+    &:focus {
+        border-bottom: 2px solid blue;
+    }
+}
+
+.pin-desc-input::placeholder {
+    color: #b7b7b7;
+}
+
+;
+
 .image-preview > img {
     height: 100%;
     width: 100%;
+}
+
+.text-area-container {
+    padding-bottom: 30px;
+}
+
+.current-user-container {
+    padding-bottom: 30px;
+    height: 48px;
 }

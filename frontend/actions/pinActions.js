@@ -41,5 +41,12 @@ export const createPin = pin => dispatch => {
     )
 }
 
+export const fetchBoardSavedPins = boardId => dispatch => {
+    return (
+        pinApiUtil.fetchBoardsPins(boardId)
+            .then(pins => dispatch(receivePins(pins)))
+    )
+}
+
 // export const deletePin = pinId => dispatch => deletePin(pinId)
 //         .then(pin => dispatch(removePin(pin)))

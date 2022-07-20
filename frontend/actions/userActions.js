@@ -3,10 +3,13 @@ import * as userApiUtil from "../util/userApiUtil";
 export const RECEIVE_USER = 'RECEIVE_USER'
 export const RECEIVE_USERS = 'RECEIEVE_USERS'
 
-export const receiveUser = (user) => ({
+export const receiveUser = (payload) => {
+    // debugger
+    return {
     type: RECEIVE_USER,
-    user
-})
+    payload
+    }
+}
 
 export const receiveUsers = (users) => ({
     type: RECEIVE_USERS,

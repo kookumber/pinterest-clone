@@ -25,6 +25,14 @@ export const createPin = pin => {
         })
 }
 
+export const fetchBoardsPins = boardId => {
+    return $.ajax({
+        url: `/api/boards/${boardId}/saved_pins`,
+        method: 'GET'
+    })
+}
+
+
 export const deletePin = pinId => {
     $.ajax({
         url: `/api/pins/${pinId}`,

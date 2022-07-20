@@ -7,16 +7,17 @@ class BoardIndexItem extends React.Component {
 
     render() {
         //Props are passed through the call of the component in the BoardIndexItem component
-        const { board, savedPins, pins, currentUser } = this.props
-        console.log("hello from board index item")
-        if ( board === undefined || pins === undefined || savedPins === undefined ) return null
-
-        const boardsSavedPins = Object.values(savedPins).filter(pin => pin.board_id === board.id)
-        const boardPinsLen = boardsSavedPins.length
-
-        let imageUrl1 = (boardPinsLen < 1 ? null : pins[boardsSavedPins[0].pin_id].imageUrl)
-        let imageUrl2 = (boardPinsLen < 2 ? null : pins[boardsSavedPins[1].pin_id].imageUrl)
-        let imageUrl3 = (boardPinsLen < 3 ? null : pins[boardsSavedPins[2].pin_id].imageUrl)
+        const { board, pins, currentUser } = this.props
+        if ( !pins || !board ) return null
+        const boardsPins = Object.values(board.pins)
+        const boardPinsLen = boardsPins.length
+        console.log("board pin arr?", boardsPins)
+        // console.log("pins", pins)
+        // console.log("sp", pins[boardsSavedPins[0].pin_id])
+        // debugger
+        let imageUrl1 = (boardPinsLen < 1 ? null : Object.values(boardsPins[0])[0].imageUrl)
+        let imageUrl2 = (boardPinsLen < 2 ? null : Object.values(boardsPins[1])[0].imageUrl)
+        let imageUrl3 = (boardPinsLen < 3 ? null : Object.values(boardsPins[2])[0].imageUrl)
 
         return (
             <div className="board-wrapper">

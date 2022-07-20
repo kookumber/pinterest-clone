@@ -36,6 +36,11 @@ export const fetchBoard = (boardId) => dispatch => {
         .then(board => dispatch(receiveBoard(board)))
 }
 
+export const fetchUsersBoards = (userId) => dispatch => {
+    return boardApiUtil.fetchUsersBoards(userId)
+        .then(boards => dispatch(receiveBoards(boards)))
+}
+
 
 export const updateBoard = (board) => dispatch => {
     return boardApiUtil.updateBoard(board)

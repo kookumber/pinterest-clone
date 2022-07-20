@@ -16,7 +16,11 @@ class Api::UsersController < ApplicationController
   end
 
   def show
+    # debugger
     @user = User.find(params[:id])
+    @boards = @user.boards
+    @board_pins = @user.board_pins
+
     if @user
       render :show
     else

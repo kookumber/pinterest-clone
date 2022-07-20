@@ -111,30 +111,8 @@
 
 .pin-show-user-container {
     @include center(row, space-between);
+
     margin-top: 25px;
-    & .pin-user {
-        @include center(row, flex-start);
-        width: 360px;
-
-        & .pin-user-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            @include center(row, center);
-            background-color: #efefef;
-            cursor: pointer;
-        }
-
-        & .pin-user-info {
-            padding-left: 13px;
-
-            & div:first-child {
-                font-weight: bold;
-                cursor: pointer;
-            }
-            
-        }
-    }
 
     & div:last-child {
         @include center(column, center);
@@ -151,5 +129,33 @@
                 background-color: #e2e2e2;
             }
         }
+    }
+}
+
+.pin-user {
+    @include center(row, flex-start);
+    width: 360px;
+
+    & .pin-user-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        @include center(row, center);
+        background-color: #efefef;
+        cursor: pointer;
+    }
+
+    & .pin-user-info {
+        padding-left: 13px;
+
+        & div:first-child {
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        & div:last-child {
+            font-size: 14px;
+        }
+
     }
 }
