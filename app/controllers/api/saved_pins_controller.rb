@@ -1,13 +1,6 @@
 class Api::SavedPinsController < ApplicationController
     def index
         @saved_pins = SavedPin.all
-        # debugger
-        # if params[:board_id]
-        #     @pins = SavedPin.where(board_id: params[:board_id]).limit(3)
-        # else
-        #     @pins = SavedPin.all
-        # end
-
         render :index
     end
 

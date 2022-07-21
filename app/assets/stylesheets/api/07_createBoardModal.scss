@@ -1,8 +1,19 @@
 @import "./01_header.scss";
 
 .board-modal {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
     width: 540px;
     height: 360px;
+    padding: 20px 10px 24px 10px;
+    border-radius: 32px;
+    text-align: center;
+    margin: auto;
 }
 
 .create-board-modal {

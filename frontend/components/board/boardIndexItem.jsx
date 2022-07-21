@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class BoardIndexItem extends React.Component {
     constructor(props){
@@ -13,14 +14,10 @@ class BoardIndexItem extends React.Component {
         
         const boardsSavedPins = Object.values(savedPins).filter(sp => sp.board_id === board.id)
         const boardsPins = []
-        // console.log("bsp", boardsSavedPins)
-        // console.log("p1", pins[1])
+
         for (let i = 0; i < boardsSavedPins.length; i++){
             boardsPins.push(pins[boardsSavedPins[i].pin_id])
         }
-
-        // console.log("the bp", boardsPins)
-        console.log("test", boardsPins[0])
 
         const boardPinsLen = boardsPins.length
         
@@ -29,29 +26,31 @@ class BoardIndexItem extends React.Component {
         let imageUrl3 = (boardPinsLen < 3 ? null : boardsPins[2].imageUrl)
 
         return (
-            <div className="board-wrapper">
-                <div className="board-image-box">
-                    <div className="board-image-big">
-                        <img src={imageUrl1} />
-                    </div>
-                    <div className="board-image-smalls">
-                        <div id="board-image-2">
-                            <img src={imageUrl2} />
+            <Link to={`/boards/${board.id}`} >
+                <div className="board-wrapper">
+                    <div className="board-image-box">
+                        <div className="board-image-big">
+                            <img src={imageUrl1} />
                         </div>
-                        <div id="board-image-3">
-                            <img src={imageUrl3} />
+                        <div className="board-image-smalls">
+                            <div id="board-image-2">
+                                <img src={imageUrl2} />
+                            </div>
+                            <div id="board-image-3">
+                                <img src={imageUrl3} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="board-info-box">
+                        <div className="board-name">
+                            <h3>{board.name}</h3>
+                        </div>
+                        <div className="board-pin-count">
+                            <h4>{boardPinsLen} pins</h4>
                         </div>
                     </div>
                 </div>
-                <div className="board-info-box">
-                    <div className="board-name">
-                        <h3>{board.name}</h3>
-                    </div>
-                    <div className="board-pin-count">
-                        <h4>{boardPinsLen} pins</h4>
-                    </div>
-                </div>
-            </div>
+            </Link>
         )
     }
 }

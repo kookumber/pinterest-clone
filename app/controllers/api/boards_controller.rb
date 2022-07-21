@@ -27,6 +27,7 @@ class Api::BoardsController < ApplicationController
     
     def show
         @board = Board.find_by(id: params[:id])
+        @pins = @board.pins
         
         if @board
             render :show

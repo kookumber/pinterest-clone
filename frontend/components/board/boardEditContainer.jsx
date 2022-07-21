@@ -2,11 +2,13 @@ import { connect } from "react-redux";
 import { closeModal } from "../../actions/modalActions";
 import { fetchBoard, updateBoard, deleteBoard } from "../../actions/boardActions";
 import BoardEdit from "./boardEdit";
+import { withRouter } from "react-router-dom";
 
 const mapStateToProps = (state, ownProps) => {
     return {
         user: state.entities.users[state.session.id],
-        board: state.entities.boards[ownProps.match.params.boardId]
+        // board: state.entities.boards[ownProps.match.params.boardId],
+        board: Object.values(state.entities.boards)[0]
     }
 }
 
@@ -19,4 +21,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoardEdit)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BoardEdit))

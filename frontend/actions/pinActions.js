@@ -10,10 +10,12 @@ export const receivePins = pins => ({
     pins
 })
 
-export const receivePin = pin => ({
-    type: RECEIVE_PIN,
-    pin
-})
+export const receivePin = pin => {
+    return {
+        type: RECEIVE_PIN,
+        pin
+    }
+}
 
 export const removePin = pinId => ({
     type: REMOVE_PIN,
@@ -37,7 +39,7 @@ export const fetchPin = pinId => dispatch => {
 export const createPin = pin => dispatch => {
     return (
         pinApiUtil.createPin(pin)
-            .then(pin => dispatch(receivePin(pin)))
+            .then(res => dispatch(receivePin(res)))
     )
 }
 

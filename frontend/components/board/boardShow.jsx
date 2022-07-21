@@ -7,46 +7,32 @@ class BoardShow extends React.Component {
 
     componentDidMount(){
         this.props.fetchBoard(this.props.match.params.boardId)
-            .then(() => {
-                this.props.fetchUser(this.props.board.user_id)})
+        //     .then(() => {
+        //         this.props.fetchUser(this.props.board.user_id)})
         
-        this.props.fetchSavedPins()
-        this.props.fetchPins()
+        // this.props.fetchSavedPins()
+        // this.props.fetchPins()
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.boardId != this.props.match.params.boardId) {
             this.props.fetchBoard(this.props.match.params.boardId)
-                .then(() => {
-                    this.props.fetchUser(this.props.board.user_id)
-                })
         }
     }
 
 
     render () {
-        const {board, pins, savedPins} = this.props
-        if ( !board || !pins || !savedPins) return null;
+        const {board, pins} = this.props
+        if ( !board || !pins) return null;
 
-        const savedPinsArr = Object.values(savedPins).filter(savedPin => savedPin.board_id === board.id)
-        
-        let boardsPins = []
+        let boardsPins = Object.values(pins)
 
-        for(let i = 0; i < savedPinsArr.length; i++){
-            boardsPins.push(pins[savedPinsArr[i].pin_id])
-        }
-
-        console.log("bs bp", boardsPins)
         return (
             <div className="board-show-container">
 
                 <div className="board-show-details">
                     <h2>{board.name}</h2>
-                    <div className="board-edit">
-                        <span className="material-symbols-outlined">
-                        more_horiz
-                        </span>
-                    </div>
+                    <div>{this.props.editBoardModal}</div>
                 </div>
                 <div>{board.details}</div>
 
@@ -77,14 +63,22 @@ class BoardShow extends React.Component {
                     </div>
                 </div>
 
+                <div className="board-pins-count">
+                    <div>
+                        {boardsPins.length} Pins
+                    </div>
+                </div>
+
                 <div className="board-show-pins-container">
-                    {/* {boardsPins.map(pin => {
-                        return (
-                            <div>
-                                <img src={pin.imageUrl}/>
-                            </div>
+                    <div className="board-show-pins-grid">
+                        {boardsPins.map(pin => {
+                            return (
+                                <div key={pin.id}>
+                                    <img src={pin.imageUrl}/>
+                                </div>
+                            )}
                         )}
-                    )} */}
+                    </div>
                 </div>
             </div>
         )

@@ -9,9 +9,9 @@ export const receiveBoards = (boards) => ({
     boards
 })
 
-export const receiveBoard = (board) => ({
+export const receiveBoard = (payload) => ({
     type: RECEIVE_BOARD,
-    board
+    payload
 })
 
 export const removeBoard = (board) => ({

@@ -1,3 +1,4 @@
+import { RECEIVE_BOARD } from "../actions/boardActions";
 import { RECEIVE_PINS, RECEIVE_PIN } from "../actions/pinActions";
 import { RECEIVE_USER } from "../actions/userActions";
 
@@ -23,6 +24,17 @@ const pinsReducer = (state = {}, action) => {
         case RECEIVE_PIN:
             newState[action.pin.id] = action.pin;
             return newState;
+        case RECEIVE_BOARD:
+            // let boardPins = Object.values(action.payload.pins)
+            // if (boardPins) {
+            //     boardPins.map(pin => {
+            //         newState[pin.id] = pin
+            //     })
+            //     return newState
+            // } else {
+                // return state
+            // }
+            return action.payload.pins
         default:
             return state;
     }

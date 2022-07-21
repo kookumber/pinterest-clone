@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import LoginFormContainer from "../sessionForm/loginFormContainer";
 import SignupFormContainer from "../sessionForm/signupFormContainer";
 import BoardFormContainer from "../board/boardFormContainer";
+import BoardEditContainer from "../board/boardEditContainer";
 
 const Modal = ({ modal, closeModal }) => {
     // This means if modal slice of state is null, we'll return null, essentially making
@@ -14,15 +15,23 @@ const Modal = ({ modal, closeModal }) => {
 
     // If modal slice exists, we'll choose what component to put inside our .modal-child div
     let component;
+    let divName;
     switch (modal) {
         case 'login':
             component = <LoginFormContainer />
+            divName = "modal-child"
             break;
         case 'signup':
             component = <SignupFormContainer />
+            divName = "modal-child"
             break;
         case 'createBoard':
             component = <BoardFormContainer />
+            divName = "board-modal"
+            break;
+        case 'editBoard':
+            component = <BoardEditContainer />
+            divName = "board-edit-modal"
             break;
         default:
             return null
@@ -33,7 +42,7 @@ const Modal = ({ modal, closeModal }) => {
         // This is super important because if we don't stop propogation, any time we click inside the .modal-child
         // the modal would close due to the way events bubble up through all containing elements
         <div className="modal-background" onClick={closeModal}>
-            <div className="modal-child board-modal" onClick={e => e.stopPropagation()}>
+            <div className={divName} onClick={e => e.stopPropagation()}>
                 { component }
             </div>
         </div>

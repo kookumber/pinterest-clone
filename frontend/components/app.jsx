@@ -19,6 +19,7 @@ const App = () => (
         </header>
 
         <Route exact path="/" component={HomePageContainer}/>
+        
         <Switch>
             <ProtectedRoute path="/pins/create" component={PinFormContainer} />
             <ProtectedRoute exact path="/pins/:pinId" component={PinShowContainer} />
