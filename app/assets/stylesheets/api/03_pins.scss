@@ -16,12 +16,17 @@
 
 .pins-grid-container {
     height: 100%;
-    width: 100%;
+    width: 95%;
     box-sizing: border-box;
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
+    align-content: center;
     overflow: hidden;
+    // grid-template-rows: masonry;
+    // flex-flow: column wrap;
+    // align-content: space-between;
+    grid-template-rows: masonry;
 }
 
 .pin-wrapper {
@@ -30,11 +35,36 @@
     max-width: 252px;
     max-height: 418px;
     border: none;
+    padding: 3px;
+    
+
+    & img {
+        max-height: 376px;
+        height: 95%;
+        width: 100%;
+        border-radius: 16px;
+    }
+
+    & .pin-title {
+        margin-top: 8px;
+        font-weight: bold;
+    }
 }
 
-.pin-image > img {
-    max-height: 376px;
-    height: 95%;
-    width: 100%;
-    border-radius: 16px;
-}
+// .pin-wrapper:nth-child(3n+1) {
+//     order: 1;
+// }
+// .pin-wrapper:nth-child(3n+2) {
+//     order: 2;
+// }
+// .pin-wrapper:nth-child(3n) {
+//     order: 3;
+// }
+
+// .pins-grid-container::before, 
+// .pins-grid-container::after {
+//     content: "";
+//     flex-basis: 100%;
+//     width: 0;
+//     order: 2;
+// }

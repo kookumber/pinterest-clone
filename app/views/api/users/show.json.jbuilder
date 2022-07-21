@@ -20,22 +20,3 @@ json.board_pins do
         end
     end
 end
-# debugger
-
-# @user.boards do |board|
-#     json.set! board.id do
-#         json.extract! board, :id, :name, :details, :user_id
-#     end
-# end
-
-# json.boards do
-#     json.extract! @user.boards.each do |board|
-#         json.set! board, :id, :name, :details, :user_id
-#     end
-# end
-
-# json.pins do
-#     json.extract! @user.board_pins.each do |pin|
-#         json.set! pin, :title, :id, :image
-#     end
-# end

@@ -10,11 +10,19 @@ const pinsReducer = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_PINS:
             return action.pins;
+        case RECEIVE_USER:
+            let pins = Object.values(action.payload.board_pins)
+            if (pins) { 
+                pins.map(pin => { 
+                    newState[pin.id] = pin
+                 })
+                 return newState
+            } else {
+                return state
+            }
         case RECEIVE_PIN:
             newState[action.pin.id] = action.pin;
             return newState;
-        case RECEIVE_USER:
-            return action.payload.board_pins
         default:
             return state;
     }

@@ -4,7 +4,6 @@ import { Route, Switch } from "react-router-dom";
 
 import Modal from "./modal/modal";
 import { AuthRoute, ProtectedRoute } from "../util/routeUtil";
-import PinIndexContainer from "./pin/pinIndexContainer";
 import PinFormContainer from "./pin/pinFormContainer";
 import UserShowContainer from "./user/userShowContainer";
 import PinShowContainer from "./pin/pinShowContainer";

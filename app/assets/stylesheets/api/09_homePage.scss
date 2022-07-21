@@ -1,57 +1,69 @@
 .home-text-wrap {
-    top: 165px;
+    padding-top: 105px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
     text-align: center;
-    height: 300px;
-}
-
-.home-text {
-    font-size: 60px;
-    font-weight: 600;
-    margin-top: 15px;
-    width: 600px;
-}
-
-.idea-text-container {
-    position: relative;
-
-    .text-change {
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translateX(-50%);
-
-        #surf-spot {
-            color: #006d77;
-        }
+    height: 36vh;
     
-        #green-thumb {
-            color: #43aa8b;
-        }
+    .home-text {
+        font-size: 60px;
+        font-weight: 600;
+        margin-top: 15px;
+        width: 600px;
+    }
+
+    .idea-text-container {
+        position: relative;
     
-        #board-fin {
-            color: #9a031e;
-        }
+        .text-change {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateX(-50%);
+            transition: 1s;
     
-        #food-idea {
-            color: #fb8500;
-        }
+            #surf-spot {
+                color: #006d77;
+                // -webkit-animation: fadeinout 4s linear forwards;
+                // animation: fadeinout 4s linear forwards;
+                transition: width 2s;
+            };
         
-        .home-text {
+            #green-thumb {
+                color: #43aa8b;
+                animation: fadeinout 10s linear;
+            }
+        
+            #board-fin {
+                color: #9a031e;
+                animation: fadeinout 16s linear;
+            }
+        
+            #food-idea {
+                color: #fb8500;
+                animation: fadeinout 22s linear;
+            }
             
-            transition-duration: 1s;
-        }
+            @keyframes fadeinout {
+                0%, 100% { opacity: 0}
+                50% { opacity: 1}
+            }
+
+        };
     }
 }
 
-.animation {
-    transform: translateY(40px);
-    opacity: 40;
-    pointer-events: none;
+.splash-1 {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 107vh;
 }
+
 
 
 // -------------- GRID SETUP -------------- //
@@ -61,11 +73,11 @@ $delay: 0.2s;
 .splash-pics-container {
     z-index: -99;
     width: 100%;
-    // position: absolute;
+    height: 195vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 24%;
+    top: 22%;
 }
 
 .splash-grid {
@@ -86,6 +98,44 @@ $delay: 0.2s;
 .splash-col {
     width: 100%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 1s;
+
+    &:nth-child(1) {
+        margin-top: 0;
+        transition-delay: 0.2s * 0;
+    }
+
+    &:nth-child(2) {
+        margin-top: 0;
+        transition-delay: 0.2s * 1;
+    }
+
+    &:nth-child(3) {
+        margin-top: 0;
+        transition-delay: 0.2s * 2;
+    }
+
+    &:nth-child(4) {
+        margin-top: 0;
+        transition-delay: 0.2s * 3;
+    }
+
+    &:nth-child(5) {
+        margin-top: 0;
+        transition-delay: 0.2s * 4;
+    }
+
+    &:nth-child(6) {
+        margin-top: 0;
+        transition-delay: 0.2s * 5;
+    }
+
+    &:nth-child(7) {
+        margin-top: 0;
+        transition-delay: 0.2s * 6;
+    }
 }
 
 .splash-pic {
@@ -94,8 +144,52 @@ $delay: 0.2s;
     border: 1px solid black;
 }
 
-.splash-pic img {
+.splash-pic > img {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+// -------------- ANIMATION SETUP -------------- //
+
+.animation {
+    transform: translateY(40px);
+    opacity: 20;
+    pointer-events: none;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0px)
+    }
+
+    25% {
+        transform: translateY(10px)
+    }
+
+    75% {
+        transform: translateY(-10px)
+    }
+
+    100% {
+        transform: translateY(0px)
+    }
+}
+
+@keyframes color-change {
+    0% {
+        background-color: rgb(241, 126, 145);
+    }
+
+    33% {
+        background-color: rgb(31, 185, 185)
+    }
+
+    66% {
+        background-color: rgb(226, 170, 47);
+    }
+
+    100% {
+        background-color: rgb(241, 126, 145);
+    }
 }

@@ -1,3 +1,63 @@
 // Place all the styles related to the api/boards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "./01_header.scss";
+
+.board-show-container {
+    margin-top: 95px;
+    @include center(column, center)
+}
+
+.board-show-details {
+    @include center(row, center);
+    & h2 {
+        padding-right: 15px;
+        font-size: 40px;
+    }
+    & .board-edit {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background-color: #efefef;
+        @include center(row, center);
+
+        & span {
+            font-weight: 700;
+            font-size: 34px;
+        }
+    }
+}
+
+.board-show-filters {
+    @include center(row, space-evenly);
+    width: 300px
+}
+
+.options-box {
+    @include center(column, center);
+    margin-top: 40px;
+
+    & div {
+        width: 88px;
+        height: 88px;
+        border-radius: 28px;
+        background-color: #efefef;
+        @include center(row, center);
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e2e2e2;
+        }
+
+        & span {
+            font-size: 30px;
+        }
+    }
+
+    & span {
+        font-weight: 800;
+        font-size: 14px;
+        padding-top: 10px;
+    }
+}

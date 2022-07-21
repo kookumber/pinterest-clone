@@ -1,6 +1,6 @@
 import React from "react";
 import PinIndexContainer from "../pin/pinIndexContainer";
-
+import { Helmet } from "react-helmet";
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -14,6 +14,7 @@ class HomePage extends React.Component {
             return (
                 <div className="splash-wrapper">
                     {/* Home text inspiration section */}
+                    
                     <div className="home-text-wrap">
                         <h2 className="home-text">Get your next</h2>
 

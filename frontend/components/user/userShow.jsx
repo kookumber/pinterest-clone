@@ -13,7 +13,14 @@ class UserShow extends React.Component {
         //     .then(() => this.props.fetchSavedPins())
         //         .then(() => this.props.fetchPins())
         this.props.fetchUser(this.props.user.id)
+        this.props.fetchSavedPins()
     }
+
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.match.params.userId != this.props.match.params.userId) {
+    //         this.props.fetchUser(this.props.user.id)
+    //     }
+    // }
     
     render() {
         const { user, pins, boards } = this.props

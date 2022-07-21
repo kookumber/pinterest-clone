@@ -7,17 +7,26 @@ class BoardIndexItem extends React.Component {
 
     render() {
         //Props are passed through the call of the component in the BoardIndexItem component
-        const { board, pins, currentUser } = this.props
-        if ( !pins || !board ) return null
-        const boardsPins = Object.values(board.pins)
+        const { board, pins, savedPins } = this.props
+        if ( !pins || !board || !savedPins) return null
+        
+        
+        const boardsSavedPins = Object.values(savedPins).filter(sp => sp.board_id === board.id)
+        const boardsPins = []
+        // console.log("bsp", boardsSavedPins)
+        // console.log("p1", pins[1])
+        for (let i = 0; i < boardsSavedPins.length; i++){
+            boardsPins.push(pins[boardsSavedPins[i].pin_id])
+        }
+
+        // console.log("the bp", boardsPins)
+        console.log("test", boardsPins[0])
+
         const boardPinsLen = boardsPins.length
-        console.log("board pin arr?", boardsPins)
-        // console.log("pins", pins)
-        // console.log("sp", pins[boardsSavedPins[0].pin_id])
-        // debugger
-        let imageUrl1 = (boardPinsLen < 1 ? null : Object.values(boardsPins[0])[0].imageUrl)
-        let imageUrl2 = (boardPinsLen < 2 ? null : Object.values(boardsPins[1])[0].imageUrl)
-        let imageUrl3 = (boardPinsLen < 3 ? null : Object.values(boardsPins[2])[0].imageUrl)
+        
+        let imageUrl1 = (boardPinsLen < 1 ? null : boardsPins[0].imageUrl)
+        let imageUrl2 = (boardPinsLen < 2 ? null : boardsPins[1].imageUrl)
+        let imageUrl3 = (boardPinsLen < 3 ? null : boardsPins[2].imageUrl)
 
         return (
             <div className="board-wrapper">

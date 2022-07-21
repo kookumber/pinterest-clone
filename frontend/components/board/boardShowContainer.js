@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         board: state.entities.boards[ownProps.match.params.boardId],
         pins: state.entities.pins,
-        savedPins: state.entities.savedPins
-        // users: state.entities.users
+        savedPins: state.entities.savedPins,
+        // user: state.entities.users[state.entities.session.id]
     }
 }
 

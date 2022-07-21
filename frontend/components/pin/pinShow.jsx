@@ -10,12 +10,24 @@ class PinShow extends React.Component {
         this.props.fetchPin(this.props.match.params.pinId)
             .then(() => {
                 this.props.fetchUser(this.props.pin.user_id)})
+
+        // this.props.fetchUser(this.props.pin.user_id)
+        //     .then(() =>  this.props.fetchPin(this.props.match.params.pinId ))
     }
 
-    
+    componentDidUpdate(prevProps) {
+        if(prevProps.match.params.pinId != this.props.match.params.pinId) {
+            this.props.fetchPin(this.props.match.params.pinId)
+                .then(() => {
+                    this.props.fetchUser(this.props.pin.user_id)
+                })
+        }
+    }
+
 
     render(){
         const { pin, users, session } = this.props;
+        
 
         //If statement here to make sure we have a pin/users we can key into because render will happen before componentDidMount
         if (pin === undefined || users === undefined) return null;

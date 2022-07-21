@@ -6,25 +6,31 @@ class BoardIndex extends React.Component {
         super(props)
     }
 
-    componentDidMount(){
-        // this.props.fetchPins()            
-        // this.props.fetchSavedPins()
-        this.props.fetchUsersBoards(this.props.currentUser.id)        
-        // this.props.fetchBoards()
-        // this.props.fetchBoardSavedPins()
-    }
+    // componentDidMount(){
+    //     // this.props.fetchPins()            
+    //     // this.props.fetchSavedPins()
+    //     // this.props.fetchUsersBoards(this.props.currentUser.id)        
+    //     // this.props.fetchBoards()
+    //     // this.props.fetchBoardSavedPins()
+    // }
 
     render() {
         // console.log("hello from board index")
         const { pins, boards, currentUser, savedPins } = this.props
-        if (!boards || Object.values(pins).length === 0) return null
-        const currentUserBoards = Object.values(boards).filter(board => board.user_id === currentUser.id)
+
+        if (!boards || Object.values(pins).length === 0 || pins === undefined) return null
+        
+        // const currentUserBoards = Object.values(boards).filter(board => board.user_id === currentUser.id)
+        const currentUserBoards = Object.values(boards)
+        
         //Loop through the boards we get from fetch request, map to it a board index item
         //Pass to it the props of a single board that we're looping through
         
+
+
         return (
             <div className="boards-index-wrapper">
-                {console.log("boards arr? ", Object.values(this.props.boards))}
+                {/* {console.log("boards arr? ", Object.values(this.props.boards))} */}
                 {/* Object.values(this.props.boards)  */}
                 {currentUserBoards.map(board => {
                     return (
