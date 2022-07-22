@@ -82,7 +82,7 @@ class SessionForm extends React.Component {
                     <div>Find new ideas to try</div>
                     <br />
                     <div className="login-form">
-                        <div className="input-label">
+                        <div className="session-input-label">
                             <label>Username</label>
                         </div>
                         <input type="text"
@@ -91,7 +91,7 @@ class SessionForm extends React.Component {
                             className="login-input"
                             placeholder="Username" />
 
-                        <div className="input-label">
+                        <div className="session-input-label">
                             <label>Email</label>
                         </div>
                         <input type="text"
@@ -100,7 +100,7 @@ class SessionForm extends React.Component {
                             className="login-input"
                             placeholder="Email" />
 
-                        <div className="input-label">
+                        <div className="session-input-label">
                             <label>Password</label>
                         </div>
                         <input type="password"
@@ -126,14 +126,14 @@ class SessionForm extends React.Component {
                     <div className="close-x" onClick={this.props.closeModal}>X</div>
                     
                     <div>
-                        <img className="session-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-192x192.png" />
+                        <img className="session-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-192x192.png"/>
                     </div>
                     <div className="modal-header">
                         <h1>Welcome to Finterest</h1>
                     </div>
                     <br />
                     <div className="login-form">
-                        <div className="input-label">
+                        <div className="session-input-label">
                             <label>Email</label>
                         </div>
                         <input type="text"
@@ -141,7 +141,7 @@ class SessionForm extends React.Component {
                             onChange={this.update('email')}
                             className="login-input"
                             placeholder="Email" />
-                        <div className="input-label">
+                        <div className="session-input-label">
                             <label>Password</label>
                         </div>
                         <input type="password"

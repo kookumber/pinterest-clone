@@ -66,11 +66,12 @@ class PinForm extends React.Component {
                         <UploadRoundedIcon className="upload-icon" />
                     </div> */}
                     {/* <div className="upload-text" id="drag-text">Drag and drop or click to upload</div>
-                    <div className="upload-text" id="rec-text">Recommendation: Use high-quality .jpg files less than 20MB</div> */}
+                     */}
                     <label className="input-label" 
                     htmlFor="image-input">
                         <UploadRoundedIcon className="upload-icon" />
                         <p>Drag and drop or click to upload</p>
+                        
                     </label>
                     <input type="file"
                         // style="visibility:hidden"
