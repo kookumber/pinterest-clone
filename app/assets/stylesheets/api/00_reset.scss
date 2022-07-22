@@ -92,6 +92,10 @@ input:focus {
     outline-width: 0;
 }
 
+:visited {
+    color: inherit;
+    text-decoration: none;
+}
 
 // Below is mixin example to reuse css for elements that
 // should have similar styles

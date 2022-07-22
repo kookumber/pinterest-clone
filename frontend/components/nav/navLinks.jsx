@@ -14,7 +14,10 @@ const NavLinks = ({ currentUser, logout, openModal }) => {
         <div className="header">        
             <nav className="logged-out-nav">
                 <div className='app-logo-container'>
-                    <a className="app-logo-title" href="#">Finterest</a>
+                    <a className="app-logo-title" href="/">
+                        <img className="nav-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png" />
+                        <div>Finterest</div>
+                    </a>
                 </div>
 
                 <div className="header-links">
@@ -38,7 +41,7 @@ const NavLinks = ({ currentUser, logout, openModal }) => {
             <nav className="logged-in-nav">
                 <div className="inspiration-links-container">
                     <div className='app-logo'>
-                        <a href="#">F</a>
+                        <img className="nav-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png" />
                     </div>
                     <div className="inspiration-link">
                         <Link to="/"><div>Home</div></Link>

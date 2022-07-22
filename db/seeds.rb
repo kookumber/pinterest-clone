@@ -151,6 +151,7 @@ pin110 = Pin.create!(title: 'Title 110 - I have got a Green Thumb Maybe', descri
 pin111 = Pin.create!(title: 'Title 111 - I have got a Green Thumb Maybe', description: 'Plant Description 28 - Hopefully the plants inspire gardening or re-decoration of your space to make it green', user_id: user9.id)
 pin112 = Pin.create!(title: 'Title 112 - I have got a Green Thumb Maybe', description: 'Plant Description 29 - Hopefully the plants inspire gardening or re-decoration of your space to make it green', user_id: user10.id)
 
+
 pin1.image.attach(io: open('https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-1.jpg'), filename: 'blue-surf-1.jpg')
 pin2.image.attach(io: open('https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-2.jpg'), filename: 'blue-surf-2.jpg')
 pin3.image.attach(io: open('https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-3.jpg'), filename: 'blue-surf-3.jpg')

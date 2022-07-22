@@ -28,7 +28,7 @@ class Api::BoardsController < ApplicationController
     def show
         @board = Board.find_by(id: params[:id])
         @pins = @board.pins
-        
+
         if @board
             render :show
         else
@@ -38,8 +38,9 @@ class Api::BoardsController < ApplicationController
 
     def update
         @board = Board.find_by(id: params[:id])
-        
-        if @board.update
+        @pins = @board.pins
+
+        if @board.update(board_params)
             render :show
         else
             render json: @board.errors.full_messages, status: 401

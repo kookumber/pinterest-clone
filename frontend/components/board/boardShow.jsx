@@ -16,8 +16,13 @@ class BoardShow extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.boardId != this.props.match.params.boardId) {
+            // debugger
             this.props.fetchBoard(this.props.match.params.boardId)
         }
+    }
+
+    componentWillUnmount() {
+        
     }
 
 

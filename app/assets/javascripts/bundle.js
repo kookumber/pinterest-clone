@@ -2227,6 +2227,34 @@ exports["default"] = _default;
 
 /***/ }),
 
+/***/ "./node_modules/@mui/icons-material/UploadRounded.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/@mui/icons-material/UploadRounded.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@mui/icons-material/utils/createSvgIcon.js"));
+
+var _jsxRuntime = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+  d: "M10 16h4c.55 0 1-.45 1-1v-5h1.59c.89 0 1.34-1.08.71-1.71L12.71 3.7a.9959.9959 0 0 0-1.41 0L6.71 8.29c-.63.63-.19 1.71.7 1.71H9v5c0 .55.45 1 1 1zm-4 2h12c.55 0 1 .45 1 1s-.45 1-1 1H6c-.55 0-1-.45-1-1s.45-1 1-1z"
+}), 'UploadRounded');
+
+exports["default"] = _default;
+
+/***/ }),
+
 /***/ "./node_modules/@mui/icons-material/utils/createSvgIcon.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/@mui/icons-material/utils/createSvgIcon.js ***!
@@ -8068,11 +8096,13 @@ var BoardEdit = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
+      id: _this.props.board.id,
       name: _this.props.board.name,
       details: _this.props.board.details,
       user_id: _this.props.user.id,
       "public": _this.props.board["public"]
     };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -8091,9 +8121,21 @@ var BoardEdit = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      console.log("update state", this.state);
+      this.props.updateBoard(this.state).then(this.props.closeBoardModal()); // .then(this.props.history.push(`/users/${this.props.board.id}`))
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       // debugger
+      var _this$props = this.props,
+          board = _this$props.board,
+          userId = _this$props.userId;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "board-edit-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -8112,7 +8154,21 @@ var BoardEdit = /*#__PURE__*/function (_React$Component) {
         value: this.state.details,
         placeholder: "What is your board about?",
         onChange: this.update('details')
-      })));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "delete-board-wrap"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Action"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: function onClick() {
+          return _this3.props.deleteBoard(board.id).then(_this3.props.history.push("/users/".concat(userId)));
+        },
+        className: "delete-board-button"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Delete board"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Delete this board and all its Pins forever."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "You can't undo this!"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "edit-board-button-wrap"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "edit-button-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: this.handleSubmit,
+        className: "edit-board-button"
+      }, "Done"))));
     }
   }]);
 
@@ -8138,7 +8194,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_modalActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modalActions */ "./frontend/actions/modalActions.js");
 /* harmony import */ var _actions_boardActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/boardActions */ "./frontend/actions/boardActions.js");
 /* harmony import */ var _boardEdit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./boardEdit */ "./frontend/components/board/boardEdit.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/userActions */ "./frontend/actions/userActions.js");
+
 
 
 
@@ -8146,10 +8204,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  // debugger
   return {
     user: state.entities.users[state.session.id],
-    // board: state.entities.boards[ownProps.match.params.boardId],
-    board: Object.values(state.entities.boards)[0]
+    board: state.entities.boards[ownProps.location.pathname.slice(8)],
+    userId: state.session.id // board: Object.values(state.entities.boards)[0]
+
   };
 };
 
@@ -8170,7 +8230,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_boardEdit__WEBPACK_IMPORTED_MODULE_3__["default"])));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_boardEdit__WEBPACK_IMPORTED_MODULE_3__["default"])));
 
 /***/ }),
 
@@ -8246,6 +8306,8 @@ var BoardForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleCreate",
     value: function handleCreate(e) {
+      var _this3 = this;
+
       e.preventDefault();
       var newBoard = {
         board: {
@@ -8255,12 +8317,14 @@ var BoardForm = /*#__PURE__*/function (_React$Component) {
           "public": this.state["public"]
         }
       };
-      this.props.createBoard(newBoard).then(this.props.closeBoardModal());
+      this.props.createBoard(newBoard).then(this.props.closeBoardModal()).then(function (res) {
+        return _this3.props.history.push("/boards/".concat(res.id));
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "create-board-modal"
@@ -8281,7 +8345,7 @@ var BoardForm = /*#__PURE__*/function (_React$Component) {
         defaultChecked: "true",
         value: this.state["public"],
         onChange: function onChange() {
-          return _this3.setState(_defineProperty({}, 'public', !_this3.state["public"]));
+          return _this4.setState(_defineProperty({}, 'public', !_this4.state["public"]));
         }
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Keep this board secret"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "So only you and collaborators can see it.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "create-board-button-wrap"
@@ -8549,6 +8613,29 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
       }
 
       var boardPinsLen = boardsPins.length;
+      var noPinsVersion = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/boards/".concat(board.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-wrapper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-image-box"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-image-big"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-image-smalls"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "board-image-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "board-image-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-info-box"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-name"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, board.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-pin-count"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, boardPinsLen, " pins"))))); // debugger
+
+      if (boardsPins[0] === undefined) return noPinsVersion;
       var imageUrl1 = boardPinsLen < 1 ? null : boardsPins[0].imageUrl;
       var imageUrl2 = boardPinsLen < 2 ? null : boardsPins[1].imageUrl;
       var imageUrl3 = boardPinsLen < 3 ? null : boardsPins[2].imageUrl;
@@ -8649,9 +8736,13 @@ var BoardShow = /*#__PURE__*/function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (prevProps.match.params.boardId != this.props.match.params.boardId) {
+        // debugger
         this.props.fetchBoard(this.props.match.params.boardId);
       }
     }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {}
   }, {
     key: "render",
     value: function render() {
@@ -8833,444 +8924,119 @@ var HomePage = /*#__PURE__*/function (_React$Component) {
           className: "splash-wrapper"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "home-text-wrap"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
           className: "home-text"
-        }, "Get your next"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        }, "Get your next")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "idea-text-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "text-change"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
           className: "home-text animation",
-          id: "surf-spot"
-        }, "surf spot destination")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "text-change"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-          className: "home-text animation",
-          id: "green-thumb"
-        }, "green thumb idea")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "text-change"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-          className: "home-text animation",
           id: "board-fin"
-        }, "surfboard fin experiment")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "text-change"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-          className: "home-text animation",
-          id: "food-idea"
-        }, "weeknight meal idea"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "home-arrow"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-1"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "search-images"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "search-text-container"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "search-text"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Search for an idea")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "What do you want to try next? Think of something you're into- like \"easy dinner recipes\" and see what you find")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        }, "surfboard fin design")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pics-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-grid"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "grid"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
+          className: "splash-col"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-1.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-1.jpeg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-2.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-2.jpeg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-3.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-3.jpeg"
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
+          className: "splash-col"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-4.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-4.png"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-5.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-5.jpeg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-6.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-6.jpeg"
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
+          className: "splash-col"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-7.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-7.jpg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-8.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-8.jpg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-9.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-9.jpg"
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
+          className: "splash-col"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-10.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-10.jpg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-11.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-11.jpg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-12.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-12.jpeg"
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
+          className: "splash-col"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-13.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-13.jpg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-14.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-14.jpeg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-15.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-15.jpg"
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
+          className: "splash-col"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-16.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-16.jpg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-17.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-17.jpg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-18.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-18.jpg"
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
+          className: "splash-col"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-19.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-19.jpg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-20.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-20.jpeg"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "splash-pic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/blue-surf-21.jpg"
-        })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "grid"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-1.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-2.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-3.jpg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-4.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-5.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-6.jpg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-7.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-8.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-9.jpg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-10.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-11.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-12.jpg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-13.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-14.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-15.jpg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-16.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-17.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-18.jpg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-19.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-20.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/green-plant-21.jpg"
-        })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "grid"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-1.jpeg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-2.jpeg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-3.jpeg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-4.png"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-5.jpeg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-6.jpeg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-7.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-8.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-9.jpg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-10.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-11.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-12.jpeg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-13.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-14.jpeg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-15.jpg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-16.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-17.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-18.jpg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-19.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-20.jpeg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-21.jpeg"
-        })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "grid"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-1.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-2.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-3.jpg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-4.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-5.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-6.png"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-7.jpeg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-8.jpeg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-9.jpeg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-10.jpeg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-11.jpeg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-12.jpeg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-13.png"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-14.jpeg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-15.jpeg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-31.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-32.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-33.jpg"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-col animation"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-34.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-35.jpg"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "splash-pic"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          scr: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/food-36.jpg"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/fin-21.jpeg"
         })))))));
       };
 
@@ -9466,8 +9232,11 @@ var NavLinks = function NavLinks(_ref) {
       className: "app-logo-container"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
       className: "app-logo-title",
-      href: "#"
-    }, "Finterest")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      href: "/"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      className: "nav-logo",
+      src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Finterest"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "header-links"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "personal-links"
@@ -9503,9 +9272,10 @@ var NavLinks = function NavLinks(_ref) {
       className: "inspiration-links-container"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "app-logo"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      className: "nav-logo",
+      src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "inspiration-link"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
       to: "/"
@@ -9610,7 +9380,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _mui_icons_material_UploadRounded__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/icons-material/UploadRounded */ "./node_modules/@mui/icons-material/UploadRounded.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -9719,31 +9490,20 @@ var PinForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         src: this.state.imageUrl
       })) : null;
-      var pinsUser = this.props.user; // const boardSelecter = (
-      //     <div className="board-selector">
-      //         <div className="search-bar-container">
-      //             <svg className="search-icon"><SearchRoundedIcon /></svg>
-      //             <input className="search-bar" type="text" placeholder="Search" />
-      //         </div>
-      //         <div className="user-boards">
-      //             <div>All boards</div>
-      //         </div>
-      //         <div className="create-board-container">
-      //             <div className="add-button">
-      //             </div>
-      //             <div id="create-text">
-      //                 Create board
-      //             </div>
-      //         </div>
-      //     </div>
-      // )
-
+      var pinsUser = this.props.user;
       var uploadBox = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "dotted-border"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "upload-image-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-        type: "file",
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+        className: "input-label",
+        htmlFor: "image-input"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_UploadRounded__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        className: "upload-icon"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Drag and drop or click to upload")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        type: "file" // style="visibility:hidden"
+        ,
+        id: "image-input",
         className: "image-upload-box",
         onChange: this.handleFile
       }), previewImg));
@@ -9764,7 +9524,7 @@ var PinForm = /*#__PURE__*/function (_React$Component) {
         className: "pin-form-submission"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-board-selector"
-      }, "Board Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Board Name")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-save-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Save")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-form-main-body"
@@ -9799,7 +9559,7 @@ var PinForm = /*#__PURE__*/function (_React$Component) {
   return PinForm;
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router__WEBPACK_IMPORTED_MODULE_1__.withRouter)(PinForm));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router__WEBPACK_IMPORTED_MODULE_2__.withRouter)(PinForm));
 
 /***/ }),
 
@@ -10388,7 +10148,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
           password: this.state.password
         }
       };
-      this.props.processForm(user).then(this.props.closeModal); // this.setState({
+      this.props.processForm(user).then(this.props.closeModal).then(this.props.history.push("/")); // this.setState({
       //     email: "",
       //     password: "",
       //     name: ""
@@ -10405,15 +10165,11 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
           password: 'demo-user1'
         }
       };
-      this.props.processForm(demoUser).then(this.props.closeModal);
+      this.props.processForm(demoUser).then(this.props.closeModal).then(this.props.history.push("/"));
     }
   }, {
     key: "renderErrors",
     value: function renderErrors() {
-      var error = {
-        invalidEmail: "",
-        invalidPassword: ""
-      };
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, this.props.errors.map(function (error, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
           key: "error-".concat(idx),
@@ -10432,7 +10188,10 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "close-x",
         onClick: this.props.closeModal
-      }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Icon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        className: "session-logo",
+        src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-192x192.png"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "modal-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Welcome to Finterest")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Find new ideas to try"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "login-form"
@@ -10479,7 +10238,10 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "close-x",
         onClick: this.props.closeModal
-      }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Icon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        className: "session-logo",
+        src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-192x192.png"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "modal-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Welcome to Finterest")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "login-form"
@@ -10674,7 +10436,9 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
         className: "content-options"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "users-content"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, this.props.openBoardModal), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "add-board-section"
+      }, this.props.openBoardModal), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
         className: "saved-content"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_board_boardIndexContainer__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
     }
@@ -10739,10 +10503,13 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch((0,_actions_savedPinActions__WEBPACK_IMPORTED_MODULE_7__.fetchSavedPins)());
     },
     openBoardModal: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      className: "add-board-button",
       onClick: function onClick() {
         return dispatch((0,_actions_modalActions__WEBPACK_IMPORTED_MODULE_4__.openModal)('createBoard'));
       }
-    }, "Create Board"),
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      className: "material-symbols-outlined"
+    }, "add")),
     closeBoardModal: function closeBoardModal() {
       return dispatch((0,_actions_modalActions__WEBPACK_IMPORTED_MODULE_4__.closeModal)());
     }
@@ -11291,6 +11058,7 @@ var createBoard = function createBoard(board) {
   });
 };
 var updateBoard = function updateBoard(board) {
+  console.log("api", board);
   return $.ajax({
     url: "/api/boards/".concat(board.id),
     method: 'PATCH',

@@ -26,8 +26,11 @@ const mapDispatchToProps = dispatch => {
         fetchBoards: () => dispatch(fetchBoards()),
         fetchSavedPins: () => dispatch(fetchSavedPins()),
         openBoardModal: (
-            <button onClick={() => dispatch(openModal('createBoard'))}>
-                Create Board
+            <button className="add-board-button"
+                onClick={() => dispatch(openModal('createBoard'))}>
+                <span className="material-symbols-outlined">
+                    add
+                </span>
             </button>
         ),
         closeBoardModal: () => dispatch(closeModal())

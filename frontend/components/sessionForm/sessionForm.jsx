@@ -31,7 +31,10 @@ class SessionForm extends React.Component {
             email: this.state.email,
             password: this.state.password
         }}
-        this.props.processForm(user).then(this.props.closeModal)
+        this.props.processForm(user)
+            .then(this.props.closeModal)
+                .then(this.props.history.push("/"))
+
         // this.setState({
         //     email: "",
         //     password: "",
@@ -47,15 +50,12 @@ class SessionForm extends React.Component {
             password: 'demo-user1'
         }
         }
-        this.props.processForm(demoUser).then(this.props.closeModal)
+        this.props.processForm(demoUser)
+            .then(this.props.closeModal)
+                .then(this.props.history.push("/"))
     }
 
     renderErrors() {
-        let error = {
-            invalidEmail: "",
-            invalidPassword: ""
-        }
-
         return(
             <ul>
                 {this.props.errors.map((error, idx) => (
@@ -74,7 +74,7 @@ class SessionForm extends React.Component {
                     <div className="close-x" onClick={this.props.closeModal}>X</div>
                     
                     <div>
-                        Icon
+                        <img className="session-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-192x192.png"/>
                     </div>
                     <div className="modal-header">
                         <h1>Welcome to Finterest</h1>
@@ -126,7 +126,7 @@ class SessionForm extends React.Component {
                     <div className="close-x" onClick={this.props.closeModal}>X</div>
                     
                     <div>
-                        Icon
+                        <img className="session-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-192x192.png" />
                     </div>
                     <div className="modal-header">
                         <h1>Welcome to Finterest</h1>

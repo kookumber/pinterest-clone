@@ -25,7 +25,7 @@ class UserShow extends React.Component {
     render() {
         const { user, pins, boards } = this.props
 
-        if(!pins || !user) return null
+        if(!pins || !user) return null;
 
         return (
             <div className="main-profile-container">
@@ -56,7 +56,7 @@ class UserShow extends React.Component {
                     </div>
                 </div>
 
-                <div>
+                <div className="add-board-section">
                     {this.props.openBoardModal}
                 </div>
                 <section className="saved-content">

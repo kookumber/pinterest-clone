@@ -57,25 +57,7 @@ class PinForm extends React.Component {
 
         const previewImg = this.state.imageUrl ? <div className="image-preview"><img src={this.state.imageUrl} /></div> : null;
         const pinsUser = this.props.user
-        // const boardSelecter = (
-        //     <div className="board-selector">
-        //         <div className="search-bar-container">
-        //             <svg className="search-icon"><SearchRoundedIcon /></svg>
-        //             <input className="search-bar" type="text" placeholder="Search" />
-        //         </div>
-        //         <div className="user-boards">
-        //             <div>All boards</div>
-        //         </div>
-        //         <div className="create-board-container">
-        //             <div className="add-button">
-                        
-        //             </div>
-        //             <div id="create-text">
-        //                 Create board
-        //             </div>
-        //         </div>
-        //     </div>
-        // )
+        
 
         const uploadBox = (  
             <div className="dotted-border">
@@ -85,7 +67,14 @@ class PinForm extends React.Component {
                     </div> */}
                     {/* <div className="upload-text" id="drag-text">Drag and drop or click to upload</div>
                     <div className="upload-text" id="rec-text">Recommendation: Use high-quality .jpg files less than 20MB</div> */}
+                    <label className="input-label" 
+                    htmlFor="image-input">
+                        <UploadRoundedIcon className="upload-icon" />
+                        <p>Drag and drop or click to upload</p>
+                    </label>
                     <input type="file"
+                        // style="visibility:hidden"
+                        id="image-input"
                         className="image-upload-box"
                         onChange={this.handleFile} />
                     {previewImg}
@@ -106,7 +95,7 @@ class PinForm extends React.Component {
                         </svg>
                     </div>
                     <div className="pin-form-submission">
-                        <div className="pin-board-selector">Board Name</div>
+                        <div className="pin-board-selector"><p>Board Name</p></div>
                         <div className="pin-save-button">
                             <button>Save</button>
                         </div>

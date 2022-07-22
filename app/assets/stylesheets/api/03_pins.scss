@@ -16,7 +16,7 @@
 
 .pins-grid-container {
     height: 100%;
-    width: 95%;
+    width: 93%;
     box-sizing: border-box;
     display: flex;
     justify-content: space-evenly;
@@ -30,8 +30,10 @@
 }
 
 .pin-wrapper {
+    margin-left: 5px;
+    margin-right: 5px;
     margin-bottom: 20px;
-    min-width: 252px;
+    width: 236px;
     max-width: 252px;
     max-height: 418px;
     border: none;

@@ -1,0 +1,121 @@
+@import "./01_header.scss";
+
+.board-edit-modal {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 520px;
+    height: 620px;
+    padding: 20px 10px 24px 10px;
+    border-radius: 32px;
+    text-align: center;
+    margin: auto;
+}
+
+.board-edit-container {
+    width: 100%;
+
+    & .board-edit-modal-header {
+        width: inherit;
+    }
+}
+
+.name-edit {
+
+    @include center(column, center);    
+
+    & h4 {
+        width: 476px;
+        text-align: left;
+    }
+
+    & .board-name-input {
+        width: 476px;
+        height: 48px;
+        border-color: #e2e2e2;
+        box-sizing: border-box;
+        border-style: solid;
+        border-radius: 16px;
+        padding-left: 18px;
+        font-size: 16px;
+    }
+
+}
+.details-edit {
+
+    @include center(column, center);
+
+    & h4 {
+            width: 476px;
+            text-align: left;
+        }
+
+    & .board-details-input {
+        width: 476px;
+        height: 120px;
+        border-color: #e2e2e2;
+        box-sizing: border-box;
+        border-style: solid;
+        border-radius: 16px;
+        padding-left: 18px;
+        font-size: 16px;
+        align-items: flex-start;
+    }
+}
+
+.delete-board-wrap {
+    margin-top: 25px;
+    width: 100%;
+    @include center(column, flex-start);
+
+    & span {
+        margin-left: 5px;
+        margin-bottom: -10px;
+        font-size: 13px;
+    }
+
+    & span, button {
+        width: 476px;
+        text-align: left;
+    }
+
+    & button {
+        cursor: pointer;
+        & h2 {
+            margin-bottom: 4px;
+        }
+        & p {
+            font-size: 17px;
+            color: #ababab;
+        }
+    }
+}
+
+.edit-board-button-wrap{
+    height: 100px;
+    @include center(row, center);
+
+    & .edit-button-container {
+        width: 476px;
+        @include center(row, flex-end)
+    }
+}
+
+.edit-board-button {
+    background-color: rgb(230, 0, 35);
+    width: 70px;
+    height: 48px;
+    border-radius: 24px;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #ad081b;
+    }
+}

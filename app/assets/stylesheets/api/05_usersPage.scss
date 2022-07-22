@@ -39,9 +39,34 @@
     @include center(row, center)
 }
 
+.add-board-section {
+    width: 100%;
+    height: 42px;
+    @include center(row, flex-end);
+
+    & .add-board-button {
+        margin-right: 45px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background-color: #efefef;
+        border: 1px solid black;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e2e2e2;
+        }
+    }
+
+    & .material-symbols-outlined {
+        font-weight: 800;
+    }
+}
+
 .saved-content {
     width: 100%;
     height: auto;
+    margin-top: 20px;
 }
 
 .boards-index-wrapper {
@@ -63,15 +88,35 @@
         & .board-image-big img {
             width: 157px;
             height: 157px;
+            border-radius: 12px 0px 0px 12px;
+            margin-right: 3px;
+            background-color: #efefef;
         }
 
         & .board-image-smalls {
             width: 78px;
             height: 157px;
+            margin: 0px;
 
-            & #board-image-2 img, #board-image-3 img{
+            & #board-image-2{
+                margin-top: -1px;
+            }
+
+            & #board-image-2 img {
                 width: 77px;
-                height: 77px
+                height: 77.2px;
+                border-radius: 0px 12px 0px 0px;
+                margin: 0px;
+                background-color: #efefef;
+            }
+
+            & #board-image-3 img {
+                width: 77px;
+                height: 77.2px;
+                border-radius: 0px 0px 12px 0px;
+                margin: 0px;
+                background-color: #efefef;
             }
         }
     }
+

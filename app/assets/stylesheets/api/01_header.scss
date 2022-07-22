@@ -38,7 +38,9 @@
     vertical-align: middle;
     margin-top: auto;
     margin-bottom: auto;
+    padding-right: 20px;
 }
+
 
 .inspiration-links-container {
     width: 200px;
@@ -51,6 +53,7 @@
     min-width: 60px;
     @include center('row', 'space-between');
     cursor: pointer;
+    
     &:hover {
         text-decoration: underline;
     }
@@ -59,11 +62,21 @@
 
 .app-logo {
     width: 60px;
+    padding-right: 20px;
 }
 
 .app-logo-title {
-    font-weight: 500;
-    font-size: 19px;
+    @include center(row, center);
+    
+    & img {
+        padding-right: 9px;
+    }
+
+    & div {
+        font-weight: 600;
+        font-size: 19px;
+        color: #288;
+    }
 }
 
 .header-links {
@@ -139,6 +152,7 @@
     background-color: #efefef;
     border: none;
     box-sizing: border-box;
+    margin-left: 20px;
 }
 
 .search-bar-container {
