@@ -16,11 +16,12 @@ class UserShow extends React.Component {
         this.props.fetchSavedPins()
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.match.params.userId != this.props.match.params.userId) {
-    //         this.props.fetchUser(this.props.user.id)
-    //     }
-    // }
+    // Added this for now 7.22
+    componentDidUpdate(prevProps) {
+        if (prevProps.match.params.userId != this.props.match.params.userId) {
+            this.props.fetchUser(this.props.user.id)
+        }
+    }
     
     render() {
         const { user, pins, boards } = this.props

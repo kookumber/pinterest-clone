@@ -5,7 +5,7 @@ import { createBoard } from "../../actions/boardActions";
 import { closeModal } from "../../actions/modalActions";
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
         user: state.entities.users[state.session.id]
     }

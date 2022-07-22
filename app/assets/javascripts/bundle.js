@@ -8158,7 +8158,7 @@ var BoardEdit = /*#__PURE__*/function (_React$Component) {
         className: "delete-board-wrap"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Action"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: function onClick() {
-          return _this3.props.deleteBoard(board.id).then(_this3.props.history.push("/users/".concat(userId)));
+          return _this3.props.deleteBoard(board.id).then(_this3.props.closeBoardModal()).then(_this3.props.history.push("/users/".concat(userId)));
         },
         className: "delete-board-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Delete board"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Delete this board and all its Pins forever."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "You can't undo this!"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -8306,8 +8306,6 @@ var BoardForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleCreate",
     value: function handleCreate(e) {
-      var _this3 = this;
-
       e.preventDefault();
       var newBoard = {
         board: {
@@ -8317,14 +8315,14 @@ var BoardForm = /*#__PURE__*/function (_React$Component) {
           "public": this.state["public"]
         }
       };
-      this.props.createBoard(newBoard).then(this.props.closeBoardModal()).then(function (res) {
-        return _this3.props.history.push("/boards/".concat(res.id));
-      });
+      this.props.createBoard(newBoard).then(this.props.closeBoardModal()); // .then(this.props.history.push(`/users/${this.state.userUid}`))
+      // Removed this for now 7.22
+      // .then((res) => this.props.history.push(`/boards/${res.id}`))
     }
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "create-board-modal"
@@ -8345,7 +8343,7 @@ var BoardForm = /*#__PURE__*/function (_React$Component) {
         defaultChecked: "true",
         value: this.state["public"],
         onChange: function onChange() {
-          return _this4.setState(_defineProperty({}, 'public', !_this4.state["public"]));
+          return _this3.setState(_defineProperty({}, 'public', !_this3.state["public"]));
         }
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Keep this board secret"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "So only you and collaborators can see it.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "create-board-button-wrap"
@@ -8383,7 +8381,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     user: state.entities.users[state.session.id]
   };
@@ -10399,12 +10397,15 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
       //         .then(() => this.props.fetchPins())
       this.props.fetchUser(this.props.user.id);
       this.props.fetchSavedPins();
-    } // componentDidUpdate(prevProps) {
-    //     if (prevProps.match.params.userId != this.props.match.params.userId) {
-    //         this.props.fetchUser(this.props.user.id)
-    //     }
-    // }
+    } // Added this for now 7.22
 
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.match.params.userId != this.props.match.params.userId) {
+        this.props.fetchUser(this.props.user.id);
+      }
+    }
   }, {
     key: "render",
     value: function render() {

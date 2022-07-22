@@ -61,7 +61,7 @@ class BoardEdit extends React.Component {
 
                 <div className="delete-board-wrap">
                     <span>Action</span>
-                    <button onClick={() => this.props.deleteBoard(board.id).then(this.props.history.push(`/users/${userId}`))} className="delete-board-button">
+                    <button onClick={() => this.props.deleteBoard(board.id).then(this.props.closeBoardModal()).then(this.props.history.push(`/users/${userId}`))} className="delete-board-button">
                         <h2>Delete board</h2>
                         <p>Delete this board and all its Pins forever.</p>
                         <p>You can't undo this!</p>

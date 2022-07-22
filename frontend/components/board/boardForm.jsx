@@ -28,7 +28,9 @@ class BoardForm extends React.Component {
         }}
         this.props.createBoard(newBoard)
             .then(this.props.closeBoardModal())
-                .then((res) => this.props.history.push(`/boards/${res.id}`))
+                // .then(this.props.history.push(`/users/${this.state.userUid}`))
+                // Removed this for now 7.22
+                // .then((res) => this.props.history.push(`/boards/${res.id}`))
     }
 
     render() {

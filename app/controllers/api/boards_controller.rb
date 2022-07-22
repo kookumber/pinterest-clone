@@ -16,9 +16,11 @@ class Api::BoardsController < ApplicationController
 
     def create
         @board = Board.new(board_params)
+        # @user = User.find_by(id: params[:id])
 
         if @board.save 
-            render :show
+            # render :show
+            render "/api/users/show"
         else
             # render json: @board.errors.full_messages, status: 401
             render json: ["did not save board"]
