@@ -35,6 +35,7 @@ class PinForm extends React.Component {
         if (file) {
             fileReader.readAsDataURL(file) //the readAsDataURL initiates the beginning of reading of the file
         }
+        console.log(imageUrl)
     }
 
     handleSubmit(e) {
@@ -58,7 +59,6 @@ class PinForm extends React.Component {
         const previewImg = this.state.imageUrl ? <div className="image-preview"><img src={this.state.imageUrl} /></div> : null;
         const pinsUser = this.props.user
         
-
         const uploadBox = (  
             <div className="dotted-border">
                 <div className="upload-image-container">

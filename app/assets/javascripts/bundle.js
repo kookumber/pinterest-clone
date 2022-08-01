@@ -9460,6 +9460,8 @@ var PinForm = /*#__PURE__*/function (_React$Component) {
       if (file) {
         fileReader.readAsDataURL(file); //the readAsDataURL initiates the beginning of reading of the file
       }
+
+      console.log(imageUrl);
     }
   }, {
     key: "handleSubmit",
