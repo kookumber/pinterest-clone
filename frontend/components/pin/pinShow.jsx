@@ -50,7 +50,7 @@ class PinShow extends React.Component {
     }
 
     render(){
-        const { pin, users, session } = this.props;
+        const { pin, users, session, currentUser } = this.props;
         
 
         //If statement here to make sure we have a pin/users we can key into because render will happen before componentDidMount
@@ -59,6 +59,15 @@ class PinShow extends React.Component {
         const pinsUser = users[pin.user_id] //Get the user of the pin so we can display their data on show
         const followButton = <button className="follow-button">Follow</button>
 
+        const editButton = () => (
+            <div className="edit-dropdown" onClick={this.editDropdownClick}>
+                <i className="fa fa-ellipsis-h" />
+                <div className="edit-dropdown-items" id="edit-dropdown-items">
+                    <div className="edit-item" onClick={this.props.openPinEditModal}>Edit Pin</div>
+                    <div className="edit-item">Delete Pin</div>
+                </div>
+            </div>
+        )
 
         return (
             <div className="pin-show-main-wrap">
@@ -71,21 +80,8 @@ class PinShow extends React.Component {
                     <div className="pin-show-data">
                         <div className="pin-show-options">
                             <div className="closeup-action-items">
-                                <div className="edit-dropdown" onClick={this.editDropdownClick}>
-                                    <i className="fa fa-ellipsis-h" />
-                                    <div className="edit-dropdown-items" id="edit-dropdown-items">
-                                        <div className="edit-item" onClick={this.props.openPinEditModal}>Edit Pin</div>
-                                        <div className="edit-item" id="download-button" onClick={this.downloadImage}>Download Image</div>
-                                        <div className="edit-item">Delete Pin</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <i className="fa fa-share"/>
-                                </div>
-                                <div>
-                                    <i className="fa fa-link"/>
-                                </div>
-                        </div>
+                                { pin.user_id === currentUser.id ? editButton() : null }
+                            </div>
                             <div className="save-options">
                                 <div>Board Selector</div>
                                 <button>Save</button>

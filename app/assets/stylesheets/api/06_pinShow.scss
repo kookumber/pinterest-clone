@@ -48,7 +48,7 @@
 
 .closeup-action-items {
     width: 145px;
-    @include center(row, space-evenly);
+    @include center(row, flex-start);
     
 
     & div {
@@ -75,7 +75,7 @@
         z-index: 1;
         border-radius: 16px;
         width: 160px;
-        max-height: 150px;
+        max-height: 110px;
 
         & .edit-item {
             width: 85%;
