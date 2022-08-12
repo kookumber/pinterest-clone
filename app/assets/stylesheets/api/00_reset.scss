@@ -75,6 +75,8 @@ a, div, h1, h2, h3, h4, input, p, li, ul {
     font-family: Arial, Helvetica, sans-serif;
     text-decoration: none;
     list-style: none;
+    color: black;
+    text-decoration-style: none;
 }
 
 ul {
@@ -88,13 +90,17 @@ ul {
 
 
 
-input:focus {
+input:focus, textarea:focus {
     outline-width: 0;
 }
 
 :visited {
     color: inherit;
     text-decoration: none;
+}
+
+.body-container {
+    margin-top: 85px;
 }
 
 // Below is mixin example to reuse css for elements that

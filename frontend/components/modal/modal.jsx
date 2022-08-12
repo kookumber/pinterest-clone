@@ -5,6 +5,7 @@ import LoginFormContainer from "../sessionForm/loginFormContainer";
 import SignupFormContainer from "../sessionForm/signupFormContainer";
 import BoardFormContainer from "../board/boardFormContainer";
 import BoardEditContainer from "../board/boardEditContainer";
+import PinEditModalContainer from "../pin/pinEditModalContainer";
 
 const Modal = ({ modal, closeModal }) => {
     // This means if modal slice of state is null, we'll return null, essentially making
@@ -32,6 +33,10 @@ const Modal = ({ modal, closeModal }) => {
         case 'editBoard':
             component = <BoardEditContainer />
             divName = "board-edit-modal"
+            break;
+        case 'editPin':
+            component = <PinEditModalContainer />
+            divName = "pin-edit-modal"
             break;
         default:
             return null

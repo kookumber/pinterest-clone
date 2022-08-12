@@ -22,7 +22,7 @@ const pinsReducer = (state = {}, action) => {
                 return state
             }
         case RECEIVE_PIN:
-            newState[action.pin.id] = action.pin;
+            newState[action.payload.id] = action.payload;
             return newState;
         case RECEIVE_BOARD:
             // let boardPins = Object.values(action.payload.pins)

@@ -32,6 +32,14 @@ export const fetchBoardsPins = boardId => {
     })
 }
 
+export const updatePin = pin => {
+    return $.ajax({
+        url: `/api/pins/${pin.id}`,
+        method: 'PATCH',
+        data: {pin}
+    })
+}
+
 
 export const deletePin = pinId => {
     $.ajax({

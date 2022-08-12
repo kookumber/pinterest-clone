@@ -28,7 +28,6 @@ class BoardEdit extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        console.log("update state", this.state)
         this.props.updateBoard(this.state)
             .then(this.props.closeBoardModal())
             // .then(this.props.history.push(`/users/${this.props.board.id}`))

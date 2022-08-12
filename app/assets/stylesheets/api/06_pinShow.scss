@@ -66,6 +66,34 @@
         color: black;
         font-size: 22px;
     }
+    
+
+    & .edit-dropdown-items {
+        display: none;
+        position: absolute;
+        box-shadow: rgba(0, 0, 0, 10%) 0px 1px 20px 0px;
+        z-index: 1;
+        border-radius: 16px;
+        width: 160px;
+        max-height: 150px;
+
+        & .edit-item {
+            width: 85%;
+            height: 40px;
+            border-radius: 10px;
+            margin-left: 4px;
+            margin-right: 6px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            padding-left: 10px;
+            @include center(row, flex-start);
+
+            &:hover {
+                font-weight: bold;
+            }
+        }
+    }
+
 }
 
 .save-options {
