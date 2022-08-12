@@ -9,10 +9,9 @@ Rails.application.routes.draw do
     resources :pins, only: [:index, :create, :show, :update, :destroy] #CRUD
     resources :boards, only: [:index, :create, :show, :update, :destroy] #CRUD
     resources :saved_pins, only: [:index, :create, :destroy]
-    # board_id, pin_id
+    
     resources :follows, only: [:index, :create, :destroy]
     resource :session, only: [:create, :destroy]
   end
   
-
 end

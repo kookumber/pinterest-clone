@@ -35,7 +35,6 @@ class PinForm extends React.Component {
         if (file) {
             fileReader.readAsDataURL(file) //the readAsDataURL initiates the beginning of reading of the file
         }
-        console.log(imageUrl)
     }
 
     handleSubmit(e) {

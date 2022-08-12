@@ -10,6 +10,7 @@ class BoardIndexItem extends React.Component {
         //Props are passed through the call of the component in the BoardIndexItem component
         const { board, pins, savedPins } = this.props
         if ( !pins || !board || !savedPins) return null
+
         
         const boardsSavedPins = Object.values(savedPins).filter(sp => sp.board_id === board.id)
         const boardsPins = []

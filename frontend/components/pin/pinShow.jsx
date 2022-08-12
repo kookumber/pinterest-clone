@@ -4,14 +4,12 @@ class PinShow extends React.Component {
     constructor(props) {
         super(props)
         this.state = {}
-        this.downloadImage = this.downloadImage.bind(this)
     }
 
     componentDidMount() {
         this.props.fetchPin(this.props.match.params.pinId)
-            .then(() => {
-                this.props.fetchUser(this.props.pin.user_id)
-            })
+            .then(() => { this.props.fetchUser(this.props.pin.user_id) })
+                .then(() => { this.props.fetchSavedPins() })
     }
 
     componentDidUpdate(prevProps) {
@@ -20,19 +18,10 @@ class PinShow extends React.Component {
                 .then(() => {
                     this.props.fetchUser(this.props.pin.user_id)
                 })
+                .then(() => {
+                    this.props.fetchSavedPins()
+                })
         }
-    }
-
-    downloadImage(){
-        console.log('check', this.props)
-        const imageSrc = this.props.pin.imageUrl
-        const link = document.createElement('a')
-        link.href = imageSrc
-        link.download = this.props.pin.title + '.jpg'
-        const ele = document.getElementById('download-button')
-        ele.appendChild(link)
-        link.click()
-        // ele.removeChild(link)
     }
 
     editDropdownClick() {
@@ -49,22 +38,26 @@ class PinShow extends React.Component {
 
     }
 
+
     render(){
-        const { pin, users, session, currentUser } = this.props;
-        
+        const { pin, users, session, currentUser, savedPins } = this.props;
 
         //If statement here to make sure we have a pin/users we can key into because render will happen before componentDidMount
         if (pin === undefined || users === undefined) return null;
 
         const pinsUser = users[pin.user_id] //Get the user of the pin so we can display their data on show
-        const followButton = <button className="follow-button">Follow</button>
+        const followButton = () => (
+            <button className="follow-button">Follow</button>
+        )
+
+        const savedPinsArr = Object.values(savedPins).filter(savedPin => savedPin.pin_id === pin.id)
 
         const editButton = () => (
             <div className="edit-dropdown" onClick={this.editDropdownClick}>
                 <i className="fa fa-ellipsis-h" />
                 <div className="edit-dropdown-items" id="edit-dropdown-items">
                     <div className="edit-item" onClick={this.props.openPinEditModal}>Edit Pin</div>
-                    <div className="edit-item">Delete Pin</div>
+                    <div className="edit-item" onClick={this.props.openPinDeleteModal}>Delete Pin</div>
                 </div>
             </div>
         )
@@ -105,12 +98,7 @@ class PinShow extends React.Component {
                             </div>
                             <div>
                                 {/* <button className="follow-button">Follow</button> */}
-                                { pinsUser ? 
-                                    (session ?  
-                                        ( pinsUser.user_id === session.id ? null : followButton)
-                                        : null) 
-                                    : null
-                                }
+                                { pin.user_id === currentUser.id ? null : followButton() }
                             </div>
                         </div>
                     </div>

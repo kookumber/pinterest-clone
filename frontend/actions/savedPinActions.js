@@ -31,6 +31,6 @@ export const createSavedPin = (savedPin) => dispatch => {
 
 export const deleteSavedPin = (savedPinId) => dispatch => {
     return savedPinApiUtil.deleteSavedPin(savedPinId)
-        .then((savedPinId) => dispatch(removeSavedPin(savedPinId)))
+        .then(() => dispatch(removeSavedPin(savedPinId)))
 }
 

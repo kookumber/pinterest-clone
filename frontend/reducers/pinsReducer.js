@@ -1,5 +1,5 @@
 import { RECEIVE_BOARD } from "../actions/boardActions";
-import { RECEIVE_PINS, RECEIVE_PIN } from "../actions/pinActions";
+import { RECEIVE_PINS, RECEIVE_PIN, REMOVE_PIN } from "../actions/pinActions";
 import { RECEIVE_USER } from "../actions/userActions";
 
 const pinsReducer = (state = {}, action) => {
@@ -12,7 +12,8 @@ const pinsReducer = (state = {}, action) => {
         case RECEIVE_PINS:
             return action.pins;
         case RECEIVE_USER:
-            let pins = Object.values(action.payload.board_pins)
+            let pins = []
+            action.payload.board_pins ? pins = Object.values(action.payload.board_pins) : pins = []
             if (pins) { 
                 pins.map(pin => { 
                     newState[pin.id] = pin
@@ -25,16 +26,10 @@ const pinsReducer = (state = {}, action) => {
             newState[action.payload.id] = action.payload;
             return newState;
         case RECEIVE_BOARD:
-            // let boardPins = Object.values(action.payload.pins)
-            // if (boardPins) {
-            //     boardPins.map(pin => {
-            //         newState[pin.id] = pin
-            //     })
-            //     return newState
-            // } else {
-                // return state
-            // }
-            return action.payload.pins
+            return action.payload.pins;
+        case REMOVE_PIN:
+            delete newState[action.pin.id]
+            return newState;
         default:
             return state;
     }

@@ -15,7 +15,7 @@ class BoardIndex extends React.Component {
     // }
 
     render() {
-        // console.log("hello from board index")
+        
         const { pins, boards, savedPins } = this.props
 
         if (!boards || Object.values(pins).length === 0 || pins === undefined) return null
