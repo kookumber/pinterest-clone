@@ -4,15 +4,14 @@ class PinShow extends React.Component {
     constructor(props) {
         super(props)
         this.state = {}
+        this.downloadImage = this.downloadImage.bind(this)
     }
 
     componentDidMount() {
         this.props.fetchPin(this.props.match.params.pinId)
             .then(() => {
-                this.props.fetchUser(this.props.pin.user_id)})
-
-        // this.props.fetchUser(this.props.pin.user_id)
-        //     .then(() =>  this.props.fetchPin(this.props.match.params.pinId ))
+                this.props.fetchUser(this.props.pin.user_id)
+            })
     }
 
     componentDidUpdate(prevProps) {
@@ -24,6 +23,31 @@ class PinShow extends React.Component {
         }
     }
 
+    downloadImage(){
+        console.log('check', this.props)
+        const imageSrc = this.props.pin.imageUrl
+        const link = document.createElement('a')
+        link.href = imageSrc
+        link.download = this.props.pin.title + '.jpg'
+        const ele = document.getElementById('download-button')
+        ele.appendChild(link)
+        link.click()
+        // ele.removeChild(link)
+    }
+
+    editDropdownClick() {
+        const ele = document.getElementById("edit-dropdown-items").style
+        ele.display === "flex" ? ele.display = "none" : ele.display = "flex"
+        ele.zIndex = 1
+        ele.marginTop = "160px"
+        ele.flexDirection = "column"
+        ele.justifyContent = "space_evenly"
+        ele.backgroundColor = "white"
+        ele.height = "140px"
+        // ele.maxHeight = "145px"
+        ele.overflow = "auto"
+
+    }
 
     render(){
         const { pin, users, session } = this.props;
@@ -34,6 +58,7 @@ class PinShow extends React.Component {
 
         const pinsUser = users[pin.user_id] //Get the user of the pin so we can display their data on show
         const followButton = <button className="follow-button">Follow</button>
+
 
         return (
             <div className="pin-show-main-wrap">
@@ -46,8 +71,13 @@ class PinShow extends React.Component {
                     <div className="pin-show-data">
                         <div className="pin-show-options">
                             <div className="closeup-action-items">
-                                <div>
+                                <div className="edit-dropdown" onClick={this.editDropdownClick}>
                                     <i className="fa fa-ellipsis-h" />
+                                    <div className="edit-dropdown-items" id="edit-dropdown-items">
+                                        <div className="edit-item" onClick={this.props.openPinEditModal}>Edit Pin</div>
+                                        <div className="edit-item" id="download-button" onClick={this.downloadImage}>Download Image</div>
+                                        <div className="edit-item">Delete Pin</div>
+                                    </div>
                                 </div>
                                 <div>
                                     <i className="fa fa-share"/>

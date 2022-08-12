@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavLinksContainer from "./nav/navLinksContainer";
 import { Route, Switch } from "react-router-dom";
 
@@ -9,7 +9,9 @@ import UserShowContainer from "./user/userShowContainer";
 import PinShowContainer from "./pin/pinShowContainer";
 import BoardShowContainer from "./board/boardShowContainer";
 import HomePageContainer from "./homePage/homePageContainer";
+import SearchIndexContainer from "./searchScroll/searchIndexContainer";
 
+// let Com = SearchIndex()
 
 const App = () => (
     <div className="main-wrapper">
@@ -19,9 +21,10 @@ const App = () => (
         </header>
 
         <Route exact path="/" component={HomePageContainer}/>
-        
+
         <Switch>
             <ProtectedRoute path="/pins/create" component={PinFormContainer} />
+            <ProtectedRoute path="/pins/search" component={SearchIndexContainer}/>
             <ProtectedRoute exact path="/pins/:pinId" component={PinShowContainer} />
             <ProtectedRoute exact path="/users/:userId" component={UserShowContainer} />
             <ProtectedRoute exact path="/boards/:boardId" component={BoardShowContainer} />

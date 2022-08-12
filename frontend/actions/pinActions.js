@@ -10,16 +10,16 @@ export const receivePins = pins => ({
     pins
 })
 
-export const receivePin = pin => {
+export const receivePin = (payload) => {
     return {
         type: RECEIVE_PIN,
-        pin
+        payload
     }
 }
 
-export const removePin = pinId => ({
+export const removePin = pin => ({
     type: REMOVE_PIN,
-    pinId
+    pin
 })
 
 export const fetchPins = () => dispatch => {
@@ -36,6 +36,12 @@ export const fetchPin = pinId => dispatch => {
     )
 }
 
+export const updatePin = pin => dispatch => {
+    return pinApiUtil.updatePin(pin)
+            .then(updatedPin => dispatch(receivePin(updatedPin)))
+    
+}
+
 export const createPin = pin => dispatch => {
     return (
         pinApiUtil.createPin(pin)
@@ -50,5 +56,9 @@ export const fetchBoardSavedPins = boardId => dispatch => {
     )
 }
 
-// export const deletePin = pinId => dispatch => deletePin(pinId)
-//         .then(pin => dispatch(removePin(pin)))
+export const deletePin = pinId => dispatch => {
+    return (
+        pinApiUtil.deletePin(pinId)
+            .then(pin => dispatch(removePin(pin)))
+    )
+}
