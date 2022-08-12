@@ -10198,6 +10198,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "updatePin": () => (/* binding */ updatePin)
 /* harmony export */ });
 /* harmony import */ var _util_pinApiUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/pinApiUtil */ "./frontend/util/pinApiUtil.js");
+/* harmony import */ var _util_savedPinApitUtil__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/savedPinApitUtil */ "./frontend/util/savedPinApitUtil.js");
+
 
 var RECEIVE_PINS = 'RECEIVE_PINS';
 var RECEIVE_PIN = 'RECEIVE_PIN';
@@ -10256,9 +10258,9 @@ var fetchBoardSavedPins = function fetchBoardSavedPins(boardId) {
     });
   };
 };
-var deletePin = function deletePin(pinId) {
+var deletePin = function deletePin(pin) {
   return function (dispatch) {
-    return _util_pinApiUtil__WEBPACK_IMPORTED_MODULE_0__.deletePin(pinId).then(function (pin) {
+    return _util_pinApiUtil__WEBPACK_IMPORTED_MODULE_0__.deletePin(pin).then(function () {
       return dispatch(removePin(pin));
     });
   };
@@ -10324,7 +10326,7 @@ var createSavedPin = function createSavedPin(savedPin) {
 };
 var deleteSavedPin = function deleteSavedPin(savedPinId) {
   return function (dispatch) {
-    return _util_savedPinApitUtil__WEBPACK_IMPORTED_MODULE_0__.deleteSavedPin(savedPinId).then(function (savedPinId) {
+    return _util_savedPinApitUtil__WEBPACK_IMPORTED_MODULE_0__.deleteSavedPin(savedPinId).then(function () {
       return dispatch(removeSavedPin(savedPinId));
     });
   };
@@ -10942,7 +10944,6 @@ var BoardIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(BoardIndex, [{
     key: "render",
     value: function render() {
-      // console.log("hello from board index")
       var _this$props = this.props,
           pins = _this$props.pins,
           boards = _this$props.boards,
@@ -11586,6 +11587,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _board_boardFormContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../board/boardFormContainer */ "./frontend/components/board/boardFormContainer.js");
 /* harmony import */ var _board_boardEditContainer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../board/boardEditContainer */ "./frontend/components/board/boardEditContainer.jsx");
 /* harmony import */ var _pin_pinEditModalContainer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../pin/pinEditModalContainer */ "./frontend/components/pin/pinEditModalContainer.jsx");
+/* harmony import */ var _pin_pinDeleteModalContainer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pin/pinDeleteModalContainer */ "./frontend/components/pin/pinDeleteModalContainer.jsx");
+
 
 
 
@@ -11633,6 +11636,11 @@ var Modal = function Modal(_ref) {
     case 'editPin':
       component = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pin_pinEditModalContainer__WEBPACK_IMPORTED_MODULE_7__["default"], null);
       divName = "pin-edit-modal";
+      break;
+
+    case 'deletePin':
+      component = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pin_pinDeleteModalContainer__WEBPACK_IMPORTED_MODULE_8__["default"], null);
+      divName = "pin-delete-modal";
       break;
 
     default:
@@ -11852,6 +11860,196 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/pin/pinDeleteModal.jsx":
+/*!****************************************************!*\
+  !*** ./frontend/components/pin/pinDeleteModal.jsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var PinDeleteModal = /*#__PURE__*/function (_React$Component) {
+  _inherits(PinDeleteModal, _React$Component);
+
+  var _super = _createSuper(PinDeleteModal);
+
+  function PinDeleteModal(props) {
+    var _this;
+
+    _classCallCheck(this, PinDeleteModal);
+
+    _this = _super.call(this, props);
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(PinDeleteModal, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.props.fetchPin(this.props.location.pathname.slice(6)).then(function () {
+        _this2.props.fetchUser(_this2.props.pin.user_id);
+      }).then(function () {
+        _this2.props.fetchSavedPins();
+      });
+    }
+  }, {
+    key: "deletePin",
+    value: function deletePin(savedPinsArr) {
+      var _iterator = _createForOfIteratorHelper(savedPinsArr),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var savedPin = _step.value;
+          this.props.deleteSavedPin(savedPin.id);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      this.props.deletePin(this.props.pin.id).then(this.props.history.push("/users/".concat(this.props.currentUser.id)));
+      this.props.closeModal();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var _this$props = this.props,
+          pin = _this$props.pin,
+          currentUser = _this$props.currentUser,
+          savedPins = _this$props.savedPins;
+      if (pin === undefined || savedPins === undefined || currentUser === undefined) return null;
+      var savedPinsArr = Object.values(savedPins).filter(function (savedPin) {
+        return savedPin.pin_id === pin.id;
+      });
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "pin-delete-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "edit-modal-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Are you sure?")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "delete-text"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Once you delete a Pin, you can't undo it!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "pin-delete-buttons-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "grey-button cancel-delete",
+        onClick: this.props.closeModal
+      }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "red-button delete-button",
+        onClick: function onClick() {
+          return _this3.deletePin(savedPinsArr);
+        }
+      }, "Delete")));
+    }
+  }]);
+
+  return PinDeleteModal;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PinDeleteModal);
+
+/***/ }),
+
+/***/ "./frontend/components/pin/pinDeleteModalContainer.jsx":
+/*!*************************************************************!*\
+  !*** ./frontend/components/pin/pinDeleteModalContainer.jsx ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_modalActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modalActions */ "./frontend/actions/modalActions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _actions_savedPinActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/savedPinActions */ "./frontend/actions/savedPinActions.js");
+/* harmony import */ var _actions_pinActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/pinActions */ "./frontend/actions/pinActions.js");
+/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/userActions */ "./frontend/actions/userActions.js");
+/* harmony import */ var _pinDeleteModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pinDeleteModal */ "./frontend/components/pin/pinDeleteModal.jsx");
+
+
+
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    pin: state.entities.pins[ownProps.location.pathname.slice(6)],
+    savedPins: state.entities.savedPins,
+    currentUser: state.entities.users[state.session.id]
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchPin: function fetchPin(pinId) {
+      return dispatch((0,_actions_pinActions__WEBPACK_IMPORTED_MODULE_3__.fetchPin)(pinId));
+    },
+    fetchSavedPins: function fetchSavedPins() {
+      return dispatch((0,_actions_savedPinActions__WEBPACK_IMPORTED_MODULE_2__.fetchSavedPins)());
+    },
+    fetchUser: function fetchUser(userId) {
+      return dispatch((0,_actions_userActions__WEBPACK_IMPORTED_MODULE_4__.fetchUser)(userId));
+    },
+    deletePin: function deletePin(pin) {
+      return dispatch((0,_actions_pinActions__WEBPACK_IMPORTED_MODULE_3__.deletePin)(pin));
+    },
+    deleteSavedPin: function deleteSavedPin(savedPinId) {
+      return dispatch((0,_actions_savedPinActions__WEBPACK_IMPORTED_MODULE_2__.deleteSavedPin)(savedPinId));
+    },
+    closeModal: function closeModal() {
+      return dispatch((0,_actions_modalActions__WEBPACK_IMPORTED_MODULE_1__.closeModal)());
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_pinDeleteModal__WEBPACK_IMPORTED_MODULE_5__["default"])));
+
+/***/ }),
+
 /***/ "./frontend/components/pin/pinEditModal.jsx":
 /*!**************************************************!*\
   !*** ./frontend/components/pin/pinEditModal.jsx ***!
@@ -11888,7 +12086,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 
 
 
@@ -12136,8 +12333,6 @@ var PinForm = /*#__PURE__*/function (_React$Component) {
       if (file) {
         fileReader.readAsDataURL(file); //the readAsDataURL initiates the beginning of reading of the file
       }
-
-      console.log(imageUrl);
     }
   }, {
     key: "handleSubmit",
@@ -12519,7 +12714,6 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {};
-    _this.downloadImage = _this.downloadImage.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -12530,6 +12724,8 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
 
       this.props.fetchPin(this.props.match.params.pinId).then(function () {
         _this2.props.fetchUser(_this2.props.pin.user_id);
+      }).then(function () {
+        _this2.props.fetchSavedPins();
       });
     }
   }, {
@@ -12540,20 +12736,10 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
       if (prevProps.match.params.pinId != this.props.match.params.pinId) {
         this.props.fetchPin(this.props.match.params.pinId).then(function () {
           _this3.props.fetchUser(_this3.props.pin.user_id);
+        }).then(function () {
+          _this3.props.fetchSavedPins();
         });
       }
-    }
-  }, {
-    key: "downloadImage",
-    value: function downloadImage() {
-      console.log('check', this.props);
-      var imageSrc = this.props.pin.imageUrl;
-      var link = document.createElement('a');
-      link.href = imageSrc;
-      link.download = this.props.pin.title + '.jpg';
-      var ele = document.getElementById('download-button');
-      ele.appendChild(link);
-      link.click(); // ele.removeChild(link)
     }
   }, {
     key: "editDropdownClick",
@@ -12578,14 +12764,21 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
           pin = _this$props.pin,
           users = _this$props.users,
           session = _this$props.session,
-          currentUser = _this$props.currentUser; //If statement here to make sure we have a pin/users we can key into because render will happen before componentDidMount
+          currentUser = _this$props.currentUser,
+          savedPins = _this$props.savedPins; //If statement here to make sure we have a pin/users we can key into because render will happen before componentDidMount
 
       if (pin === undefined || users === undefined) return null;
       var pinsUser = users[pin.user_id]; //Get the user of the pin so we can display their data on show
 
-      var followButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "follow-button"
-      }, "Follow");
+      var followButton = function followButton() {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+          className: "follow-button"
+        }, "Follow");
+      };
+
+      var savedPinsArr = Object.values(savedPins).filter(function (savedPin) {
+        return savedPin.pin_id === pin.id;
+      });
 
       var editButton = function editButton() {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -12600,7 +12793,8 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
           className: "edit-item",
           onClick: _this4.props.openPinEditModal
         }, "Edit Pin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "edit-item"
+          className: "edit-item",
+          onClick: _this4.props.openPinDeleteModal
         }, "Delete Pin")));
       };
 
@@ -12634,7 +12828,7 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
         className: "pin-user-icon"
       }, pinsUser ? pinsUser.username[0].toUpperCase() : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-user-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, pinsUser ? pinsUser.username : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "# of followers"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, pinsUser ? session ? pinsUser.user_id === session.id ? null : followButton : null : null)))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, pinsUser ? pinsUser.username : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "# of followers"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, pin.user_id === currentUser.id ? null : followButton())))));
     }
   }]);
 
@@ -12658,9 +12852,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_pinActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/pinActions */ "./frontend/actions/pinActions.js");
-/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/userActions */ "./frontend/actions/userActions.js");
-/* harmony import */ var _actions_modalActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/modalActions */ "./frontend/actions/modalActions.js");
-/* harmony import */ var _pinShow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pinShow */ "./frontend/components/pin/pinShow.jsx");
+/* harmony import */ var _actions_savedPinActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/savedPinActions */ "./frontend/actions/savedPinActions.js");
+/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/userActions */ "./frontend/actions/userActions.js");
+/* harmony import */ var _actions_modalActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modalActions */ "./frontend/actions/modalActions.js");
+/* harmony import */ var _pinShow__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pinShow */ "./frontend/components/pin/pinShow.jsx");
+
 
 
 
@@ -12668,13 +12864,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  console.log(ownProps);
   return {
     pin: state.entities.pins[ownProps.match.params.pinId],
     users: state.entities.users,
     session: state.session,
-    currentUser: state.entities.users[state.session.id] // currentUser: ""
-
+    currentUser: state.entities.users[state.session.id],
+    savedPins: state.entities.savedPins
   };
 };
 
@@ -12684,15 +12879,27 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch((0,_actions_pinActions__WEBPACK_IMPORTED_MODULE_1__.fetchPin)(pinId));
     },
     fetchUser: function fetchUser(userId) {
-      return dispatch((0,_actions_userActions__WEBPACK_IMPORTED_MODULE_2__.fetchUser)(userId));
+      return dispatch((0,_actions_userActions__WEBPACK_IMPORTED_MODULE_3__.fetchUser)(userId));
     },
     openPinEditModal: function openPinEditModal() {
-      return dispatch((0,_actions_modalActions__WEBPACK_IMPORTED_MODULE_3__.openModal)('editPin'));
+      return dispatch((0,_actions_modalActions__WEBPACK_IMPORTED_MODULE_4__.openModal)('editPin'));
+    },
+    openPinDeleteModal: function openPinDeleteModal() {
+      return dispatch((0,_actions_modalActions__WEBPACK_IMPORTED_MODULE_4__.openModal)('deletePin'));
+    },
+    deletePin: function deletePin(pin) {
+      return dispatch((0,_actions_pinActions__WEBPACK_IMPORTED_MODULE_1__.deletePin)(pin));
+    },
+    fetchSavedPins: function fetchSavedPins() {
+      return dispatch((0,_actions_savedPinActions__WEBPACK_IMPORTED_MODULE_2__.fetchSavedPins)());
+    },
+    deleteSavedPin: function deleteSavedPin(savedPinId) {
+      return dispatch((0,_actions_savedPinActions__WEBPACK_IMPORTED_MODULE_2__.deleteSavedPin)(savedPinId));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_pinShow__WEBPACK_IMPORTED_MODULE_4__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_pinShow__WEBPACK_IMPORTED_MODULE_5__["default"]));
 
 /***/ }),
 
@@ -12778,8 +12985,7 @@ function SearchIndex() {
       loading = _userPinSearch.loading,
       error = _userPinSearch.error;
 
-  if (pins === undefined) return null; // console.log("from pins", pins)
-
+  if (pins === undefined) return null;
   return (
     /*#__PURE__*/
     // The <> </> brackets are called fragments
@@ -12789,7 +12995,6 @@ function SearchIndex() {
       type: "text",
       onChange: handleSearch
     }), pins.map(function (pin, idx) {
-      console.log("my pin", pin);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         key: idx
       }, pin), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null));
@@ -13314,18 +13519,19 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
   _createClass(UserShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // this.props.fetchBoards()
-      //     .then(() => this.props.fetchSavedPins())
-      //         .then(() => this.props.fetchPins())
-      this.props.fetchUser(this.props.user.id);
-      this.props.fetchSavedPins();
-    } // Added this for now 7.22
+      var _this = this;
 
+      this.props.fetchUser(this.props.user.id).then(function () {
+        return _this.props.fetchSavedPins();
+      });
+    }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (prevProps.match.params.userId != this.props.match.params.userId) {
+        console.log("did this hit?");
         this.props.fetchUser(this.props.user.id);
+        this.props.fetchSavedPins();
       }
     }
   }, {
@@ -13653,7 +13859,8 @@ var pinsReducer = function pinsReducer() {
       return action.pins;
 
     case _actions_userActions__WEBPACK_IMPORTED_MODULE_2__.RECEIVE_USER:
-      var pins = Object.values(action.payload.board_pins);
+      var pins = [];
+      action.payload.board_pins ? pins = Object.values(action.payload.board_pins) : pins = [];
 
       if (pins) {
         pins.map(function (pin) {
@@ -13669,16 +13876,11 @@ var pinsReducer = function pinsReducer() {
       return newState;
 
     case _actions_boardActions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_BOARD:
-      // let boardPins = Object.values(action.payload.pins)
-      // if (boardPins) {
-      //     boardPins.map(pin => {
-      //         newState[pin.id] = pin
-      //     })
-      //     return newState
-      // } else {
-      // return state
-      // }
       return action.payload.pins;
+
+    case _actions_pinActions__WEBPACK_IMPORTED_MODULE_1__.REMOVE_PIN:
+      delete newState[action.pin.id];
+      return newState;
 
     default:
       return state;
@@ -14069,7 +14271,6 @@ var fetchPin = function fetchPin(pinId) {
   });
 };
 var createPin = function createPin(pin) {
-  console.log("pin ajax", pin);
   return $.ajax({
     url: '/api/pins/',
     method: 'POST',
@@ -14095,7 +14296,7 @@ var updatePin = function updatePin(pin) {
   });
 };
 var deletePin = function deletePin(pinId) {
-  $.ajax({
+  return $.ajax({
     url: "/api/pins/".concat(pinId),
     method: 'DELETE'
   });

@@ -1,4 +1,5 @@
 import * as pinApiUtil from "../util/pinApiUtil";
+import * as savedPinApiUtil from "../util/savedPinApitUtil"
 
 export const RECEIVE_PINS = 'RECEIVE_PINS'
 export const RECEIVE_PIN = 'RECEIVE_PIN'
@@ -56,9 +57,8 @@ export const fetchBoardSavedPins = boardId => dispatch => {
     )
 }
 
-export const deletePin = pinId => dispatch => {
-    return (
-        pinApiUtil.deletePin(pinId)
-            .then(pin => dispatch(removePin(pin)))
-    )
+export const deletePin = pin => dispatch => {
+    return pinApiUtil.deletePin(pin)
+            .then(() => dispatch(removePin(pin)))
+    
 }

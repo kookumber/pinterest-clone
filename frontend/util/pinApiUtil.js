@@ -14,7 +14,6 @@ export const fetchPin = pinId => {
 }
 
 export const createPin = pin => {
-    console.log("pin ajax", pin)
     return $.ajax({
             url: '/api/pins/',
             method: 'POST',
@@ -42,7 +41,7 @@ export const updatePin = pin => {
 
 
 export const deletePin = pinId => {
-    $.ajax({
+    return $.ajax({
         url: `/api/pins/${pinId}`,
         method: 'DELETE'
     })

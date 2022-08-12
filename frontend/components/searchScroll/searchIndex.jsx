@@ -20,7 +20,7 @@ export default function SearchIndex() {
     } = userPinSearch(query, pageNumber)
 
     if (pins === undefined) return null
-    // console.log("from pins", pins)
+    
 
     return (
         // The <> </> brackets are called fragments
@@ -28,7 +28,7 @@ export default function SearchIndex() {
             <div className="body-container">
                 <input type="text" onChange={handleSearch}/>
                 {pins.map((pin, idx) => {
-                    console.log("my pin", pin)
+                    
                     return ( 
                         <>
                             <br/>
