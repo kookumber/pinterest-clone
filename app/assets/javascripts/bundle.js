@@ -12572,10 +12572,13 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       var _this$props = this.props,
           pin = _this$props.pin,
           users = _this$props.users,
-          session = _this$props.session; //If statement here to make sure we have a pin/users we can key into because render will happen before componentDidMount
+          session = _this$props.session,
+          currentUser = _this$props.currentUser; //If statement here to make sure we have a pin/users we can key into because render will happen before componentDidMount
 
       if (pin === undefined || users === undefined) return null;
       var pinsUser = users[pin.user_id]; //Get the user of the pin so we can display their data on show
@@ -12583,6 +12586,24 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
       var followButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "follow-button"
       }, "Follow");
+
+      var editButton = function editButton() {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "edit-dropdown",
+          onClick: _this4.editDropdownClick
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
+          className: "fa fa-ellipsis-h"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "edit-dropdown-items",
+          id: "edit-dropdown-items"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "edit-item",
+          onClick: _this4.props.openPinEditModal
+        }, "Edit Pin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "edit-item"
+        }, "Delete Pin")));
+      };
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-show-main-wrap"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -12599,28 +12620,7 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
         className: "pin-show-options"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "closeup-action-items"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "edit-dropdown",
-        onClick: this.editDropdownClick
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
-        className: "fa fa-ellipsis-h"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "edit-dropdown-items",
-        id: "edit-dropdown-items"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "edit-item",
-        onClick: this.props.openPinEditModal
-      }, "Edit Pin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "edit-item",
-        id: "download-button",
-        onClick: this.downloadImage
-      }, "Download Image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "edit-item"
-      }, "Delete Pin"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
-        className: "fa fa-share"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
-        className: "fa fa-link"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, pin.user_id === currentUser.id ? editButton() : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "save-options"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Board Selector"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Save"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-show-title"
@@ -12673,8 +12673,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     pin: state.entities.pins[ownProps.match.params.pinId],
     users: state.entities.users,
     session: state.session,
-    // currentUser: state.entities.users[state.session.id]
-    currentUser: ""
+    currentUser: state.entities.users[state.session.id] // currentUser: ""
+
   };
 };
 
