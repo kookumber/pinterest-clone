@@ -1,4 +1,5 @@
 import React from "react";
+import SavedPinOptionsContainer from "../savedPin/savedPinOptionsContainer";
 
 class PinShow extends React.Component {
     constructor(props) {
@@ -76,8 +77,7 @@ class PinShow extends React.Component {
                                 { pin.user_id === currentUser.id ? editButton() : null }
                             </div>
                             <div className="save-options">
-                                <div>Board Selector</div>
-                                <button>Save</button>
+                                <SavedPinOptionsContainer pin={pin}/>
                             </div>
                         </div>
                         <div className="pin-show-title">

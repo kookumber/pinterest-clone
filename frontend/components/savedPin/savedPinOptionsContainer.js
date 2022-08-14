@@ -7,16 +7,17 @@ const mapStateToProps = state => {
     return ({
         currentUser: state.entities.users[state.session.id],
         boards: Object.values(state.entities.boards),
-        savedPins: Object.values(state.entities.savedPins)
+        savedPins: Object.values(state.entities.savedPins),
+        pins: state.entities.pins
     })
 }
 
 const mapDispatchToProps = dispatch => {
     return ({
         createSavedPin: savedPin => dispatch(createSavedPin(savedPin)),
-        deleteSavedPin: savedPin => dispatch(deleteSavedPin(savedPin)),
+        deleteSavedPin: savedPinId => dispatch(deleteSavedPin(savedPinId)),
         fetchBoards: () => dispatch(fetchBoards())
     })
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SavedPinOptions)
+export default connect(mapStateToProps, mapDispatchToProps)(SavedPinOptions) 
