@@ -28,6 +28,7 @@ class PinDeleteModal extends React.Component {
         const { pin, currentUser, savedPins } = this.props;
 
         if (pin === undefined || savedPins === undefined || currentUser === undefined) return null;
+        
         const savedPinsArr = Object.values(savedPins).filter(savedPin => savedPin.pin_id === pin.id)
         
         return (
