@@ -76,9 +76,8 @@ class PinShow extends React.Component {
                             <div className="closeup-action-items">
                                 { pin.user_id === currentUser.id ? editButton() : null }
                             </div>
-                            <div className="save-options">
+
                                 <SavedPinOptionsContainer pin={pin}/>
-                            </div>
                         </div>
                         <div className="pin-show-title">
                             <h1>{pin.title}</h1>

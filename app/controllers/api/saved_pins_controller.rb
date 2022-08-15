@@ -20,7 +20,7 @@ class Api::SavedPinsController < ApplicationController
         @saved_pin = SavedPin.find_by(id: params[:id])
 
         if @saved_pin && @saved_pin.destroy
-            render :index
+            render :json ["The pin has been removed from the board"]
         else
             render :json ["No pin on board to delete"], status: 404
         end

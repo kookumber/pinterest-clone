@@ -130,6 +130,29 @@ input:focus, textarea:focus {
         background-color: #e2e2e2;
     }
 }
+
+.grey-button {
+    width: 80px;
+    height: 42px;
+    background-color: #efefef;
+    border-radius: 28px;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #e2e2e2;
+    }
+}
+
+.board-saved-button {
+    width: 70px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    border-radius: 28px;
+    font-size: 16px;
+    cursor: pointer;
+}
 // Below is mixin example to reuse css for elements that
 // should have similar styles
 // @mixin button($num, $color) {
