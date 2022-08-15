@@ -33,7 +33,7 @@ class Api::PinsController < ApplicationController
         @pin = Pin.find_by(id: params[:id])
 
         if @pin && @pin.destroy
-            render json: ["pin was deleted"]
+            render json: ["Pin was deleted"]
         else
             render json: @pin.errors.full_messages, status: 401
         end

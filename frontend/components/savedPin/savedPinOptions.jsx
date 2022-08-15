@@ -27,8 +27,8 @@ class SavedPinOptions extends React.Component {
     render() {
 
         const { currentUser, boards, savedPins, pin, createSavedPin, deleteSavedPin } = this.props
-        console.log("my boards", boards)
-        console.log("curUse", currentUser)
+        // console.log("my boards", boards)
+        // console.log("curUse", currentUser)
         //Use the boards index and find boards where user_id matches current session id
         const currentUsersBoards = boards.filter(board => board.user_id === currentUser.id)
         const pinBoards = savedPins.filter(savedPin => savedPin.pin_id === pin.id)
@@ -42,25 +42,38 @@ class SavedPinOptions extends React.Component {
         const currentSavedBoard = savedPins.filter(saved => boardIds.includes(saved.board_id))
         // if(boards === undefined || savedPins === undefined) return null;
 
-        const saveStatus = (board) => {
-            for(const pinBoard of pinBoards) {
-                if (pinBoard.board_id === board.id) {
-                    return (
-                        <div key={board.id} className="board-save-item-container" onClick={() => deleteSavedPin(pinBoard.id)}>
-                            <h3>{board.name}</h3>
-                            <button className="board-saved-button">Saved</button>
-                        </div>
-                    )
-                }
-            }
-        }
-
         const dropMenu = () => {
+
+            const saveStatus = (board) => {
+                // console.log("pinBoard", board)
+                console.log("pinBoards", pinBoards)
+                for (const pinBoard of pinBoards) {
+                    if (pinBoard.board_id === board.id) {
+                        return (
+                            <div key={board.id} className="board-save-item-container" onClick={() => deleteSavedPin(pinBoard.id)}>
+                                <h3>{board.name}</h3>
+                                <button className="board-saved-button">Saved</button>
+                            </div>
+                        )
+                    }
+                }
+
+                return (
+                    <div key={board.id} 
+                        className="board-save-item-container" 
+                        onClick={() => createSavedPin({ pin_id: pin.id, board_id: board.id })}>
+                            <h3>{board.name}</h3>
+                            <button className="red-button board-save-button">Save</button>
+                        </div>
+                )
+            }
+
             return (
                 <div key={pin.id} className="board-dropmenu-container">
                     <h3>Save to Board</h3>
                     <div className="board-save-items-wrap">
                         <span>All boards</span>
+                        {console.log(currentUsersBoards.length)}
                         {currentUsersBoards.length === 0 ? 
                         <div className="board-save-item">
                             <h3>You don't have any boards</h3>
@@ -76,18 +89,18 @@ class SavedPinOptions extends React.Component {
             <div className="user-board-list-wrap">
                 <div className="save-options">
                     <div className="board-select-box">
-                        <button className="save-board" onClick={this.showMenu}>Boards</button>
+                        <div className="save-board" onClick={this.showMenu}>Boards</div>
                         <span className="material-symbols-outlined">expand_more</span>
                     </div>
                 </div>
                 {currentSavedBoard.filter(saved => saved.pin_id === pin.id).length > 0 ?
                     <button className="board-saved-button">Saved</button> : 
-                    <button className="save-pin-button"
+                    <button className="red-button"
                         onClick={ () => createSavedPin({ pin_id: pin.id, board_id: currentUsersBoards[0].id }) }>
                             Save
                     </button>  
                 }
-
+                {console.log("menustate", this.state.showMenu)}
                 {this.state.showMenu ? dropMenu() : null }
             </div>
         )

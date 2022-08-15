@@ -12816,11 +12816,9 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
         className: "pin-show-options"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "closeup-action-items"
-      }, pin.user_id === currentUser.id ? editButton() : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "save-options"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_savedPin_savedPinOptionsContainer__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, pin.user_id === currentUser.id ? editButton() : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_savedPin_savedPinOptionsContainer__WEBPACK_IMPORTED_MODULE_1__["default"], {
         pin: pin
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-show-title"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pin.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-show-description"
@@ -13033,9 +13031,9 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
           savedPins = _this$props.savedPins,
           pin = _this$props.pin,
           createSavedPin = _this$props.createSavedPin,
-          deleteSavedPin = _this$props.deleteSavedPin;
-      console.log("my boards", boards);
-      console.log("curUse", currentUser); //Use the boards index and find boards where user_id matches current session id
+          deleteSavedPin = _this$props.deleteSavedPin; // console.log("my boards", boards)
+      // console.log("curUse", currentUser)
+      //Use the boards index and find boards where user_id matches current session id
 
       var currentUsersBoards = boards.filter(function (board) {
         return board.user_id === currentUser.id;
@@ -13052,48 +13050,64 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
         return boardIds.includes(saved.board_id);
       }); // if(boards === undefined || savedPins === undefined) return null;
 
-      var saveStatus = function saveStatus(board) {
-        var _iterator = _createForOfIteratorHelper(pinBoards),
-            _step;
-
-        try {
-          var _loop = function _loop() {
-            var pinBoard = _step.value;
-
-            if (pinBoard.board_id === board.id) {
-              return {
-                v: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-                  key: board.id,
-                  className: "board-save-item-container",
-                  onClick: function onClick() {
-                    return deleteSavedPin(pinBoard.id);
-                  }
-                }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, board.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-                  className: "board-saved-button"
-                }, "Saved"))
-              };
-            }
-          };
-
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var _ret = _loop();
-
-            if (_typeof(_ret) === "object") return _ret.v;
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
-      };
-
       var dropMenu = function dropMenu() {
+        var saveStatus = function saveStatus(board) {
+          // console.log("pinBoard", board)
+          console.log("pinBoards", pinBoards);
+
+          var _iterator = _createForOfIteratorHelper(pinBoards),
+              _step;
+
+          try {
+            var _loop = function _loop() {
+              var pinBoard = _step.value;
+
+              if (pinBoard.board_id === board.id) {
+                return {
+                  v: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+                    key: board.id,
+                    className: "board-save-item-container",
+                    onClick: function onClick() {
+                      return deleteSavedPin(pinBoard.id);
+                    }
+                  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, board.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+                    className: "board-saved-button"
+                  }, "Saved"))
+                };
+              }
+            };
+
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var _ret = _loop();
+
+              if (_typeof(_ret) === "object") return _ret.v;
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+            key: board.id,
+            className: "board-save-item-container",
+            onClick: function onClick() {
+              return createSavedPin({
+                pin_id: pin.id,
+                board_id: board.id
+              });
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, board.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+            className: "red-button board-save-button"
+          }, "Save"));
+        };
+
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           key: pin.id,
           className: "board-dropmenu-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Save to Board"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "board-save-items-wrap"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "All boards"), currentUsersBoards.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "All boards"), console.log(currentUsersBoards.length), currentUsersBoards.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "board-save-item"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "You don't have any boards")) : currentUsersBoards.map(function (board) {
           return saveStatus(board);
@@ -13106,7 +13120,7 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
         className: "save-options"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "board-select-box"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "save-board",
         onClick: this.showMenu
       }, "Boards"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
@@ -13116,14 +13130,14 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
       }).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "board-saved-button"
       }, "Saved") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "save-pin-button",
+        className: "red-button",
         onClick: function onClick() {
           return createSavedPin({
             pin_id: pin.id,
             board_id: currentUsersBoards[0].id
           });
         }
-      }, "Save"), this.state.showMenu ? dropMenu() : null);
+      }, "Save"), console.log("menustate", this.state.showMenu), this.state.showMenu ? dropMenu() : null);
     }
   }]);
 
