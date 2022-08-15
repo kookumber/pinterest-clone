@@ -1,62 +1,120 @@
 @import "./01_header.scss";
 
 .user-board-list-wrap {
-    @include center(row, space-between)
+    @include center(row, space-between);
+
+    & button {
+        height: 40px;
+    }
 }
 .board-dropmenu-container {
-    z-index: 9999;
-    border-radius: 8px;
+    z-index: 999;
+    border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 10%) 0px 1px 20px 0px;
     position: absolute;
     margin-top: 420px;
-    width: 360px;
-    overflow-y: scroll;
+    width: 350px;
+    max-height: 400px;
     cursor: default;
     background-color: white;
-    @include center(column, center);
+    @include center(column, space-between);
     
     & h3 {
-        margin-left: 15px;
+        font-size: 16px;
     }
 
     & .board-save-items-wrap {
         z-index: 9999;
         margin-right: 15px;
         margin-left: 15px;
+        margin-bottom: 15px;
         width: 93%;
+        max-height: 320px;
+        overflow-y: scroll;
 
         & span {
-                margin-left: 15px;
+            font-size: 13px;
+            margin-left: 15px;
+        }
+    }
+
+    & .board-create-option {
+        height: 60px;
+        width: 100%;
+        @include center(row, flex-start);
+        box-shadow: rgba(0, 0, 0, 10%) 0px 1px 20px 0px;
+        border-radius: 0px 0px 12px 12px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #efefef;
+        }
+
+        & div {
+            margin-bottom: 15px;
+            margin-left: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        & .add-symbol {
+            width: 48px;
+            height: 48px;
+            @include center(row, center);
+            background-color: #efefef;
+
+            & span {
+                font-weight: 800;
+                font-size: 24px;
+                background-color: transparent;
             }
+        }
     }
 }
 
 .board-select-box {
-    @include center(row, space-between)
+    @include center(row, center);
+
+    & .save-board {
+        text-align: end;
+        font-weight: 700;
+    }
+
+    & span {
+        font-weight: 700;
+    }
 }
 
 .board-save-item-container {
     @include center(row, space-between);
     z-index: 9999;
-    height: 64px;
+    height: 60px;
     border-radius: 9px;
+    cursor: pointer;
 
     & h3 {
+        margin-left: 15px;
         font-size: 15px;
         font-weight: 700;
     }
 
     & button {
         margin-right: 15px;
+        display: none;
     }
 
     &:hover {
         background-color: #efefef;
     }
 
+    &:hover button {
+        display: block;
+    }
+
 }
 
-.board-save-button {
-    width: 70px;
-    height: 40px;
+.board-save-button, .board-saved-button {
+    width: 65px;
+    height: 36px;
 }

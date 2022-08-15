@@ -13025,6 +13025,8 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$props = this.props,
           currentUser = _this$props.currentUser,
           boards = _this$props.boards,
@@ -13052,9 +13054,6 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
 
       var dropMenu = function dropMenu() {
         var saveStatus = function saveStatus(board) {
-          // console.log("pinBoard", board)
-          console.log("pinBoards", pinBoards);
-
           var _iterator = _createForOfIteratorHelper(pinBoards),
               _step;
 
@@ -13071,7 +13070,7 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
                       return deleteSavedPin(pinBoard.id);
                     }
                   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, board.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-                    className: "board-saved-button"
+                    className: "black-button board-saved-button"
                   }, "Saved"))
                 };
               }
@@ -13111,7 +13110,14 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
           className: "board-save-item"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "You don't have any boards")) : currentUsersBoards.map(function (board) {
           return saveStatus(board);
-        })));
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "board-create-option",
+          onClick: _this2.props.openBoardModal
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "add-symbol"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+          className: "material-symbols-outlined"
+        }, "add")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Create board")));
       };
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -13119,7 +13125,8 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "save-options"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "board-select-box"
+        className: "board-select-box",
+        onClick: this.showMenu
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "save-board",
         onClick: this.showMenu
@@ -13128,7 +13135,7 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
       }, "expand_more"))), currentSavedBoard.filter(function (saved) {
         return saved.pin_id === pin.id;
       }).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "board-saved-button"
+        className: "black-button board-saved-button"
       }, "Saved") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "red-button",
         onClick: function onClick() {
@@ -13137,7 +13144,7 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
             board_id: currentUsersBoards[0].id
           });
         }
-      }, "Save"), console.log("menustate", this.state.showMenu), this.state.showMenu ? dropMenu() : null);
+      }, "Save"), this.state.showMenu ? dropMenu() : null);
     }
   }]);
 
@@ -13163,6 +13170,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _savedPinOptions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./savedPinOptions */ "./frontend/components/savedPin/savedPinOptions.jsx");
 /* harmony import */ var _actions_savedPinActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/savedPinActions */ "./frontend/actions/savedPinActions.js");
 /* harmony import */ var _actions_boardActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/boardActions */ "./frontend/actions/boardActions.js");
+/* harmony import */ var _actions_modalActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modalActions */ "./frontend/actions/modalActions.js");
+
+
 
 
 
@@ -13187,6 +13197,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchBoards: function fetchBoards() {
       return dispatch((0,_actions_boardActions__WEBPACK_IMPORTED_MODULE_3__.fetchBoards)());
+    },
+    closeBoardModal: function closeBoardModal() {
+      return dispatch((0,_actions_modalActions__WEBPACK_IMPORTED_MODULE_4__.closeModal)());
+    },
+    openBoardModal: function openBoardModal() {
+      return dispatch((0,_actions_modalActions__WEBPACK_IMPORTED_MODULE_4__.openModal)('createBoard'));
     }
   };
 };
@@ -14206,8 +14222,12 @@ var savedPinReducer = function savedPinReducer() {
     case _actions_savedPinActions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_SAVED_PINS:
       return action.savedPins;
 
+    case _actions_savedPinActions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_SAVED_PIN:
+      newState[action.savedPin.id] = action.savedPin;
+      return newState;
+
     case _actions_savedPinActions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_SAVED_PIN:
-      delete newState[action.savedPin.id];
+      delete newState[action.savedPinId];
       return newState;
 
     default:

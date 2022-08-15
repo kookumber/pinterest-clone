@@ -45,14 +45,12 @@ class SavedPinOptions extends React.Component {
         const dropMenu = () => {
 
             const saveStatus = (board) => {
-                // console.log("pinBoard", board)
-                console.log("pinBoards", pinBoards)
                 for (const pinBoard of pinBoards) {
                     if (pinBoard.board_id === board.id) {
                         return (
                             <div key={board.id} className="board-save-item-container" onClick={() => deleteSavedPin(pinBoard.id)}>
                                 <h3>{board.name}</h3>
-                                <button className="board-saved-button">Saved</button>
+                                <button className="black-button board-saved-button">Saved</button>
                             </div>
                         )
                     }
@@ -81,6 +79,14 @@ class SavedPinOptions extends React.Component {
                         currentUsersBoards.map((board) => saveStatus(board))
                         }
                     </div>
+                    <div className="board-create-option" onClick={ this.props.openBoardModal }>
+                        <div className="add-symbol">
+                            <span className="material-symbols-outlined">
+                                add
+                            </span>
+                        </div>
+                        <div>Create board</div>
+                    </div>
                 </div>
             )
         }
@@ -88,19 +94,18 @@ class SavedPinOptions extends React.Component {
         return (
             <div className="user-board-list-wrap">
                 <div className="save-options">
-                    <div className="board-select-box">
+                    <div className="board-select-box" onClick={this.showMenu}>
                         <div className="save-board" onClick={this.showMenu}>Boards</div>
                         <span className="material-symbols-outlined">expand_more</span>
                     </div>
                 </div>
                 {currentSavedBoard.filter(saved => saved.pin_id === pin.id).length > 0 ?
-                    <button className="board-saved-button">Saved</button> : 
+                    <button className="black-button board-saved-button">Saved</button> : 
                     <button className="red-button"
                         onClick={ () => createSavedPin({ pin_id: pin.id, board_id: currentUsersBoards[0].id }) }>
                             Save
                     </button>  
                 }
-                {console.log("menustate", this.state.showMenu)}
                 {this.state.showMenu ? dropMenu() : null }
             </div>
         )
