@@ -1,7 +1,9 @@
 import { connect } from "react-redux";
 import SavedPinOptions from "./savedPinOptions";
-import {createSavedPin, deleteSavedPin } from "../../actions/savedPinActions";
+import { createSavedPin, deleteSavedPin } from "../../actions/savedPinActions";
 import { fetchBoards } from "../../actions/boardActions";
+import { createBoard } from "../../actions/boardActions";
+import { openModal, closeModal } from "../../actions/modalActions";
 
 const mapStateToProps = state => {
     return ({
@@ -16,7 +18,9 @@ const mapDispatchToProps = dispatch => {
     return ({
         createSavedPin: savedPin => dispatch(createSavedPin(savedPin)),
         deleteSavedPin: savedPinId => dispatch(deleteSavedPin(savedPinId)),
-        fetchBoards: () => dispatch(fetchBoards())
+        fetchBoards: () => dispatch(fetchBoards()),
+        closeBoardModal: () => dispatch(closeModal()),
+        openBoardModal: () => dispatch(openModal('createBoard'))
     })
 }
 
