@@ -8,9 +8,14 @@ const boardReducer = (state = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_BOARD:
-            newState[action.payload.board.id] = action.payload.board
-            return newState;
-            
+            if (action.payload.board) {
+                newState[action.payload.board.id] = action.payload.board
+                return newState;
+            } else {
+                const boardArr = Object.values(action.payload.boards)
+                newState[boardArr[boardArr.length - 1].id] = boardArr[boardArr.length - 1]
+                return newState;
+            }
         case RECEIVE_BOARDS:
             return action.boards
         case RECEIVE_USER:

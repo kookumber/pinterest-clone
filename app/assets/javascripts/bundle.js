@@ -11208,8 +11208,8 @@ var BoardShow = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       this.props.fetchBoard(this.props.match.params.boardId); //     .then(() => {
       //         this.props.fetchUser(this.props.board.user_id)})
-      // this.props.fetchSavedPins()
-      // this.props.fetchPins()
+
+      this.props.fetchSavedPins(); // this.props.fetchPins()
     }
   }, {
     key: "componentDidUpdate",
@@ -11315,7 +11315,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchUser: function fetchUser() {
       return dispatch((0,_actions_userActions__WEBPACK_IMPORTED_MODULE_6__.fetchUser)());
     },
-    // fetchUsers: () => dispatch(fetchUsers()),
     fetchPins: function fetchPins() {
       return dispatch((0,_actions_pinActions__WEBPACK_IMPORTED_MODULE_4__.fetchPins)());
     },
@@ -13033,9 +13032,7 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
           savedPins = _this$props.savedPins,
           pin = _this$props.pin,
           createSavedPin = _this$props.createSavedPin,
-          deleteSavedPin = _this$props.deleteSavedPin; // console.log("my boards", boards)
-      // console.log("curUse", currentUser)
-      //Use the boards index and find boards where user_id matches current session id
+          deleteSavedPin = _this$props.deleteSavedPin; //Use the boards index and find boards where user_id matches current session id
 
       var currentUsersBoards = boards.filter(function (board) {
         return board.user_id === currentUser.id;
@@ -13043,7 +13040,6 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
       var pinBoards = savedPins.filter(function (savedPin) {
         return savedPin.pin_id === pin.id;
       });
-      console.log("filtered boards", currentUsersBoards);
       var boardIds = [];
       currentUsersBoards.map(function (board) {
         boardIds.push(board.id);
@@ -13106,7 +13102,7 @@ var SavedPinOptions = /*#__PURE__*/function (_React$Component) {
           className: "board-dropmenu-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Save to Board"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "board-save-items-wrap"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "All boards"), console.log(currentUsersBoards.length), currentUsersBoards.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "All boards"), currentUsersBoards.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "board-save-item"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "You don't have any boards")) : currentUsersBoards.map(function (board) {
           return saveStatus(board);
@@ -13805,7 +13801,6 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (prevProps.match.params.userId != this.props.match.params.userId) {
-        console.log("did this hit?");
         this.props.fetchUser(this.props.user.id);
         this.props.fetchSavedPins();
       }
@@ -13949,8 +13944,14 @@ var boardReducer = function boardReducer() {
 
   switch (action.type) {
     case _actions_boardActions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_BOARD:
-      newState[action.payload.board.id] = action.payload.board;
-      return newState;
+      if (action.payload.board) {
+        newState[action.payload.board.id] = action.payload.board;
+        return newState;
+      } else {
+        var boardArr = Object.values(action.payload.boards);
+        newState[boardArr[boardArr.length - 1].id] = boardArr[boardArr.length - 1];
+        return newState;
+      }
 
     case _actions_boardActions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_BOARDS:
       return action.boards;
@@ -14152,7 +14153,12 @@ var pinsReducer = function pinsReducer() {
       return newState;
 
     case _actions_boardActions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_BOARD:
-      return action.payload.pins;
+      // return action.payload.pins;
+      if (action.payload.pins) {
+        return action.payload.pins;
+      } else {
+        return state;
+      }
 
     case _actions_pinActions__WEBPACK_IMPORTED_MODULE_1__.REMOVE_PIN:
       delete newState[action.pin.id];

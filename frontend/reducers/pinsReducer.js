@@ -26,7 +26,12 @@ const pinsReducer = (state = {}, action) => {
             newState[action.payload.id] = action.payload;
             return newState;
         case RECEIVE_BOARD:
-            return action.payload.pins;
+            // return action.payload.pins;
+            if (action.payload.pins) {
+                return action.payload.pins
+            } else {
+                return state
+            }
         case REMOVE_PIN:
             delete newState[action.pin.id]
             return newState;

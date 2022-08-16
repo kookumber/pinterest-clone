@@ -27,12 +27,9 @@ class SavedPinOptions extends React.Component {
     render() {
 
         const { currentUser, boards, savedPins, pin, createSavedPin, deleteSavedPin } = this.props
-        // console.log("my boards", boards)
-        // console.log("curUse", currentUser)
         //Use the boards index and find boards where user_id matches current session id
         const currentUsersBoards = boards.filter(board => board.user_id === currentUser.id)
         const pinBoards = savedPins.filter(savedPin => savedPin.pin_id === pin.id)
-        console.log("filtered boards", currentUsersBoards)
         const boardIds = []
 
         currentUsersBoards.map(board => {
@@ -71,7 +68,6 @@ class SavedPinOptions extends React.Component {
                     <h3>Save to Board</h3>
                     <div className="board-save-items-wrap">
                         <span>All boards</span>
-                        {console.log(currentUsersBoards.length)}
                         {currentUsersBoards.length === 0 ? 
                         <div className="board-save-item">
                             <h3>You don't have any boards</h3>
