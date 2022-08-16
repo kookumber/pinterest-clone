@@ -6,7 +6,11 @@ class Api::PinsController < ApplicationController
 
     def show
         @pin = Pin.find_by(id: params[:id])
-        render :show
+        if @pin
+            render :show
+        else
+            render json: @pin.errors.full_messages, status: 401
+        end
     end
 
     def create

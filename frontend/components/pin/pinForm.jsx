@@ -49,7 +49,10 @@ class PinForm extends React.Component {
         }
 
         this.props.createPin(formData)
-            .then((res) => this.props.history.push(`/pins/${res.pin.id}`))
+            .then((res) => {
+                console.log("pin res", res)
+                this.props.history.push(`/pins/${res.payload.id}`)
+            })
     }
 
 
