@@ -11,7 +11,8 @@ import { openModal, closeModal } from "../../actions/modalActions";
 const mapStateToProps = (state, ownProps) => {
     return {
         board: state.entities.boards[ownProps.match.params.boardId],
-        pins: state.entities.pins
+        pins: state.entities.pins,
+        savedPins: state.entities.savedPins
     }
 }
 
