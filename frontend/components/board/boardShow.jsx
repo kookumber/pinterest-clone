@@ -6,17 +6,12 @@ class BoardShow extends React.Component {
     }
 
     componentDidMount(){
-        this.props.fetchBoard(this.props.match.params.boardId)
-        //     .then(() => {
-        //         this.props.fetchUser(this.props.board.user_id)})
-        
-            this.props.fetchSavedPins()
-            // this.props.fetchPins()
+        this.props.fetchBoard(this.props.match.params.boardId) 
+        this.props.fetchSavedPins()
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.boardId != this.props.match.params.boardId) {
-            // debugger
             this.props.fetchBoard(this.props.match.params.boardId)
             this.props.fetchSavedPins()
         }
@@ -32,8 +27,6 @@ class BoardShow extends React.Component {
             let pinId = savedPin.pin_id
             boardsPins.push(pins[pinId])
         }
-
-        // let boardsPins = Object.values(pins)
 
         return (
             <div className="board-show-container">

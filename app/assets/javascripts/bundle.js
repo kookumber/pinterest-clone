@@ -11212,16 +11212,13 @@ var BoardShow = /*#__PURE__*/function (_React$Component) {
   _createClass(BoardShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchBoard(this.props.match.params.boardId); //     .then(() => {
-      //         this.props.fetchUser(this.props.board.user_id)})
-
-      this.props.fetchSavedPins(); // this.props.fetchPins()
+      this.props.fetchBoard(this.props.match.params.boardId);
+      this.props.fetchSavedPins();
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (prevProps.match.params.boardId != this.props.match.params.boardId) {
-        // debugger
         this.props.fetchBoard(this.props.match.params.boardId);
         this.props.fetchSavedPins();
       }
@@ -11247,8 +11244,7 @@ var BoardShow = /*#__PURE__*/function (_React$Component) {
           var savedPin = _step.value;
           var pinId = savedPin.pin_id;
           boardsPins.push(pins[pinId]);
-        } // let boardsPins = Object.values(pins)
-
+        }
       } catch (err) {
         _iterator.e(err);
       } finally {
@@ -12375,7 +12371,9 @@ var PinForm = /*#__PURE__*/function (_React$Component) {
       }
 
       this.props.createPin(formData).then(function (res) {
-        return _this4.props.history.push("/pins/".concat(res.pin.id));
+        console.log("pin res", res);
+
+        _this4.props.history.push("/pins/".concat(res.payload.id));
       });
     }
   }, {
