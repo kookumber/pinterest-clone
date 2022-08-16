@@ -18,7 +18,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchUser: () => dispatch(fetchUser()),
-        // fetchUsers: () => dispatch(fetchUsers()),
         fetchPins: () => dispatch(fetchPins()),
         fetchSavedPins: () => dispatch(fetchSavedPins()),
         fetchBoard: (boardId) => dispatch(fetchBoard(boardId)),
@@ -30,7 +29,6 @@ const mapDispatchToProps = (dispatch) => {
                         more_horiz
                     </span>
                 </div>
-                {/* Edit Board */}
             </button>
         )
     }

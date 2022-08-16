@@ -3,10 +3,6 @@ class Api::BoardsController < ApplicationController
     def index
         # @boards = Board.all
 
-        # @boards.each do |board|
-        #     board.saved_pins_on_board = board.featured_pins
-        # end
-
         if params[:user_id]
             @boards = Board.where(user_id: params[:user_id])
         else
@@ -16,8 +12,10 @@ class Api::BoardsController < ApplicationController
 
     def create
         @board = Board.new(board_params)
-        # @user = User.find_by(id: params[:id])
-
+        @boards = Board.all
+        @board_pins = @board.pins
+        @user = @board.user
+        
         if @board.save 
             # render :show
             render "/api/users/show"
@@ -51,6 +49,7 @@ class Api::BoardsController < ApplicationController
 
     def destroy
         @board = Board.find_by(id: params[:id])
+        @boards = Board.all
         if @board && @board.destroy
             render :index
         else

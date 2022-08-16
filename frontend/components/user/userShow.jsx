@@ -16,7 +16,6 @@ class UserShow extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.userId != this.props.match.params.userId) {
-            console.log("did this hit?")
             this.props.fetchUser(this.props.user.id)
             this.props.fetchSavedPins()
         }

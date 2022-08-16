@@ -10,8 +10,8 @@ class BoardShow extends React.Component {
         //     .then(() => {
         //         this.props.fetchUser(this.props.board.user_id)})
         
-        // this.props.fetchSavedPins()
-        // this.props.fetchPins()
+            this.props.fetchSavedPins()
+            // this.props.fetchPins()
     }
 
     componentDidUpdate(prevProps) {
