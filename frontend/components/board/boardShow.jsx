@@ -18,19 +18,22 @@ class BoardShow extends React.Component {
         if (prevProps.match.params.boardId != this.props.match.params.boardId) {
             // debugger
             this.props.fetchBoard(this.props.match.params.boardId)
+            this.props.fetchSavedPins()
         }
     }
 
-    componentWillUnmount() {
-        
-    }
-
-
     render () {
-        const {board, pins} = this.props
-        if ( !board || !pins) return null;
+        const {board, pins, savedPins} = this.props
+        if ( !board || !pins || !savedPins) return null;
+        const boardSavedPins = Object.values(savedPins).filter(savedPin => savedPin.board_id === board.id)
+        let boardsPins = []
+        
+        for(const savedPin of boardSavedPins) {
+            let pinId = savedPin.pin_id
+            boardsPins.push(pins[pinId])
+        }
 
-        let boardsPins = Object.values(pins)
+        // let boardsPins = Object.values(pins)
 
         return (
             <div className="board-show-container">
