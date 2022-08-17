@@ -43,7 +43,7 @@
 
 
 .inspiration-links-container {
-    width: 200px;
+    width: 180px;
     @include center('row', 'space-between');
     margin-right: 15px;
 }
@@ -55,7 +55,7 @@
     cursor: pointer;
     
     &:hover {
-        text-decoration: underline;
+        font-weight: bold;
     }
     
 }
