@@ -11795,8 +11795,6 @@ var NavLinks = function NavLinks(_ref) {
       to: "/"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Home"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "inspiration-link"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Today")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "inspiration-link"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
       to: "/pins/create"
     }, "Create"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -12371,8 +12369,6 @@ var PinForm = /*#__PURE__*/function (_React$Component) {
       }
 
       this.props.createPin(formData).then(function (res) {
-        console.log("pin res", res);
-
         _this4.props.history.push("/pins/".concat(res.payload.id));
       });
     }
@@ -12547,6 +12543,7 @@ var PinIndex = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchPins();
+      this.props.fetchSavedPins();
     }
   }, {
     key: "render",
@@ -12587,7 +12584,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _pinIndexItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pinIndexItem */ "./frontend/components/pin/pinIndexItem.jsx");
 /* harmony import */ var _actions_pinActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/pinActions */ "./frontend/actions/pinActions.js");
-/* harmony import */ var _pinIndex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pinIndex */ "./frontend/components/pin/pinIndex.jsx");
+/* harmony import */ var _actions_savedPinActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/savedPinActions */ "./frontend/actions/savedPinActions.js");
+/* harmony import */ var _pinIndex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pinIndex */ "./frontend/components/pin/pinIndex.jsx");
+
 
 
 
@@ -12605,11 +12604,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchPins: function fetchPins() {
       return dispatch((0,_actions_pinActions__WEBPACK_IMPORTED_MODULE_3__.fetchPins)());
+    },
+    fetchSavedPins: function fetchSavedPins() {
+      return dispatch((0,_actions_savedPinActions__WEBPACK_IMPORTED_MODULE_4__.fetchSavedPins)());
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_pinIndex__WEBPACK_IMPORTED_MODULE_4__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_pinIndex__WEBPACK_IMPORTED_MODULE_5__["default"]));
 
 /***/ }),
 
@@ -12626,7 +12628,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _savedPin_savedPinOptionsContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../savedPin/savedPinOptionsContainer */ "./frontend/components/savedPin/savedPinOptionsContainer.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12652,6 +12655,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var PinIndexItem = /*#__PURE__*/function (_React$Component) {
   _inherits(PinIndexItem, _React$Component);
 
@@ -12670,12 +12674,15 @@ var PinIndexItem = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-wrapper"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "pin-image"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        className: "pin-hover-to-save"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_savedPin_savedPinOptionsContainer__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        pin: this.props.pin
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/pins/".concat(pin.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        className: "pin-item-img",
         src: this.props.pin.imageUrl
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-title"
       }, this.props.pin.title));
     }

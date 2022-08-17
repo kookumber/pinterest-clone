@@ -8,6 +8,7 @@
 
 .home-feed {
     height: 100%;
+    width: 100%;
     margin-top: 85px;
     padding-bottom: 24px;
     height: auto;
@@ -18,55 +19,97 @@
     height: 100%;
     width: 93%;
     box-sizing: border-box;
-    display: flex;
-    justify-content: space-evenly;
-    flex-flow: row wrap;
-    align-content: center;
-    overflow: hidden;
-    // grid-template-rows: masonry;
-    // flex-flow: column wrap;
-    // align-content: space-between;
-    // grid-template-rows: masonry;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, 250px);
+    grid-auto-rows: 10px;
+
 }
 
 .pin-wrapper {
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 20px;
-    width: 236px;
-    max-width: 252px;
-    max-height: 418px;
-    border: none;
-    padding: 3px;
-    
+    width: 230px;
+    background-color: transparent;
+    border-radius: 18px;
+    box-sizing: border-box;
+    align-items: center;
+    cursor: zoom-in;
+    margin-bottom: 50px;
 
-    & img {
-        max-height: 376px;
-        height: 95%;
-        width: 100%;
-        border-radius: 16px;
+    &:hover .pin-hover-to-save {
+        z-index: 99;
+        opacity: 1;
+    }
+
+    &:hover .pin-item-img {
+        z-index: -1;
+        filter: brightness(60%)
+    }
+
+    &:nth-child(n+2) {
+        grid-row-end: span 20;
+    }
+
+    &:nth-child(2n) {
+        grid-row-end: span 25;
+    }
+
+    &:nth-child(3n+1) {
+        grid-row-end: span 33;
+    }
+
+    &:nth-child(3n+3) {
+        grid-row-end: span 38;
+    }
+
+    &:nth-child(4n) {
+        grid-row-end: span 42;
     }
 
     & .pin-title {
-        margin-top: 8px;
-        font-weight: bold;
+        margin-top: -20px;
+        font-size: 15px;
+        font-weight: 600;
     }
+
 }
 
-// .pin-wrapper:nth-child(3n+1) {
-//     order: 1;
-// }
-// .pin-wrapper:nth-child(3n+2) {
-//     order: 2;
-// }
-// .pin-wrapper:nth-child(3n) {
-//     order: 3;
-// }
+.pin-item-img {
+    z-index: -1;
+    width: 230px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+    box-sizing: border-box;
+    align-items: center;
+    cursor: zoom-in;
+    margin-bottom: 25px;
+}
 
-// .pins-grid-container::before, 
-// .pins-grid-container::after {
-//     content: "";
-//     flex-basis: 100%;
-//     width: 0;
-//     order: 2;
-// }
+.pin-hover-to-save {
+    position: absolute;
+    opacity: 0;
+    width: 200px;
+    padding: 15px;
+    color: white;
+
+    & .user-board-list-wrap {
+        width: 100%;
+        @include center(row, space-between);
+
+        & .save-options {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 40px;
+
+            & .board-select-box {
+                margin-left: 20px;
+                width: 40px;
+            }
+
+            & .save-board, span {
+                color: white;
+            }
+        }
+    }
+}

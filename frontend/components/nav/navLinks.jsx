@@ -46,9 +46,9 @@ const NavLinks = ({ currentUser, logout, openModal }) => {
                     <div className="inspiration-link">
                         <Link to="/"><div>Home</div></Link>
                     </div>
-                    <div className="inspiration-link">
+                    {/* <div className="inspiration-link">
                         <span>Today</span>
-                    </div>
+                    </div> */}
                     <div className="inspiration-link">
                         <Link to="/pins/create">Create</Link>
                     </div>

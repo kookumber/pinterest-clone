@@ -9,6 +9,7 @@ class PinIndex extends React.Component {
 
     componentDidMount() {
         this.props.fetchPins()
+        this.props.fetchSavedPins()
     }
 
     render() {
