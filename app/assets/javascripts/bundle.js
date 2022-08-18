@@ -14708,7 +14708,7 @@ var createFollow = function createFollow(follow) {
 };
 var deleteFollow = function deleteFollow(followId) {
   return $.ajax({
-    url: "/api/follows/".concat(followId),
+    url: "/api/follows/".concat(followId.id),
     method: 'DELETE'
   });
 };
