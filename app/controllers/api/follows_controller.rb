@@ -8,7 +8,7 @@ class Api::FollowsController < ApplicationController
     def create
         @follow = Follow.new(follow_params)
 
-        if @follow.save!
+        if @follow.save
             render :show
         else
             render json: @follow.errors.full_messages
@@ -25,6 +25,8 @@ class Api::FollowsController < ApplicationController
             render json: ['No existing follow to destroy']
         end
     end
+
+    private
 
     def follow_params
         params.require(:follow).permit(:user_id, :following_id)
