@@ -3,6 +3,7 @@ import { fetchPin, deletePin } from "../../actions/pinActions";
 import { fetchSavedPins, deleteSavedPin } from "../../actions/savedPinActions";
 import { fetchUser, fetchUsers } from "../../actions/userActions";
 import { openModal } from "../../actions/modalActions";
+import { fetchBoards } from "../../actions/boardActions";
 import PinShow from "./pinShow";
 
 const mapStateToProps = (state, ownProps) => {
@@ -22,6 +23,7 @@ const mapDispatchToProps = dispatch => {
         fetchUser: (userId) => dispatch(fetchUser(userId)),
         openPinEditModal: () => dispatch(openModal('editPin')),
         openPinDeleteModal: () => dispatch(openModal('deletePin')),
+        fetchBoards: () => dispatch(fetchBoards()),
         deletePin: (pin) => dispatch(deletePin(pin)),
         fetchSavedPins: () => dispatch(fetchSavedPins()),
         deleteSavedPin: (savedPinId) => dispatch(deleteSavedPin(savedPinId))
