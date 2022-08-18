@@ -61,25 +61,28 @@ const NavLinks = ({ currentUser, logout, openModal }) => {
 
                 <div className="user-links">
                     <div className="notifications">
-                        <svg className="user-icons">
-                            <NotificationsIcon />
-                        </svg>
+                        <a href="https://github.com/kookumber" target="_blank">
+                            <i className="fa fa-github"></i>
+                        </a>
                     </div>
                     <div className="messages">
-                        <svg className="user-icons">
-                            <MessageRoundedIcon />
-                        </svg>
+                        <a href="https://www.linkedin.com/in/quang-tran-2926a78b/" target="_blank">
+                            <i className="fa fa-linkedin-square"></i>
+                        </a>
                     </div>
                     <div className="profile">
                         <svg className="user-icons">
                             <Link to={`/users/${currentUser.id}`}><PersonRoundedIcon /></Link>
                         </svg>
                     </div>
-                    <button className="logout-button" onClick={logout}>
-                        <svg className="user-icons">
-                            <LogoutRoundedIcon />
-                        </svg>
-                    </button>
+                    
+                    <Link to="/">
+                        <button className="logout-button" onClick={logout}>
+                            <svg className="user-icons">
+                                <LogoutRoundedIcon />
+                            </svg>
+                        </button>
+                    </Link>
                 </div>
 
             </nav>

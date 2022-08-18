@@ -10,9 +10,9 @@ class SavedPinOptions extends React.Component {
         this.closeMenu = this.closeMenu.bind(this)
     }
 
-    componentDidMount() {
-        this.props.fetchBoards()
-    }
+    // componentDidMount() {
+    //     this.props.fetchBoards()
+    // }
 
     showMenu(e) {
         e.preventDefault()
