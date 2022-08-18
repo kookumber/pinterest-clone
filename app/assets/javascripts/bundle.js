@@ -12859,6 +12859,8 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
         _this2.props.fetchUser(_this2.props.pin.user_id);
       }).then(function () {
         _this2.props.fetchSavedPins();
+      }).then(function () {
+        _this2.props.fetchBoards();
       });
     }
   }, {
@@ -12871,6 +12873,8 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
           _this3.props.fetchUser(_this3.props.pin.user_id);
         }).then(function () {
           _this3.props.fetchSavedPins();
+        }).then(function () {
+          _this3.props.fetchBoards();
         });
       }
     }
@@ -12988,7 +12992,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_savedPinActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/savedPinActions */ "./frontend/actions/savedPinActions.js");
 /* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/userActions */ "./frontend/actions/userActions.js");
 /* harmony import */ var _actions_modalActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modalActions */ "./frontend/actions/modalActions.js");
-/* harmony import */ var _pinShow__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pinShow */ "./frontend/components/pin/pinShow.jsx");
+/* harmony import */ var _actions_boardActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/boardActions */ "./frontend/actions/boardActions.js");
+/* harmony import */ var _pinShow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pinShow */ "./frontend/components/pin/pinShow.jsx");
+
 
 
 
@@ -13020,6 +13026,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     openPinDeleteModal: function openPinDeleteModal() {
       return dispatch((0,_actions_modalActions__WEBPACK_IMPORTED_MODULE_4__.openModal)('deletePin'));
     },
+    fetchBoards: function fetchBoards() {
+      return dispatch((0,_actions_boardActions__WEBPACK_IMPORTED_MODULE_5__.fetchBoards)());
+    },
     deletePin: function deletePin(pin) {
       return dispatch((0,_actions_pinActions__WEBPACK_IMPORTED_MODULE_1__.deletePin)(pin));
     },
@@ -13032,7 +13041,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_pinShow__WEBPACK_IMPORTED_MODULE_5__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_pinShow__WEBPACK_IMPORTED_MODULE_6__["default"]));
 
 /***/ }),
 

@@ -11,17 +11,15 @@ class PinShow extends React.Component {
         this.props.fetchPin(this.props.match.params.pinId)
             .then(() => { this.props.fetchUser(this.props.pin.user_id) })
                 .then(() => { this.props.fetchSavedPins() })
+                    .then(() => { this.props.fetchBoards() } )
     }
 
     componentDidUpdate(prevProps) {
         if(prevProps.match.params.pinId != this.props.match.params.pinId) {
             this.props.fetchPin(this.props.match.params.pinId)
-                .then(() => {
-                    this.props.fetchUser(this.props.pin.user_id)
-                })
-                .then(() => {
-                    this.props.fetchSavedPins()
-                })
+                .then(() => { this.props.fetchUser(this.props.pin.user_id) })
+                .then(() => { this.props.fetchSavedPins()} )
+                .then(() => { this.props.fetchBoards() })
         }
     }
 
