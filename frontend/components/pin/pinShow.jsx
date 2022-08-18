@@ -12,14 +12,16 @@ class PinShow extends React.Component {
             .then(() => { this.props.fetchUser(this.props.pin.user_id) })
                 .then(() => { this.props.fetchSavedPins() })
                     .then(() => { this.props.fetchBoards() } )
+                        .then(() => { this.props.fetchFollows() })
     }
 
     componentDidUpdate(prevProps) {
         if(prevProps.match.params.pinId != this.props.match.params.pinId) {
             this.props.fetchPin(this.props.match.params.pinId)
                 .then(() => { this.props.fetchUser(this.props.pin.user_id) })
-                .then(() => { this.props.fetchSavedPins()} )
+                .then(() => { this.props.fetchSavedPins() })
                 .then(() => { this.props.fetchBoards() })
+                .then(() => { this.props.fetchFollows() })
         }
     }
 
@@ -39,15 +41,25 @@ class PinShow extends React.Component {
 
 
     render(){
-        const { pin, users, session, currentUser, savedPins } = this.props;
+        const { pin, users, session, currentUser, savedPins, follows, createFollow, deleteFollow } = this.props;
 
         //If statement here to make sure we have a pin/users we can key into because render will happen before componentDidMount
-        if (pin === undefined || users === undefined) return null;
+        if (pin === undefined || users === undefined || follows === undefined) return null;
 
         const pinsUser = users[pin.user_id] //Get the user of the pin so we can display their data on show
-        const followButton = () => (
-            <button className="follow-button">Follow</button>
-        )
+        const followers = Object.values(follows).filter(follow => follow.following_id === pin.user_id)
+        const followersCount = followers.length
+        const followStatus = Object.values(follows).filter(follow => follow.user_id === currentUser.id && follow.following_id === pin.user_id )
+
+        const followButton = () => {
+            console.log("status", followStatus)
+            return(
+            followStatus.length === 0 ?
+                <button className="follow-button" onClick={() => createFollow({ follow: { user_id: currentUser.id, following_id: pin.user_id } }) }>Follow</button>
+                :
+                <button className="follow-button" onClick={() => deleteFollow(followStatus[0])}>Unfollow</button>
+            )
+        }
 
         const savedPinsArr = Object.values(savedPins).filter(savedPin => savedPin.pin_id === pin.id)
 
@@ -90,7 +102,7 @@ class PinShow extends React.Component {
                                 </div>
                                 <div className="pin-user-info">
                                     <div>{pinsUser ? pinsUser.username : null}</div>
-                                    <div># of followers</div>
+                                    <div>{followersCount} followers</div>
                                 </div>
                             </div>
                             <div>

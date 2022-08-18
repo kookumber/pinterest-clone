@@ -4,6 +4,7 @@ import { fetchSavedPins, deleteSavedPin } from "../../actions/savedPinActions";
 import { fetchUser, fetchUsers } from "../../actions/userActions";
 import { openModal } from "../../actions/modalActions";
 import { fetchBoards } from "../../actions/boardActions";
+import { fetchFollows, createFollow, deleteFollow } from "../../actions/followActions";
 import PinShow from "./pinShow";
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,7 +14,8 @@ const mapStateToProps = (state, ownProps) => {
         users: state.entities.users,
         session: state.session,
         currentUser: state.entities.users[state.session.id],
-        savedPins: state.entities.savedPins
+        savedPins: state.entities.savedPins,
+        follows: state.entities.follows
     }
 }
 
@@ -26,7 +28,10 @@ const mapDispatchToProps = dispatch => {
         fetchBoards: () => dispatch(fetchBoards()),
         deletePin: (pin) => dispatch(deletePin(pin)),
         fetchSavedPins: () => dispatch(fetchSavedPins()),
-        deleteSavedPin: (savedPinId) => dispatch(deleteSavedPin(savedPinId))
+        deleteSavedPin: (savedPinId) => dispatch(deleteSavedPin(savedPinId)),
+        fetchFollows: () => dispatch(fetchFollows()),
+        createFollow: (follow) => dispatch(createFollow(follow)),
+        deleteFollow: (followId) => dispatch(deleteFollow(followId))
     }
 }
 

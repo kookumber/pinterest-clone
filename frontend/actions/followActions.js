@@ -1,7 +1,7 @@
 import * as followApiUtil from "../util/followApiUtil";
 
 export const RECEIVE_FOLLOWS = 'RECEIVE_FOLLOWS'
-export const RECEIVE_FOLLOW = 'RECEIEE_FOLLOW'
+export const RECEIVE_FOLLOW = 'RECEIEVE_FOLLOW'
 export const REMOVE_FOLLOW = 'REMOVE_FOLLOW'
 
 export const receiveFollows = (follows) => ({
@@ -36,5 +36,5 @@ export const createFollow = (follow) => dispatch => {
 
 export const deleteFollow = (followId) => dispatch => {
     return followApiUtil.deleteFollow(followId)
-        .then(follow => dispatch(removeFollow(follow)))
+        .then(() => dispatch(removeFollow(followId)))
 }    

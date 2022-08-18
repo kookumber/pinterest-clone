@@ -10037,7 +10037,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_followApiUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/followApiUtil */ "./frontend/util/followApiUtil.js");
 
 var RECEIVE_FOLLOWS = 'RECEIVE_FOLLOWS';
-var RECEIVE_FOLLOW = 'RECEIEE_FOLLOW';
+var RECEIVE_FOLLOW = 'RECEIEVE_FOLLOW';
 var REMOVE_FOLLOW = 'REMOVE_FOLLOW';
 var receiveFollows = function receiveFollows(follows) {
   return {
@@ -10080,8 +10080,8 @@ var createFollow = function createFollow(follow) {
 };
 var deleteFollow = function deleteFollow(followId) {
   return function (dispatch) {
-    return _util_followApiUtil__WEBPACK_IMPORTED_MODULE_0__.deleteFollow(followId).then(function (follow) {
-      return dispatch(removeFollow(follow));
+    return _util_followApiUtil__WEBPACK_IMPORTED_MODULE_0__.deleteFollow(followId).then(function () {
+      return dispatch(removeFollow(followId));
     });
   };
 };
@@ -12861,6 +12861,8 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
         _this2.props.fetchSavedPins();
       }).then(function () {
         _this2.props.fetchBoards();
+      }).then(function () {
+        _this2.props.fetchFollows();
       });
     }
   }, {
@@ -12875,6 +12877,8 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
           _this3.props.fetchSavedPins();
         }).then(function () {
           _this3.props.fetchBoards();
+        }).then(function () {
+          _this3.props.fetchFollows();
         });
       }
     }
@@ -12902,15 +12906,40 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
           users = _this$props.users,
           session = _this$props.session,
           currentUser = _this$props.currentUser,
-          savedPins = _this$props.savedPins; //If statement here to make sure we have a pin/users we can key into because render will happen before componentDidMount
+          savedPins = _this$props.savedPins,
+          follows = _this$props.follows,
+          createFollow = _this$props.createFollow,
+          deleteFollow = _this$props.deleteFollow; //If statement here to make sure we have a pin/users we can key into because render will happen before componentDidMount
 
-      if (pin === undefined || users === undefined) return null;
+      if (pin === undefined || users === undefined || follows === undefined) return null;
       var pinsUser = users[pin.user_id]; //Get the user of the pin so we can display their data on show
 
+      var followers = Object.values(follows).filter(function (follow) {
+        return follow.following_id === pin.user_id;
+      });
+      var followersCount = followers.length;
+      var followStatus = Object.values(follows).filter(function (follow) {
+        return follow.user_id === currentUser.id && follow.following_id === pin.user_id;
+      });
+
       var followButton = function followButton() {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-          className: "follow-button"
-        }, "Follow");
+        console.log("status", followStatus);
+        return followStatus.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+          className: "follow-button",
+          onClick: function onClick() {
+            return createFollow({
+              follow: {
+                user_id: currentUser.id,
+                following_id: pin.user_id
+              }
+            });
+          }
+        }, "Follow") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+          className: "follow-button",
+          onClick: function onClick() {
+            return deleteFollow(followStatus[0]);
+          }
+        }, "Unfollow");
       };
 
       var savedPinsArr = Object.values(savedPins).filter(function (savedPin) {
@@ -12965,7 +12994,7 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
         className: "pin-user-icon"
       }, pinsUser ? pinsUser.username[0].toUpperCase() : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-user-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, pinsUser ? pinsUser.username : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "# of followers"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, pin.user_id === currentUser.id ? null : followButton())))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, pinsUser ? pinsUser.username : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, followersCount, " followers"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, pin.user_id === currentUser.id ? null : followButton())))));
     }
   }]);
 
@@ -12993,7 +13022,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/userActions */ "./frontend/actions/userActions.js");
 /* harmony import */ var _actions_modalActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modalActions */ "./frontend/actions/modalActions.js");
 /* harmony import */ var _actions_boardActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/boardActions */ "./frontend/actions/boardActions.js");
-/* harmony import */ var _pinShow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pinShow */ "./frontend/components/pin/pinShow.jsx");
+/* harmony import */ var _actions_followActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/followActions */ "./frontend/actions/followActions.js");
+/* harmony import */ var _pinShow__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pinShow */ "./frontend/components/pin/pinShow.jsx");
+
 
 
 
@@ -13008,7 +13039,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     users: state.entities.users,
     session: state.session,
     currentUser: state.entities.users[state.session.id],
-    savedPins: state.entities.savedPins
+    savedPins: state.entities.savedPins,
+    follows: state.entities.follows
   };
 };
 
@@ -13037,11 +13069,20 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     deleteSavedPin: function deleteSavedPin(savedPinId) {
       return dispatch((0,_actions_savedPinActions__WEBPACK_IMPORTED_MODULE_2__.deleteSavedPin)(savedPinId));
+    },
+    fetchFollows: function fetchFollows() {
+      return dispatch((0,_actions_followActions__WEBPACK_IMPORTED_MODULE_6__.fetchFollows)());
+    },
+    createFollow: function createFollow(follow) {
+      return dispatch((0,_actions_followActions__WEBPACK_IMPORTED_MODULE_6__.createFollow)(follow));
+    },
+    deleteFollow: function deleteFollow(followId) {
+      return dispatch((0,_actions_followActions__WEBPACK_IMPORTED_MODULE_6__.deleteFollow)(followId));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_pinShow__WEBPACK_IMPORTED_MODULE_6__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_pinShow__WEBPACK_IMPORTED_MODULE_7__["default"]));
 
 /***/ }),
 
@@ -14206,7 +14247,7 @@ var followsReducer = function followsReducer() {
       return newState;
 
     case _actions_followActions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_FOLLOW:
-      delete newState[action.follow.id];
+      delete newState[action.followId.id];
       return newState;
 
     default:
