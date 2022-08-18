@@ -22,7 +22,7 @@ export const createFollow = (follow) => {
 
 export const deleteFollow = (followId) => {
     return $.ajax({
-        url: `/api/follows/${followId}`,
+        url: `/api/follows/${followId.id}`,
         method: 'DELETE'
     })
 }
