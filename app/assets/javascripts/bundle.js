@@ -10419,7 +10419,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _nav_navLinksContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nav/navLinksContainer */ "./frontend/components/nav/navLinksContainer.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
 /* harmony import */ var _util_routeUtil__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/routeUtil */ "./frontend/util/routeUtil.jsx");
 /* harmony import */ var _pin_pinFormContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pin/pinFormContainer */ "./frontend/components/pin/pinFormContainer.jsx");
@@ -10443,29 +10442,7 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "main-wrapper"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_nav_navLinksContainer__WEBPACK_IMPORTED_MODULE_1__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
-    exact: true,
-    path: "/",
-    component: _homePage_homePageContainer__WEBPACK_IMPORTED_MODULE_8__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_3__.ProtectedRoute, {
-    path: "/pins/create",
-    component: _pin_pinFormContainer__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_3__.ProtectedRoute, {
-    path: "/pins/search",
-    component: _searchScroll_searchIndexContainer__WEBPACK_IMPORTED_MODULE_9__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_3__.ProtectedRoute, {
-    exact: true,
-    path: "/pins/:pinId",
-    component: _pin_pinShowContainer__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_3__.ProtectedRoute, {
-    exact: true,
-    path: "/users/:userId",
-    component: _user_userShowContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_3__.ProtectedRoute, {
-    exact: true,
-    path: "/boards/:boardId",
-    component: _board_boardShowContainer__WEBPACK_IMPORTED_MODULE_7__["default"]
-  })));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_nav_navLinksContainer__WEBPACK_IMPORTED_MODULE_1__["default"], null));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -11628,7 +11605,10 @@ var HomePage = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_sessionForm_signupFormContainer__WEBPACK_IMPORTED_MODULE_3__["default"], null))));
       };
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pin_pinIndexContainer__WEBPACK_IMPORTED_MODULE_1__["default"], null) : splash());
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pin_pinIndexContainer__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        search: this.props.search,
+        filter: this.props.filter
+      }) : splash());
     }
   }]);
 
@@ -11806,10 +11786,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _mui_icons_material_LogoutRounded__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/icons-material/LogoutRounded */ "./node_modules/@mui/icons-material/LogoutRounded.js");
-/* harmony import */ var _mui_icons_material_SearchRounded__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/icons-material/SearchRounded */ "./node_modules/@mui/icons-material/SearchRounded.js");
-/* harmony import */ var _mui_icons_material_PersonRounded__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/icons-material/PersonRounded */ "./node_modules/@mui/icons-material/PersonRounded.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _mui_icons_material_LogoutRounded__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/icons-material/LogoutRounded */ "./node_modules/@mui/icons-material/LogoutRounded.js");
+/* harmony import */ var _mui_icons_material_SearchRounded__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/icons-material/SearchRounded */ "./node_modules/@mui/icons-material/SearchRounded.js");
+/* harmony import */ var _mui_icons_material_PersonRounded__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/icons-material/PersonRounded */ "./node_modules/@mui/icons-material/PersonRounded.js");
+/* harmony import */ var _util_routeUtil__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/routeUtil */ "./frontend/util/routeUtil.jsx");
+/* harmony import */ var _homePage_homePageContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../homePage/homePageContainer */ "./frontend/components/homePage/homePageContainer.js");
+/* harmony import */ var _pin_pinShowContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pin/pinShowContainer */ "./frontend/components/pin/pinShowContainer.js");
+/* harmony import */ var _pin_pinFormContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pin/pinFormContainer */ "./frontend/components/pin/pinFormContainer.jsx");
+/* harmony import */ var _board_boardShowContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../board/boardShowContainer */ "./frontend/components/board/boardShowContainer.js");
+/* harmony import */ var _user_userShowContainer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../user/userShowContainer */ "./frontend/components/user/userShowContainer.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
@@ -11818,113 +11828,216 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var NavLinks = function NavLinks(_ref) {
-  var currentUser = _ref.currentUser,
-      logout = _ref.logout,
-      openModal = _ref.openModal;
 
-  var sessionLinks = function sessionLinks() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "header"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
-      className: "logged-out-nav"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "app-logo-container"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      className: "app-logo-title",
-      href: "/"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-      className: "nav-logo",
-      src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png"
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Finterest"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "header-links"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "personal-links"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "https://www.linkedin.com/in/quang-tran-2926a78b/",
-      target: "_blank"
-    }, "Linkedin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "https://github.com/kookumber",
-      target: "_blank"
-    }, "Github"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Portfolio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "login-signup-buttons-container"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-      onClick: function onClick() {
-        return openModal('login');
-      },
-      className: "login-button"
-    }, "Log in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-      onClick: function onClick() {
-        return openModal('signup');
-      },
-      className: "signup-button"
-    }, "Sign up")))));
-  };
 
-  var loaded = function loaded() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "header"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
-      className: "logged-in-nav"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "inspiration-links-container"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "app-logo"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-      className: "nav-logo",
-      src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png"
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "inspiration-link"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-      to: "/"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Home"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "inspiration-link"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-      to: "/pins/create"
-    }, "Create"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "search-bar-container"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
-      className: "search-icon"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_SearchRounded__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      className: "search-bar",
-      type: "text",
-      placeholder: "Search"
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "user-links"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "notifications"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "https://github.com/kookumber",
-      target: "_blank"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
-      className: "fa fa-github"
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "messages"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "https://www.linkedin.com/in/quang-tran-2926a78b/",
-      target: "_blank"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
-      className: "fa fa-linkedin-square"
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "profile"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
-      className: "user-icons"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-      to: "/users/".concat(currentUser.id)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_PersonRounded__WEBPACK_IMPORTED_MODULE_3__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-      to: "/"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-      className: "logout-button",
-      onClick: logout
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
-      className: "user-icons"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_LogoutRounded__WEBPACK_IMPORTED_MODULE_4__["default"], null)))))));
-  };
 
-  return currentUser ? loaded() : sessionLinks();
-};
+
+
+
+
+
+var NavLinks = /*#__PURE__*/function (_React$Component) {
+  _inherits(NavLinks, _React$Component);
+
+  var _super = _createSuper(NavLinks);
+
+  function NavLinks(props) {
+    var _this;
+
+    _classCallCheck(this, NavLinks);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      searchText: "",
+      submittedSearchText: ""
+    };
+    _this.handleSubmittedSearch = _this.handleSubmittedSearch.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(NavLinks, [{
+    key: "handleSearch",
+    value: function handleSearch() {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState({
+          searchText: e.currentTarget.value
+        });
+      };
+    }
+  }, {
+    key: "handleSubmittedSearch",
+    value: function handleSubmittedSearch(e) {
+      var _this3 = this;
+
+      return function (e) {
+        e.keyCode === 13 ? _this3.setState({
+          submittedSearchText: _this3.state.searchText
+        }) : null;
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      var _this$props = this.props,
+          currentUser = _this$props.currentUser,
+          logout = _this$props.logout,
+          openModal = _this$props.openModal;
+
+      var sessionLinks = function sessionLinks() {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "header"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
+          className: "logged-out-nav"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "app-logo-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+          className: "app-logo-title",
+          href: "/"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+          className: "nav-logo",
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Finterest"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "header-links"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "personal-links"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+          href: "https://www.linkedin.com/in/quang-tran-2926a78b/",
+          target: "_blank"
+        }, "Linkedin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+          href: "https://github.com/kookumber",
+          target: "_blank"
+        }, "Github"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+          href: "#"
+        }, "Portfolio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "login-signup-buttons-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+          onClick: function onClick() {
+            return openModal('login');
+          },
+          className: "login-button"
+        }, "Log in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+          onClick: function onClick() {
+            return openModal('signup');
+          },
+          className: "signup-button"
+        }, "Sign up"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+          exact: true,
+          path: "/",
+          component: _homePage_homePageContainer__WEBPACK_IMPORTED_MODULE_2__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+          path: "/pins/create",
+          component: _pin_pinFormContainer__WEBPACK_IMPORTED_MODULE_4__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+          exact: true,
+          path: "/pins/:pinId",
+          component: _pin_pinShowContainer__WEBPACK_IMPORTED_MODULE_3__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+          exact: true,
+          path: "/users/:userId",
+          component: _user_userShowContainer__WEBPACK_IMPORTED_MODULE_6__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+          exact: true,
+          path: "/boards/:boardId",
+          component: _board_boardShowContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
+        })));
+      };
+
+      var loaded = function loaded() {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "header"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
+          className: "logged-in-nav"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "inspiration-links-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "app-logo"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+          className: "nav-logo",
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "inspiration-link"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
+          to: "/"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Home"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "inspiration-link"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
+          to: "/pins/create"
+        }, "Create"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "search-bar-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
+          className: "search-icon"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_SearchRounded__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+          className: "search-bar",
+          type: "text",
+          placeholder: "Search",
+          onChange: _this4.handleSearch(),
+          onKeyDown: _this4.handleSubmittedSearch()
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "user-links"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "notifications"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+          href: "https://github.com/kookumber",
+          target: "_blank"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
+          className: "fa fa-github"
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "messages"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+          href: "https://www.linkedin.com/in/quang-tran-2926a78b/",
+          target: "_blank"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
+          className: "fa fa-linkedin-square"
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "profile"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
+          className: "user-icons"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
+          to: "/users/".concat(currentUser.id)
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_PersonRounded__WEBPACK_IMPORTED_MODULE_10__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
+          to: "/"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+          className: "logout-button",
+          onClick: logout
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
+          className: "user-icons"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_LogoutRounded__WEBPACK_IMPORTED_MODULE_11__["default"], null))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+          exact: true,
+          path: "/",
+          render: function render(props) {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_homePage_homePageContainer__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, props, {
+              search: _this4.state.searchText,
+              filter: _this4.state.submittedSearchText
+            }));
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+          path: "/pins/create",
+          component: _pin_pinFormContainer__WEBPACK_IMPORTED_MODULE_4__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+          exact: true,
+          path: "/pins/:pinId",
+          component: _pin_pinShowContainer__WEBPACK_IMPORTED_MODULE_3__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+          exact: true,
+          path: "/users/:userId",
+          component: _user_userShowContainer__WEBPACK_IMPORTED_MODULE_6__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+          exact: true,
+          path: "/boards/:boardId",
+          component: _board_boardShowContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
+        })));
+      };
+
+      return currentUser ? loaded() : sessionLinks();
+    }
+  }]);
+
+  return NavLinks;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavLinks);
 
@@ -12628,9 +12741,17 @@ var PinIndex = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(PinIndex);
 
   function PinIndex(props) {
+    var _this;
+
     _classCallCheck(this, PinIndex);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      filter: "",
+      pins: []
+    };
+    _this.handleSearch = _this.handleSearch.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(PinIndex, [{
@@ -12639,15 +12760,47 @@ var PinIndex = /*#__PURE__*/function (_React$Component) {
       this.props.fetchPins();
       this.props.fetchSavedPins();
       this.props.fetchBoards();
+    } // componentDidUpdate(newState) {
+    //     newState.pins ? this.setState({ pins: newState.pins}) : null
+    // }
+
+  }, {
+    key: "handleSearch",
+    value: function handleSearch() {
+      var _this2 = this;
+
+      if (this.props.search === "") {
+        return this.props.pins;
+      } else {
+        console.log("my pins", Object.values(this.props.pins)[this.props.pins.length - 1].title);
+        return Object.values(this.props.pins).filter(function (pin) {
+          return pin.title.match(new RegExp(_this2.props.filter, "i")) || pin.description.match(new RegExp(_this2.props.filter, "i"));
+        });
+      }
     }
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
+      var _this$props = this.props,
+          pins = _this$props.pins,
+          currentUser = _this$props.currentUser,
+          boards = _this$props.boards,
+          filter = _this$props.filter;
+      if (pins === undefined || currentUser === undefined || boards === undefined) return null; // console.log("pin title 1", firstPin.title)
+      // console.log("search this", this.handleSearch())
+
+      var pinRecs = Object.values(pins).filter(function (pin) {
+        return pin.title.match(new RegExp(_this3.props.search, "i")) || pin.description.match(new RegExp(_this3.props.search, "i"));
+      } // pin.title === 'Jellyfish Waves'
+      ).slice(0, 10);
+      var searchedResults = this.handleSearch();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "home-feed"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pins-grid-container"
-      }, this.props.pins.map(function (pin) {
+      }, searchedResults.map(function (pin) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pinIndexItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
           pin: pin,
           key: pin.id
@@ -12923,7 +13076,6 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
       });
 
       var followButton = function followButton() {
-        console.log("status", followStatus);
         return followStatus.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
           className: "follow-button",
           onClick: function onClick() {
