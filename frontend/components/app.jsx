@@ -16,19 +16,17 @@ import SearchIndexContainer from "./searchScroll/searchIndexContainer";
 const App = () => (
     <div className="main-wrapper">
         <Modal />
-        <header>
-            <NavLinksContainer />
-        </header>
-
-        <Route exact path="/" component={HomePageContainer}/>
+        
+        <NavLinksContainer />
+        
+        {/* <Route exact path="/" component={HomePageContainer}/>
 
         <Switch>
             <ProtectedRoute path="/pins/create" component={PinFormContainer} />
-            <ProtectedRoute path="/pins/search" component={SearchIndexContainer}/>
             <ProtectedRoute exact path="/pins/:pinId" component={PinShowContainer} />
             <ProtectedRoute exact path="/users/:userId" component={UserShowContainer} />
             <ProtectedRoute exact path="/boards/:boardId" component={BoardShowContainer} />
-        </Switch>
+        </Switch> */}
         
         
     </div>

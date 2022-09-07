@@ -172,7 +172,7 @@ class HomePage extends React.Component {
 
         return (
             <div>
-                {this.props.currentUser ? <PinIndexContainer /> : splash()}
+                {this.props.currentUser ? <PinIndexContainer search={this.props.search} filter={this.props.filter}/> : splash()}
             </div>
         )
 

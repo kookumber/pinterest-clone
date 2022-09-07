@@ -52,7 +52,7 @@ class PinShow extends React.Component {
         const followStatus = Object.values(follows).filter(follow => follow.user_id === currentUser.id && follow.following_id === pin.user_id )
 
         const followButton = () => {
-            console.log("status", followStatus)
+            
             return(
             followStatus.length === 0 ?
                 <button className="follow-button" onClick={() => createFollow({ follow: { user_id: currentUser.id, following_id: pin.user_id } }) }>Follow</button>
