@@ -20,12 +20,13 @@ class NavLinks extends React.Component {
         super(props)
         this.state = {
             searchText: "",
-            submittedSearchText: "",
+            filter: "",
             searchResults: this.props.pins,
             displaySearch: false,
-            inputValue: ""
+            inputValue: "",
+            finalSearchText: ""
         }
-        this.handleSubmittedSearch = this.handleSubmittedSearch.bind(this)
+        this.handleKeyDown = this.handleKeyDown.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
         this.closeSearch = this.closeSearch.bind(this)
         this.handleResultClick = this.handleResultClick.bind(this)
@@ -36,8 +37,6 @@ class NavLinks extends React.Component {
         this.setState({ searchText: searchWord, inputValue: searchWord})
         const resultList = (this.props.pins).filter((pin) => 
             pin.title.match(new RegExp(searchWord, "i")) 
-            // ||
-            // pin.description.match(new RegExp(searchWord, "i"))
         )
         this.setState({ searchResults: resultList})
     }
@@ -48,20 +47,20 @@ class NavLinks extends React.Component {
         }
     }
 
-    handleSubmittedSearch(e) {
+    handleKeyDown(e) {
         return e => {
-            e.keyCode === 13 ? this.setState({ submittedSearchText: this.state.searchText, 
+            e.keyCode === 13 ? this.setState({ filter: this.state.searchText, 
                                             displaySearch: false, 
                                             inputValue: "" }) : null
         }
     }
 
     handleResultClick(result){
-        this.setState({ submittedSearchText: result })
+        this.setState({ filter: result, finalSearchText: this.state.searchText })
     }
 
     closeSearch(e) {
-        // e.stopPropagation();
+        e.stopPropagation();
         if(e.target.className !== "search-icon" && 
             e.target.className !== "search-bar") {
             this.setState({ displaySearch: false, 
@@ -151,7 +150,7 @@ class NavLinks extends React.Component {
                                     onFocus={this.handleSearch()}
                                     value={this.state.inputValue}
                                     onChange={e => this.handleUpdate(e)}
-                                    onKeyDown={this.handleSubmittedSearch()} />
+                                    onKeyDown={this.handleKeyDown()} />
                             </div>
 
                             {
@@ -205,7 +204,7 @@ class NavLinks extends React.Component {
                 </header>
 
                 
-                <Route exact path="/" render={(props) => <HomePageContainer {...props} search={this.state.searchText} filter={this.state.submittedSearchText}/>} />
+                <Route exact path="/" render={(props) => <HomePageContainer {...props} search={this.state.finalSearchText} filter={this.state.filter}/>} />
 
                 <Switch>
                     <ProtectedRoute path="/pins/create" component={PinFormContainer} />

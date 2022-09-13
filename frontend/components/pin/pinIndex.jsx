@@ -18,12 +18,9 @@ class PinIndex extends React.Component {
         this.props.fetchBoards()
     }
 
-    // componentDidUpdate(newState) {
-    //     newState.pins ? this.setState({ pins: newState.pins}) : null
-    // }
-
     handleSearch() {
-        if(this.props.search === "") {
+        console.log("from idx", this.props.filter)
+        if(this.props.filter === "") {
             return this.props.pins
         } else {
             return (
@@ -35,17 +32,9 @@ class PinIndex extends React.Component {
     }
 
     render() {
-        const { pins, currentUser, boards, filter } = this.props
+        const { pins, currentUser, boards } = this.props
         
         if (pins === undefined || currentUser === undefined || boards === undefined) return null
-        // console.log("pin title 1", firstPin.title)
-        // console.log("search this", this.handleSearch())
-
-        const pinRecs = Object.values(pins).filter(pin => 
-            (pin.title).match(new RegExp(this.props.search, "i")) || 
-            (pin.description).match(new RegExp(this.props.search, "i"))
-            // pin.title === 'Jellyfish Waves'
-        ).slice(0,10)
             
         const searchedResults = this.handleSearch()
         

@@ -11849,12 +11849,13 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       searchText: "",
-      submittedSearchText: "",
+      filter: "",
       searchResults: _this.props.pins,
       displaySearch: false,
-      inputValue: ""
+      inputValue: "",
+      finalSearchText: ""
     };
-    _this.handleSubmittedSearch = _this.handleSubmittedSearch.bind(_assertThisInitialized(_this));
+    _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_this));
     _this.handleUpdate = _this.handleUpdate.bind(_assertThisInitialized(_this));
     _this.closeSearch = _this.closeSearch.bind(_assertThisInitialized(_this));
     _this.handleResultClick = _this.handleResultClick.bind(_assertThisInitialized(_this));
@@ -11871,9 +11872,7 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
       });
       var resultList = this.props.pins.filter(function (pin) {
         return pin.title.match(new RegExp(searchWord, "i"));
-      } // ||
-      // pin.description.match(new RegExp(searchWord, "i"))
-      );
+      });
       this.setState({
         searchResults: resultList
       });
@@ -11890,13 +11889,13 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
-    key: "handleSubmittedSearch",
-    value: function handleSubmittedSearch(e) {
+    key: "handleKeyDown",
+    value: function handleKeyDown(e) {
       var _this3 = this;
 
       return function (e) {
         e.keyCode === 13 ? _this3.setState({
-          submittedSearchText: _this3.state.searchText,
+          filter: _this3.state.searchText,
           displaySearch: false,
           inputValue: ""
         }) : null;
@@ -11906,13 +11905,15 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
     key: "handleResultClick",
     value: function handleResultClick(result) {
       this.setState({
-        submittedSearchText: result
+        filter: result,
+        finalSearchText: this.state.searchText
       });
     }
   }, {
     key: "closeSearch",
     value: function closeSearch(e) {
-      // e.stopPropagation();
+      e.stopPropagation();
+
       if (e.target.className !== "search-icon" && e.target.className !== "search-bar") {
         this.setState({
           displaySearch: false,
@@ -12038,7 +12039,7 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
           onChange: function onChange(e) {
             return _this4.handleUpdate(e);
           },
-          onKeyDown: _this4.handleSubmittedSearch()
+          onKeyDown: _this4.handleKeyDown()
         })), _this4.state.displaySearch ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           id: "search-child",
           className: "search-component",
@@ -12085,8 +12086,8 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
           path: "/",
           render: function render(props) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_homePage_homePageContainer__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, props, {
-              search: _this4.state.searchText,
-              filter: _this4.state.submittedSearchText
+              search: _this4.state.finalSearchText,
+              filter: _this4.state.filter
             }));
           }
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
@@ -12838,16 +12839,15 @@ var PinIndex = /*#__PURE__*/function (_React$Component) {
       this.props.fetchPins();
       this.props.fetchSavedPins();
       this.props.fetchBoards();
-    } // componentDidUpdate(newState) {
-    //     newState.pins ? this.setState({ pins: newState.pins}) : null
-    // }
-
+    }
   }, {
     key: "handleSearch",
     value: function handleSearch() {
       var _this2 = this;
 
-      if (this.props.search === "") {
+      console.log("from idx", this.props.filter);
+
+      if (this.props.filter === "") {
         return this.props.pins;
       } else {
         return Object.values(this.props.pins).filter(function (pin) {
@@ -12858,20 +12858,11 @@ var PinIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
       var _this$props = this.props,
           pins = _this$props.pins,
           currentUser = _this$props.currentUser,
-          boards = _this$props.boards,
-          filter = _this$props.filter;
-      if (pins === undefined || currentUser === undefined || boards === undefined) return null; // console.log("pin title 1", firstPin.title)
-      // console.log("search this", this.handleSearch())
-
-      var pinRecs = Object.values(pins).filter(function (pin) {
-        return pin.title.match(new RegExp(_this3.props.search, "i")) || pin.description.match(new RegExp(_this3.props.search, "i"));
-      } // pin.title === 'Jellyfish Waves'
-      ).slice(0, 10);
+          boards = _this$props.boards;
+      if (pins === undefined || currentUser === undefined || boards === undefined) return null;
       var searchedResults = this.handleSearch();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "home-feed"
