@@ -20,27 +20,74 @@ class NavLinks extends React.Component {
         super(props)
         this.state = {
             searchText: "",
-            submittedSearchText: ""
+            submittedSearchText: "",
+            searchResults: this.props.pins,
+            displaySearch: false,
+            inputValue: ""
         }
         this.handleSubmittedSearch = this.handleSubmittedSearch.bind(this)
+        this.handleUpdate = this.handleUpdate.bind(this)
+        this.closeSearch = this.closeSearch.bind(this)
+        this.handleResultClick = this.handleResultClick.bind(this)
     }
 
-    handleSearch() {
-        return e => {
-            this.setState({ searchText: e.currentTarget.value })
+    handleUpdate(e) {
+        let searchWord = e.currentTarget.value
+        this.setState({ searchText: searchWord, inputValue: searchWord})
+        const resultList = (this.props.pins).filter((pin) => 
+            pin.title.match(new RegExp(searchWord, "i")) 
+            // ||
+            // pin.description.match(new RegExp(searchWord, "i"))
+        )
+        this.setState({ searchResults: resultList})
+    }
+
+    handleSearch(e) {
+        return e => { 
+            this.setState({ displaySearch: true })
         }
     }
 
     handleSubmittedSearch(e) {
         return e => {
-            e.keyCode === 13 ? this.setState({ submittedSearchText: this.state.searchText }) : null
+            e.keyCode === 13 ? this.setState({ submittedSearchText: this.state.searchText, 
+                                            displaySearch: false, 
+                                            inputValue: "" }) : null
         }
     }
 
+    handleResultClick(result){
+        this.setState({ submittedSearchText: result })
+    }
+
+    closeSearch(e) {
+        // e.stopPropagation();
+        if(e.target.className !== "search-icon" && 
+            e.target.className !== "search-bar") {
+            this.setState({ displaySearch: false, 
+                            searchResults: this.props.pins,
+                            inputValue: "" 
+            })
+        }
+    }
+
+
     render() {
 
-        const { currentUser, logout, openModal } = this.props
+        const { currentUser, logout, openModal, pins } = this.props
+        if (pins === undefined || this.state.searchResults === undefined) return null
 
+        const searchResults = 
+            this.state.searchResults.length > 0 ?
+                (this.state.searchResults.slice(0,15)).map((pin, idx) => {
+                return (
+                    <li key={idx} onClick={e => this.handleResultClick(pin.title.slice(pin.title.indexOf("-")+2))}>
+                        <svg className="search-icon"><SearchRoundedIcon /></svg>
+                        {pin.title}
+                    </li>
+                )}) :
+                <></>
+        
         const sessionLinks = () => (
             <>
                 <div className="header">
@@ -79,11 +126,10 @@ class NavLinks extends React.Component {
         );
 
         const loaded = () => {
-            
             return (
             <>
-                <div className="header">
-                    <nav className="logged-in-nav">
+                <header className="header">
+                    <nav className="logged-in-nav" onClick={this.closeSearch}>
                         <div className="inspiration-links-container">
                             <div className='app-logo'>
                                 <img className="nav-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png" />
@@ -91,21 +137,42 @@ class NavLinks extends React.Component {
                             <div className="inspiration-link">
                                 <Link to="/"><div>Home</div></Link>
                             </div>
-                            {/* <div className="inspiration-link">
-                            <span>Today</span>
-                        </div> */}
                             <div className="inspiration-link">
                                 <Link to="/pins/create">Create</Link>
                             </div>
                         </div>
 
                         <div className="search-bar-container">
-                            <svg className="search-icon"><SearchRoundedIcon /></svg>
-                            <input className="search-bar" 
-                                    type="text" 
-                                    placeholder="Search"
-                                    onChange={this.handleSearch()}
+                            <div className="main-search">
+                                <svg className="search-icon"><SearchRoundedIcon /></svg>
+                                <input className="search-bar"
+                                    type="text"
+                                    placeholder="Search Pins"
+                                    onFocus={this.handleSearch()}
+                                    value={this.state.inputValue}
+                                    onChange={e => this.handleUpdate(e)}
                                     onKeyDown={this.handleSubmittedSearch()} />
+                            </div>
+
+                            {
+                                this.state.displaySearch ? 
+                                    <div id="search-child" className="search-component" onClick={e => e.stopPropagation()}>
+                                        { searchResults.length > 0 ? 
+                                                <ul onClick={this.closeSearch}>
+                                                    <h3>Find results similar to...</h3>
+                                                    {searchResults}
+                                                </ul> :
+                                                <ul>
+                                                    <li>No result found</li>
+                                                </ul>
+
+                                        } 
+                                    </div> : <></>
+                            }
+                            {
+                                this.state.displaySearch ?
+                                    <div id="search-parent" className="modal-background" onClick={this.closeSearch}></div> : <></>
+                            }
                         </div>
 
                         <div className="user-links">
@@ -135,9 +202,9 @@ class NavLinks extends React.Component {
                         </div>
 
                     </nav>
-                </div>
+                </header>
 
-                {/* <Route exact path="/" component={HomePageContainer} /> */}
+                
                 <Route exact path="/" render={(props) => <HomePageContainer {...props} search={this.state.searchText} filter={this.state.submittedSearchText}/>} />
 
                 <Switch>

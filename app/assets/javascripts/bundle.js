@@ -11786,10 +11786,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _mui_icons_material_LogoutRounded__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/icons-material/LogoutRounded */ "./node_modules/@mui/icons-material/LogoutRounded.js");
-/* harmony import */ var _mui_icons_material_SearchRounded__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/icons-material/SearchRounded */ "./node_modules/@mui/icons-material/SearchRounded.js");
+/* harmony import */ var _mui_icons_material_SearchRounded__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/icons-material/SearchRounded */ "./node_modules/@mui/icons-material/SearchRounded.js");
 /* harmony import */ var _mui_icons_material_PersonRounded__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/icons-material/PersonRounded */ "./node_modules/@mui/icons-material/PersonRounded.js");
 /* harmony import */ var _util_routeUtil__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/routeUtil */ "./frontend/util/routeUtil.jsx");
 /* harmony import */ var _homePage_homePageContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../homePage/homePageContainer */ "./frontend/components/homePage/homePageContainer.js");
@@ -11849,20 +11849,43 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       searchText: "",
-      submittedSearchText: ""
+      submittedSearchText: "",
+      searchResults: _this.props.pins,
+      displaySearch: false,
+      inputValue: ""
     };
     _this.handleSubmittedSearch = _this.handleSubmittedSearch.bind(_assertThisInitialized(_this));
+    _this.handleUpdate = _this.handleUpdate.bind(_assertThisInitialized(_this));
+    _this.closeSearch = _this.closeSearch.bind(_assertThisInitialized(_this));
+    _this.handleResultClick = _this.handleResultClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(NavLinks, [{
+    key: "handleUpdate",
+    value: function handleUpdate(e) {
+      var searchWord = e.currentTarget.value;
+      this.setState({
+        searchText: searchWord,
+        inputValue: searchWord
+      });
+      var resultList = this.props.pins.filter(function (pin) {
+        return pin.title.match(new RegExp(searchWord, "i"));
+      } // ||
+      // pin.description.match(new RegExp(searchWord, "i"))
+      );
+      this.setState({
+        searchResults: resultList
+      });
+    }
+  }, {
     key: "handleSearch",
-    value: function handleSearch() {
+    value: function handleSearch(e) {
       var _this2 = this;
 
       return function (e) {
         _this2.setState({
-          searchText: e.currentTarget.value
+          displaySearch: true
         });
       };
     }
@@ -11873,9 +11896,30 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
 
       return function (e) {
         e.keyCode === 13 ? _this3.setState({
-          submittedSearchText: _this3.state.searchText
+          submittedSearchText: _this3.state.searchText,
+          displaySearch: false,
+          inputValue: ""
         }) : null;
       };
+    }
+  }, {
+    key: "handleResultClick",
+    value: function handleResultClick(result) {
+      this.setState({
+        submittedSearchText: result
+      });
+    }
+  }, {
+    key: "closeSearch",
+    value: function closeSearch(e) {
+      // e.stopPropagation();
+      if (e.target.className !== "search-icon" && e.target.className !== "search-bar") {
+        this.setState({
+          displaySearch: false,
+          searchResults: this.props.pins,
+          inputValue: ""
+        });
+      }
     }
   }, {
     key: "render",
@@ -11885,7 +11929,19 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           currentUser = _this$props.currentUser,
           logout = _this$props.logout,
-          openModal = _this$props.openModal;
+          openModal = _this$props.openModal,
+          pins = _this$props.pins;
+      if (pins === undefined || this.state.searchResults === undefined) return null;
+      var searchResults = this.state.searchResults.length > 0 ? this.state.searchResults.slice(0, 15).map(function (pin, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+          key: idx,
+          onClick: function onClick(e) {
+            return _this4.handleResultClick(pin.title.slice(pin.title.indexOf("-") + 2));
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
+          className: "search-icon"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_SearchRounded__WEBPACK_IMPORTED_MODULE_7__["default"], null)), pin.title);
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
 
       var sessionLinks = function sessionLinks() {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -11924,11 +11980,11 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
             return openModal('signup');
           },
           className: "signup-button"
-        }, "Sign up"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+        }, "Sign up"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
           exact: true,
           path: "/",
           component: _homePage_homePageContainer__WEBPACK_IMPORTED_MODULE_2__["default"]
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
           path: "/pins/create",
           component: _pin_pinFormContainer__WEBPACK_IMPORTED_MODULE_4__["default"]
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
@@ -11947,10 +12003,11 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
       };
 
       var loaded = function loaded() {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", {
           className: "header"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
-          className: "logged-in-nav"
+          className: "logged-in-nav",
+          onClick: _this4.closeSearch
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "inspiration-links-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -11960,23 +12017,41 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
           src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "inspiration-link"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
           to: "/"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Home"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "inspiration-link"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
           to: "/pins/create"
         }, "Create"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "search-bar-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "main-search"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
           className: "search-icon"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_SearchRounded__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_SearchRounded__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
           className: "search-bar",
           type: "text",
-          placeholder: "Search",
-          onChange: _this4.handleSearch(),
+          placeholder: "Search Pins",
+          onFocus: _this4.handleSearch(),
+          value: _this4.state.inputValue,
+          onChange: function onChange(e) {
+            return _this4.handleUpdate(e);
+          },
           onKeyDown: _this4.handleSubmittedSearch()
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        })), _this4.state.displaySearch ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          id: "search-child",
+          className: "search-component",
+          onClick: function onClick(e) {
+            return e.stopPropagation();
+          }
+        }, searchResults.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
+          onClick: _this4.closeSearch
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Find results similar to..."), searchResults) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "No result found"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null), _this4.state.displaySearch ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          id: "search-parent",
+          className: "modal-background",
+          onClick: _this4.closeSearch
+        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "user-links"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "notifications"
@@ -11996,16 +12071,16 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
           className: "profile"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
           className: "user-icons"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
           to: "/users/".concat(currentUser.id)
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_PersonRounded__WEBPACK_IMPORTED_MODULE_10__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_PersonRounded__WEBPACK_IMPORTED_MODULE_10__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
           to: "/"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
           className: "logout-button",
           onClick: logout
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
           className: "user-icons"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_LogoutRounded__WEBPACK_IMPORTED_MODULE_11__["default"], null))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_LogoutRounded__WEBPACK_IMPORTED_MODULE_11__["default"], null))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
           exact: true,
           path: "/",
           render: function render(props) {
@@ -12014,7 +12089,7 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
               filter: _this4.state.submittedSearchText
             }));
           }
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
           path: "/pins/create",
           component: _pin_pinFormContainer__WEBPACK_IMPORTED_MODULE_4__["default"]
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_routeUtil__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
@@ -12065,9 +12140,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(_ref) {
   var session = _ref.session,
-      users = _ref.entities.users;
+      _ref$entities = _ref.entities,
+      pins = _ref$entities.pins,
+      users = _ref$entities.users;
   return {
-    currentUser: users[session.id]
+    currentUser: users[session.id],
+    pins: Object.values(pins)
   };
 };
 
@@ -12772,7 +12850,6 @@ var PinIndex = /*#__PURE__*/function (_React$Component) {
       if (this.props.search === "") {
         return this.props.pins;
       } else {
-        console.log("my pins", Object.values(this.props.pins)[this.props.pins.length - 1].title);
         return Object.values(this.props.pins).filter(function (pin) {
           return pin.title.match(new RegExp(_this2.props.filter, "i")) || pin.description.match(new RegExp(_this2.props.filter, "i"));
         });

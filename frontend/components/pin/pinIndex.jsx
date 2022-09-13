@@ -26,7 +26,6 @@ class PinIndex extends React.Component {
         if(this.props.search === "") {
             return this.props.pins
         } else {
-            console.log("my pins", Object.values(this.props.pins)[this.props.pins.length-1].title)
             return (
                 (Object.values(this.props.pins)).filter(pin => 
                     pin.title.match(new RegExp(this.props.filter, "i")) ||
