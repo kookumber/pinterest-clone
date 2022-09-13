@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { fetchPin, deletePin } from "../../actions/pinActions";
+import { fetchPin, deletePin, fetchPins } from "../../actions/pinActions";
 import { fetchSavedPins, deleteSavedPin } from "../../actions/savedPinActions";
 import { fetchUser, fetchUsers } from "../../actions/userActions";
 import { openModal } from "../../actions/modalActions";
@@ -15,7 +15,8 @@ const mapStateToProps = (state, ownProps) => {
         session: state.session,
         currentUser: state.entities.users[state.session.id],
         savedPins: state.entities.savedPins,
-        follows: state.entities.follows
+        follows: state.entities.follows,
+        pins: state.entities.pins
     }
 }
 
@@ -31,7 +32,8 @@ const mapDispatchToProps = dispatch => {
         deleteSavedPin: (savedPinId) => dispatch(deleteSavedPin(savedPinId)),
         fetchFollows: () => dispatch(fetchFollows()),
         createFollow: (follow) => dispatch(createFollow(follow)),
-        deleteFollow: (followId) => dispatch(deleteFollow(followId))
+        deleteFollow: (followId) => dispatch(deleteFollow(followId)),
+        fetchPins: () => dispatch(fetchPins())
     }
 }
 

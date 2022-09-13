@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
@@ -32,6 +32,15 @@ class NavLinks extends React.Component {
         this.handleResultClick = this.handleResultClick.bind(this)
     }
 
+    componentDidMount(){
+        this.setState({
+            searchText: "",
+            filter: "",
+            finalSearchText: "",
+            inputValue: ""
+        })
+    }
+
     handleUpdate(e) {
         let searchWord = e.currentTarget.value
         this.setState({ searchText: searchWord, inputValue: searchWord})
@@ -48,15 +57,30 @@ class NavLinks extends React.Component {
     }
 
     handleKeyDown(e) {
+        console.log("ctx", this.props.history)
         return e => {
-            e.keyCode === 13 ? this.setState({ filter: this.state.searchText, 
+            if(e.keyCode === 13){ 
+                this.setState({ filter: this.state.searchText, 
                                             displaySearch: false, 
-                                            inputValue: "" }) : null
+                                            inputValue: "" })
+                if (window.location.hash !== "#/") {
+                    return (
+                        window.location.assign("#/")
+                    )
+                }
+            } else { 
+                return null
+            }
         }
     }
 
     handleResultClick(result){
         this.setState({ filter: result, finalSearchText: this.state.searchText })
+        if (window.location.hash !== "#/") {
+            return (
+                window.location.assign("#/")
+            )
+        }
     }
 
     closeSearch(e) {
@@ -72,7 +96,7 @@ class NavLinks extends React.Component {
 
 
     render() {
-
+        
         const { currentUser, logout, openModal, pins } = this.props
         if (pins === undefined || this.state.searchResults === undefined) return null
 
@@ -134,7 +158,7 @@ class NavLinks extends React.Component {
                                 <img className="nav-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png" />
                             </div>
                             <div className="inspiration-link">
-                                <Link to="/"><div>Home</div></Link>
+                                <Link to="/" onClick={() => window.location.reload()}><div>Home</div></Link>
                             </div>
                             <div className="inspiration-link">
                                 <Link to="/pins/create">Create</Link>
