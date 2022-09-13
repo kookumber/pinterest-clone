@@ -13,6 +13,7 @@ class PinShow extends React.Component {
                 .then(() => { this.props.fetchSavedPins() })
                     .then(() => { this.props.fetchBoards() } )
                         .then(() => { this.props.fetchFollows() })
+                            .then(() => { this.props.fetchPins() })
     }
 
     componentDidUpdate(prevProps) {

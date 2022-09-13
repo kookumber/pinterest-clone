@@ -11863,6 +11863,16 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(NavLinks, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        searchText: "",
+        filter: "",
+        finalSearchText: "",
+        inputValue: ""
+      });
+    }
+  }, {
     key: "handleUpdate",
     value: function handleUpdate(e) {
       var searchWord = e.currentTarget.value;
@@ -11893,12 +11903,21 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
     value: function handleKeyDown(e) {
       var _this3 = this;
 
+      console.log("ctx", this.props.history);
       return function (e) {
-        e.keyCode === 13 ? _this3.setState({
-          filter: _this3.state.searchText,
-          displaySearch: false,
-          inputValue: ""
-        }) : null;
+        if (e.keyCode === 13) {
+          _this3.setState({
+            filter: _this3.state.searchText,
+            displaySearch: false,
+            inputValue: ""
+          });
+
+          if (window.location.hash !== "#/") {
+            return window.location.assign("#/");
+          }
+        } else {
+          return null;
+        }
       };
     }
   }, {
@@ -11908,6 +11927,10 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
         filter: result,
         finalSearchText: this.state.searchText
       });
+
+      if (window.location.hash !== "#/") {
+        return window.location.assign("#/");
+      }
     }
   }, {
     key: "closeSearch",
@@ -12019,7 +12042,10 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "inspiration-link"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
-          to: "/"
+          to: "/",
+          onClick: function onClick() {
+            return window.location.reload();
+          }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Home"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "inspiration-link"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
@@ -12139,7 +12165,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(_ref) {
+var mapStateToProps = function mapStateToProps(_ref, ownProps) {
   var session = _ref.session,
       _ref$entities = _ref.entities,
       pins = _ref$entities.pins,
@@ -13084,6 +13110,8 @@ var PinShow = /*#__PURE__*/function (_React$Component) {
         _this2.props.fetchBoards();
       }).then(function () {
         _this2.props.fetchFollows();
+      }).then(function () {
+        _this2.props.fetchPins();
       });
     }
   }, {
@@ -13260,7 +13288,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     session: state.session,
     currentUser: state.entities.users[state.session.id],
     savedPins: state.entities.savedPins,
-    follows: state.entities.follows
+    follows: state.entities.follows,
+    pins: state.entities.pins
   };
 };
 
@@ -13298,6 +13327,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     deleteFollow: function deleteFollow(followId) {
       return dispatch((0,_actions_followActions__WEBPACK_IMPORTED_MODULE_6__.deleteFollow)(followId));
+    },
+    fetchPins: function fetchPins() {
+      return dispatch((0,_actions_pinActions__WEBPACK_IMPORTED_MODULE_1__.fetchPins)());
     }
   };
 };
