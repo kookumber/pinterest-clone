@@ -71,13 +71,27 @@
 
 .boards-index-wrapper {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 
 .board-wrapper {
     width: 236px;
-    height: 157px;
+    height: 236px;
+    margin: 0px 12px 12px 12px;
+
+    & .board-info-box {
+        margin-top: -45px;
+    }
+
+    & .board-pin-count {
+        margin-top: -10px;
+
+        & h4 {
+            font-size: 14px;
+            font-weight: 300;
+        }
+    }
 }
 
 .board-image-box {

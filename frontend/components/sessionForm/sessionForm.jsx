@@ -35,11 +35,12 @@ class SessionForm extends React.Component {
             .then(user => { this.props.loginNewUser(user) })
                 .then(this.props.closeModal)
 
-        // this.setState({
-        //     email: "",
-        //     password: "",
-        //     name: ""
-        // })
+    }
+
+    handleSignupRedirect(e, action) {
+        e.preventDefault()
+        this.props.closeModal()
+        action === "signup" ? this.props.openSignupModal() : this.props.openLoginModal()
     }
 
     handleDemoLogin(e) {
@@ -53,6 +54,21 @@ class SessionForm extends React.Component {
         this.props.processForm(demoUser)
             .then(this.props.closeModal)
                 .then(this.props.history.push("/"))
+    }
+
+    handleDemoSignup(e) {
+        e.preventDefault()
+        const demoUser = {
+            user: {
+                username: 'demo-user1',
+                email: 'demo@user1.com',
+                password: 'demo-user1'
+            }
+        }
+
+        this.props.loginNewUser(demoUser)
+            .then(this.props.closeModal)
+            .then(this.props.history.push("/"))
     }
 
     renderErrors() {
@@ -115,6 +131,26 @@ class SessionForm extends React.Component {
                             className="session-submit-button" />
                     </div>
                 </form>
+
+                <h3>Or</h3>
+
+                <div id="demo-button-container">
+                    <button className="demo-login-button" onClick={e => this.handleDemoSignup(e)}>Log in as Demo User</button>
+                </div>
+
+                <div className="disclosure-text">
+                    <div>
+                        <span>By continuing, you agree to Finterest's <span>Terms of Service</span> and acknowledge you've read our <span>Privacy Policy</span> </span>
+                    </div>
+                </div>
+
+                <div id="line-break">
+                    <div></div>
+                </div>
+
+                <div id="signup-redirect">
+                    <div onClick={(e) => this.handleSignupRedirect(e, "login")}>Already a member? Log in</div>
+                </div>
             </div>
         )
     }
@@ -158,8 +194,24 @@ class SessionForm extends React.Component {
                                 className="session-submit-button" />
                         </div>
 
+                        <h3>Or</h3>
+
                         <div>
                             <button className="demo-login-button" onClick={e => this.handleDemoLogin(e)}>Log in as Demo User</button>
+                        </div>
+
+                        <div className="disclosure-text">
+                            <div>
+                                <span>By continuing, you agree to Finterest's <span>Terms of Service</span> and acknowledge you've read our <span>Privacy Policy</span> </span>
+                            </div>
+                        </div>
+
+                        <div id="line-break">
+                            <div></div>
+                        </div>
+
+                        <div id="signup-redirect">
+                            <div onClick={(e) => this.handleSignupRedirect(e, "signup")}>Not on Finterest yet? Sign up</div>
                         </div>
                         
                     </div>

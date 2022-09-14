@@ -12044,7 +12044,7 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
           to: "/",
           onClick: function onClick() {
-            return window.location.reload();
+            return window.location.hash === "#/" ? window.location.reload() : null;
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Home"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "inspiration-link"
@@ -13881,6 +13881,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     removeErrors: function removeErrors() {
       return dispatch((0,_actions_sessionActions__WEBPACK_IMPORTED_MODULE_2__.removeErrors)());
+    },
+    openSignupModal: function openSignupModal() {
+      return dispatch((0,_actions_modalActions__WEBPACK_IMPORTED_MODULE_3__.openModal)('signup'));
     }
   };
 };
@@ -13981,11 +13984,14 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       };
       this.props.processForm(user).then(function (user) {
         _this3.props.loginNewUser(user);
-      }).then(this.props.closeModal); // this.setState({
-      //     email: "",
-      //     password: "",
-      //     name: ""
-      // })
+      }).then(this.props.closeModal);
+    }
+  }, {
+    key: "handleSignupRedirect",
+    value: function handleSignupRedirect(e, action) {
+      e.preventDefault();
+      this.props.closeModal();
+      action === "signup" ? this.props.openSignupModal() : this.props.openLoginModal();
     }
   }, {
     key: "handleDemoLogin",
@@ -14001,6 +14007,19 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       this.props.processForm(demoUser).then(this.props.closeModal).then(this.props.history.push("/"));
     }
   }, {
+    key: "handleDemoSignup",
+    value: function handleDemoSignup(e) {
+      e.preventDefault();
+      var demoUser = {
+        user: {
+          username: 'demo-user1',
+          email: 'demo@user1.com',
+          password: 'demo-user1'
+        }
+      };
+      this.props.loginNewUser(demoUser).then(this.props.closeModal).then(this.props.history.push("/"));
+    }
+  }, {
     key: "renderErrors",
     value: function renderErrors() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, this.props.errors.map(function (error, idx) {
@@ -14013,6 +14032,8 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "signupForm",
     value: function signupForm() {
+      var _this4 = this;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "login-form-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
@@ -14056,12 +14077,29 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         type: "submit",
         value: this.props.formType === 'signup' ? 'Continue' : 'Log in',
         className: "session-submit-button"
-      }))));
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Or"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "demo-button-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "demo-login-button",
+        onClick: function onClick(e) {
+          return _this4.handleDemoSignup(e);
+        }
+      }, "Log in as Demo User")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "disclosure-text"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "By continuing, you agree to Finterest's ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Terms of Service"), " and acknowledge you've read our ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Privacy Policy"), " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "line-break"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "signup-redirect"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        onClick: function onClick(e) {
+          return _this4.handleSignupRedirect(e, "login");
+        }
+      }, "Already a member? Log in")));
     }
   }, {
     key: "loginForm",
     value: function loginForm() {
-      var _this4 = this;
+      var _this5 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "login-form-container"
@@ -14100,12 +14138,22 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         type: "submit",
         value: this.props.formType === 'signup' ? 'Continue' : 'Log in',
         className: "session-submit-button"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Or"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "demo-login-button",
         onClick: function onClick(e) {
-          return _this4.handleDemoLogin(e);
+          return _this5.handleDemoLogin(e);
         }
-      }, "Log in as Demo User")))));
+      }, "Log in as Demo User")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "disclosure-text"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "By continuing, you agree to Finterest's ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Terms of Service"), " and acknowledge you've read our ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Privacy Policy"), " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "line-break"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        id: "signup-redirect"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        onClick: function onClick(e) {
+          return _this5.handleSignupRedirect(e, "signup");
+        }
+      }, "Not on Finterest yet? Sign up")))));
     }
   }, {
     key: "render",
@@ -14169,6 +14217,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     removeErrors: function removeErrors() {
       return dispatch((0,_actions_sessionActions__WEBPACK_IMPORTED_MODULE_3__.removeErrors)());
+    },
+    openLoginModal: function openLoginModal() {
+      return dispatch((0,_actions_modalActions__WEBPACK_IMPORTED_MODULE_2__.openModal)("login"));
     }
   };
 };
