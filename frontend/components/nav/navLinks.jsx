@@ -158,7 +158,7 @@ class NavLinks extends React.Component {
                                 <img className="nav-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png" />
                             </div>
                             <div className="inspiration-link">
-                                <Link to="/" onClick={() => window.location.reload()}><div>Home</div></Link>
+                                    <Link to="/" onClick={() => window.location.hash === "#/" ? window.location.reload() : null}><div>Home</div></Link>
                             </div>
                             <div className="inspiration-link">
                                 <Link to="/pins/create">Create</Link>
