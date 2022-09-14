@@ -90,7 +90,7 @@ class SessionForm extends React.Component {
                     <div className="close-x" onClick={this.props.closeModal}>X</div>
                     
                     <div>
-                        <img className="session-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-192x192.png"/>
+                        <img className="session-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/favicon-red-192x192.png"/>
                     </div>
                     <div className="modal-header">
                         <h1>Welcome to Finterest</h1>
@@ -162,7 +162,7 @@ class SessionForm extends React.Component {
                     <div className="close-x" onClick={this.props.closeModal}>X</div>
                     
                     <div>
-                        <img className="session-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-192x192.png"/>
+                        <img className="session-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/favicon-red-192x192.png"/>
                     </div>
                     <div className="modal-header">
                         <h1>Welcome to Finterest</h1>

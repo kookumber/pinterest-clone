@@ -117,7 +117,7 @@ class NavLinks extends React.Component {
                     <nav className="logged-out-nav">
                         <div className='app-logo-container'>
                             <a className="app-logo-title" href="/">
-                                <img className="nav-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png" />
+                                <img className="nav-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/favicon-red-32x32.png" />
                                 <div>Finterest</div>
                             </a>
                         </div>
@@ -149,18 +149,23 @@ class NavLinks extends React.Component {
         );
 
         const loaded = () => {
+            let urlLocation = window.location.hash
+            let homeLinkStatus = urlLocation === "#/" ? "inspiration-link-active" : "inspiration-link"
+            let createLinkStatus = urlLocation === "#/pins/create" ? "inspiration-link-active" : "inspiration-link"
             return (
             <>
                 <header className="header">
                     <nav className="logged-in-nav" onClick={this.closeSearch}>
                         <div className="inspiration-links-container">
                             <div className='app-logo'>
-                                <img className="nav-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png" />
+                                    <Link to="/" onClick={() => urlLocation === "#/" ? window.location.reload() : null}>
+                                        <img className="nav-logo" src="https://finterest-project-dev.s3.us-west-1.amazonaws.com/favicon-red-32x32.png" />
+                                    </Link>
                             </div>
-                            <div className="inspiration-link">
-                                    <Link to="/" onClick={() => window.location.hash === "#/" ? window.location.reload() : null}><div>Home</div></Link>
+                            <div className={homeLinkStatus}>
+                                    <Link to="/" onClick={() => urlLocation === "#/" ? window.location.reload() : null}><div>Home</div></Link>
                             </div>
-                            <div className="inspiration-link">
+                            <div className={createLinkStatus}>
                                 <Link to="/pins/create">Create</Link>
                             </div>
                         </div>
@@ -199,28 +204,32 @@ class NavLinks extends React.Component {
                         </div>
 
                         <div className="user-links">
-                            <div className="notifications">
+                            <div className="user-link">
                                 <a href="https://github.com/kookumber" target="_blank">
                                     <i className="fa fa-github"></i>
                                 </a>
+                                {/* <div className="link-hover-details">My Github</div> */}
                             </div>
-                            <div className="messages">
+                            <div className="user-link">
                                 <a href="https://www.linkedin.com/in/quang-tran-2926a78b/" target="_blank">
                                     <i className="fa fa-linkedin-square"></i>
                                 </a>
+                                {/* <div className="link-hover-details">My LinkedIn</div> */}
                             </div>
-                            <div className="profile">
+                            <div className="profile-link">
                                 <svg className="user-icons">
                                     <Link to={`/users/${currentUser.id}`}><PersonRoundedIcon /></Link>
                                 </svg>
                             </div>
+                                {/* <div className="link-hover-details">Profile</div> */}
 
                             <Link to="/">
-                                <button className="logout-button" onClick={logout}>
+                                <button className="user-link" onClick={logout}>
                                     <svg className="user-icons">
                                         <LogoutRoundedIcon />
                                     </svg>
                                 </button>
+                                <div className="link-hover-details">Logout</div>
                             </Link>
                         </div>
 

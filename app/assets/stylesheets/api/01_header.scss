@@ -38,27 +38,63 @@ header {
 
 
 .inspiration-links-container {
-    width: 180px;
+    width: 220px;
     @include center('row', 'space-between');
     margin-right: 15px;
+
+    & .app-logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #efefef;
+        }
+    }
+
+    & .nav-logo {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.inspiration-link, .inspiration-link-active {
+    height: 48px;
+    width: 80px;
+    @include center('row', 'space-between');
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
 
 .inspiration-link {
-    height: 48px;
-    min-width: 60px;
-    @include center('row', 'space-between');
-    cursor: pointer;
-    
+
     &:hover {
         font-weight: bold;
     }
-    
 }
 
-.app-logo {
-    width: 60px;
-    padding-right: 20px;
+.inspiration-link-active {
+    background-color: #111111;
+    border-radius: 24px;
+    width: 80px;
+    height: 48px;
+    color: white;
+
+    & div {
+        color: white;
+    }
 }
+
+// .app-logo {
+//     width: 60px;
+//     padding-right: 20px;
+// }
 
 .app-logo-title {
     @include center(row, center);
@@ -70,7 +106,7 @@ header {
     & div {
         font-weight: 600;
         font-size: 19px;
-        color: #288;
+        color: rgb(230, 0, 35);
     }
 }
 
@@ -145,7 +181,22 @@ header {
     vertical-align: middle;
 }
 
-.notifications, .messages, .profile, .logout-button {
+.link-hover-details {
+    display: none;
+    background-color: #111111;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 12px;
+    height: 25px;
+    line-height: 25px;
+    right: 20px;
+    font-size: 14px;
+    position: relative;
+}
+
+
+.user-link, .profile-link {
     color: #767676;
     display: flex;
     justify-content: center;
@@ -158,6 +209,12 @@ header {
 
     &:hover {
         background-color: #efefef;
+    }
+
+    &:hover +.link-hover-details {
+        display: block;
+        margin-top: 10px;
+        margin-right: -20px;
     }
 }
 

@@ -47,10 +47,10 @@ class PinEditModal extends React.Component {
                 </div>
                 <div className="pin-edit-section">
                     <div className="pin-edit-fields">
-                        <div className="pin-edit">
+                        {/* <div className="pin-edit">
                             <h4>Board</h4>
                             <div>Board Selection</div>
-                        </div>
+                        </div> */}
 
                         <div className="pin-edit">
                             <h4>Title</h4>

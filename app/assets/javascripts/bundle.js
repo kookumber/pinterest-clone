@@ -11979,7 +11979,7 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
           href: "/"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
           className: "nav-logo",
-          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png"
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/favicon-red-32x32.png"
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Finterest"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "header-links"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -12027,6 +12027,9 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
       };
 
       var loaded = function loaded() {
+        var urlLocation = window.location.hash;
+        var homeLinkStatus = urlLocation === "#/" ? "inspiration-link-active" : "inspiration-link";
+        var createLinkStatus = urlLocation === "#/pins/create" ? "inspiration-link-active" : "inspiration-link";
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", {
           className: "header"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
@@ -12036,18 +12039,23 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
           className: "inspiration-links-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "app-logo"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          className: "nav-logo",
-          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-32x32.png"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "inspiration-link"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
           to: "/",
           onClick: function onClick() {
-            return window.location.hash === "#/" ? window.location.reload() : null;
+            return urlLocation === "#/" ? window.location.reload() : null;
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+          className: "nav-logo",
+          src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/favicon-red-32x32.png"
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: homeLinkStatus
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
+          to: "/",
+          onClick: function onClick() {
+            return urlLocation === "#/" ? window.location.reload() : null;
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Home"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "inspiration-link"
+          className: createLinkStatus
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
           to: "/pins/create"
         }, "Create"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -12081,21 +12089,21 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
         }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "user-links"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "notifications"
+          className: "user-link"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
           href: "https://github.com/kookumber",
           target: "_blank"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
           className: "fa fa-github"
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "messages"
+          className: "user-link"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
           href: "https://www.linkedin.com/in/quang-tran-2926a78b/",
           target: "_blank"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
           className: "fa fa-linkedin-square"
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "profile"
+          className: "profile-link"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
           className: "user-icons"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
@@ -12103,11 +12111,13 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_PersonRounded__WEBPACK_IMPORTED_MODULE_10__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
           to: "/"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-          className: "logout-button",
+          className: "user-link",
           onClick: logout
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
           className: "user-icons"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_LogoutRounded__WEBPACK_IMPORTED_MODULE_11__["default"], null))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mui_icons_material_LogoutRounded__WEBPACK_IMPORTED_MODULE_11__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "link-hover-details"
+        }, "Logout"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
           exact: true,
           path: "/",
           render: function render(props) {
@@ -12483,8 +12493,6 @@ var PinEditModal = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-edit-fields"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "pin-edit"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Board"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Board Selection")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-edit"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         type: "text",
@@ -14044,7 +14052,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         onClick: this.props.closeModal
       }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "session-logo",
-        src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-192x192.png"
+        src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/favicon-red-192x192.png"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "modal-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Welcome to Finterest")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Find new ideas to try"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -14111,7 +14119,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         onClick: this.props.closeModal
       }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "session-logo",
-        src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/finterest-192x192.png"
+        src: "https://finterest-project-dev.s3.us-west-1.amazonaws.com/favicon-red-192x192.png"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "modal-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Welcome to Finterest")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
