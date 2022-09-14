@@ -1,24 +1,24 @@
-# README
+### README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Finterest
 
-Things you may want to cover:
+Finterest is a fullstack clone of Pinterest, an image sharing and social media service designed to enable saving and discovery of information on the internet using images.
 
-* Ruby version
+[Live Link](https://finterest-project.herokuapp.com/#/)
 
-* System dependencies
+## Functionality and MVPs
+* User authentication and signup
+* User's show page
+* Full CRUD features for pins, boards, and follows
+* Search with Recommendations
+* AWS Image Hosting
 
-* Configuration
+## Technologies Used
+### Frontend:
+* Javascript, React, Redux, AJAX, HTML5 / SCSS
 
-* Database creation
+### Backend:
+* Ruby on Rails, PostgreSQL, Active Storage
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Hosting & Server:
+* Heroku, AWS S3
