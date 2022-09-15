@@ -11871,7 +11871,8 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
         finalSearchText: "",
         inputValue: ""
       });
-    }
+    } // Updates search text state as user types to update recommendations based on title match
+
   }, {
     key: "handleUpdate",
     value: function handleUpdate(e) {
@@ -11880,13 +11881,14 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
         searchText: searchWord,
         inputValue: searchWord
       });
-      var resultList = this.props.pins.filter(function (pin) {
+      var recommendations = this.props.pins.filter(function (pin) {
         return pin.title.match(new RegExp(searchWord, "i"));
       });
       this.setState({
-        searchResults: resultList
+        searchResults: recommendations
       });
-    }
+    } // Opens the search modal when user clicks on the search input
+
   }, {
     key: "handleSearch",
     value: function handleSearch(e) {
@@ -11897,7 +11899,9 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
           displaySearch: true
         });
       };
-    }
+    } // Update search filter when user keys ENTER; If search is done outside of Homepage
+    // User will be redirected to Homepage and their search items will be displayed
+
   }, {
     key: "handleKeyDown",
     value: function handleKeyDown(e) {
@@ -12671,7 +12675,8 @@ var PinForm = /*#__PURE__*/function (_React$Component) {
       if (file) {
         fileReader.readAsDataURL(file); //the readAsDataURL initiates the beginning of reading of the file
       }
-    }
+    } // Create new FormData and appends necessary data to create the pin
+
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
@@ -15057,7 +15062,8 @@ var createPin = function createPin(pin) {
     url: '/api/pins/',
     method: 'POST',
     data: pin,
-    //The 2 lines below let the ajax method know not to fiddle with formData object for rails backend. Leave as is so rails does the work
+    // The 2 lines below let the ajax method know not to fiddle with formData 
+    // object for rails backend. Leave as is so rails does the work
     contentType: false,
     processData: false
   });

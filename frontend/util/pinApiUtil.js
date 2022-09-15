@@ -18,7 +18,8 @@ export const createPin = pin => {
             url: '/api/pins/',
             method: 'POST',
             data: pin,
-            //The 2 lines below let the ajax method know not to fiddle with formData object for rails backend. Leave as is so rails does the work
+            // The 2 lines below let the ajax method know not to fiddle with formData 
+            // object for rails backend. Leave as is so rails does the work
             contentType: false, 
             processData: false
         })

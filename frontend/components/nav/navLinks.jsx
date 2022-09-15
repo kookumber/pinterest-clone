@@ -41,31 +41,33 @@ class NavLinks extends React.Component {
         })
     }
 
+    // Updates search text state as user types to update recommendations based on title match
     handleUpdate(e) {
         let searchWord = e.currentTarget.value
         this.setState({ searchText: searchWord, inputValue: searchWord})
-        const resultList = (this.props.pins).filter((pin) => 
+        const recommendations = (this.props.pins).filter((pin) => 
             pin.title.match(new RegExp(searchWord, "i")) 
         )
-        this.setState({ searchResults: resultList})
+        this.setState({ searchResults: recommendations})
     }
 
+    // Opens the search modal when user clicks on the search input
     handleSearch(e) {
         return e => { 
             this.setState({ displaySearch: true })
         }
     }
 
+    // Update search filter when user keys ENTER; If search is done outside of Homepage
+    // User will be redirected to Homepage and their search items will be displayed
     handleKeyDown(e) {
         return e => {
             if(e.keyCode === 13){ 
                 this.setState({ filter: this.state.searchText, 
-                                            displaySearch: false, 
-                                            inputValue: "" })
+                                    displaySearch: false, 
+                                    inputValue: "" })
                 if (window.location.hash !== "#/") {
-                    return (
-                        window.location.assign("#/")
-                    )
+                    return (window.location.assign("#/"))
                 }
             } else { 
                 return null

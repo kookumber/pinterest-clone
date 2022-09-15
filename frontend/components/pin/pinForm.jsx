@@ -37,6 +37,7 @@ class PinForm extends React.Component {
         }
     }
 
+    // Create new FormData and appends necessary data to create the pin
     handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData();
