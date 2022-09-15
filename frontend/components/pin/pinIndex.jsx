@@ -19,7 +19,6 @@ class PinIndex extends React.Component {
     }
 
     handleSearch() {
-        console.log("from idx", this.props.filter)
         if(this.props.filter === "") {
             return this.props.pins
         } else {

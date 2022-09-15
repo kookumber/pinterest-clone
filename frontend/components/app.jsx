@@ -11,7 +11,6 @@ import BoardShowContainer from "./board/boardShowContainer";
 import HomePageContainer from "./homePage/homePageContainer";
 import SearchIndexContainer from "./searchScroll/searchIndexContainer";
 
-// let Com = SearchIndex()
 
 const App = () => (
     <div className="main-wrapper">

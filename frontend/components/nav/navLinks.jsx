@@ -57,7 +57,6 @@ class NavLinks extends React.Component {
     }
 
     handleKeyDown(e) {
-        console.log("ctx", this.props.history)
         return e => {
             if(e.keyCode === 13){ 
                 this.setState({ filter: this.state.searchText, 

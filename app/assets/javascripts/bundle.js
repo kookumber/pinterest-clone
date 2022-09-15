@@ -10437,7 +10437,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // let Com = SearchIndex()
+
 
 var App = function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -11903,7 +11903,6 @@ var NavLinks = /*#__PURE__*/function (_React$Component) {
     value: function handleKeyDown(e) {
       var _this3 = this;
 
-      console.log("ctx", this.props.history);
       return function (e) {
         if (e.keyCode === 13) {
           _this3.setState({
@@ -12878,8 +12877,6 @@ var PinIndex = /*#__PURE__*/function (_React$Component) {
     key: "handleSearch",
     value: function handleSearch() {
       var _this2 = this;
-
-      console.log("from idx", this.props.filter);
 
       if (this.props.filter === "") {
         return this.props.pins;
@@ -14918,7 +14915,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0,redux__WEBPACK_IMPORTED_MODULE_2__.legacy_createStore)(_reducers_rootReducer__WEBPACK_IMPORTED_MODULE_0__["default"], preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_2__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_3__["default"], (redux_logger__WEBPACK_IMPORTED_MODULE_1___default())));
+  return (0,redux__WEBPACK_IMPORTED_MODULE_2__.legacy_createStore)(_reducers_rootReducer__WEBPACK_IMPORTED_MODULE_0__["default"], preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_2__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_3__["default"]) //, logger)
+  );
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
