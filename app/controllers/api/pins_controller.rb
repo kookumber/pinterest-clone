@@ -1,6 +1,7 @@
 class Api::PinsController < ApplicationController
     def index
-        @pins = Pin.order("created_at DESC")
+        @pins = Pin.order(created_at: :desc)
+        
         render :index
     end
 

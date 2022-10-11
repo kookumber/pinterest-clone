@@ -14,11 +14,6 @@ if @boards
     end
 end
 
-# json.array! @boards do |board|
-#     json.set! board.id do
-#         json.extract! board, :id, :name, :details
-#     end
-# end
 
 if @board_pins
     json.board_pins do

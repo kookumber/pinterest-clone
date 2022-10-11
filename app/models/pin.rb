@@ -18,10 +18,4 @@ class Pin < ApplicationRecord
         through: :saved_pins_on_board,
         source: :board
     
-
-    # def ensure_photo  
-    #     unless self.phot.attached?
-    #         errors[:photo] << "Must include a picture"
-    #     end
-    # end
 end
