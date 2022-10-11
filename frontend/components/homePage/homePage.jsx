@@ -147,18 +147,6 @@ class HomePage extends React.Component {
                     </section>
                     {/* End home text inspiration section */}
 
-                    <section className="second-page">
-                        <div className="left-half">
-
-                        </div>
-                        <div className="right-half">
-                            <div className="splash-text-container">
-                                <h1>Search for an idea and the ones you like</h1>
-                                <div>What are you interested in? Search for something like "surf spots" and see what you find.</div>
-                            </div>
-                        </div>
-                    </section>
-
                     <section className="third-page">
                         <div className="left-half">
                             <div>Sign up to get your ideas</div>
